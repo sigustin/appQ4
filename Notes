@@ -1,0 +1,1 @@
+Class CurrentUser must implement Serializable (import java.io.Serializable)
