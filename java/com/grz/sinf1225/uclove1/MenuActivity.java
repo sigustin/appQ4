@@ -1,5 +1,6 @@
 package com.grz.sinf1225.uclove1;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,6 +23,10 @@ public class MenuActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+
+        /*
+        CurrentUser currentUser = (CurrentUser) getIntent().getSerializableExtra(CurrentUser.EXTRA_CURRENT_USER);
+         */
 
         ImageView profilePicture = (ImageView) findViewById(R.id.profile_picture);
         profilePicture.setImageResource(profilePictureRes);
@@ -58,8 +63,7 @@ public class MenuActivity extends AppCompatActivity
     public void onMyProfileButtonClicked(View view)
     {
         Log.d("BUTTON", "my profile button clicked");
-        Intent intent = new Intent(this, MyProfileActivity.class);
-        startActivity(intent);
+        goToActivity(MyProfileActivity.class);
     }
 
     public void onFindFriendsButtonClicked(View view)
@@ -70,8 +74,7 @@ public class MenuActivity extends AppCompatActivity
     public void onMyFriendsButtonClicked(View view)
     {
         Log.d("BUTTON", "my friends button clicked");
-        Intent intent = new Intent(this, FriendsActivity.class);
-        startActivity(intent);
+        goToActivity(FriendsActivity.class);
     }
 
     public void onMessagesButtonClicked(View view)
@@ -82,8 +85,7 @@ public class MenuActivity extends AppCompatActivity
     public void onMyDatesButtonClicked(View view)
     {
         Log.d("BUTTON", "my dates button clicked");
-        Intent intent = new Intent(this, DatesActivity.class);
-        startActivity(intent);
+        goToActivity(DatesActivity.class);
     }
 
     public void onSettingsButtonClicked(View view)
@@ -96,7 +98,15 @@ public class MenuActivity extends AppCompatActivity
     public void onOverviewClicked(View view)
     {
         Log.d("OVERVIEW", "Overview clicked");
-        Intent intent = new Intent(this, MyProfileActivity.class);
+        goToActivity(MyProfileActivity.class);
+    }
+
+    public void goToActivity(Class<?> activityClass)
+    {
+        Intent intent = new Intent(this, activityClass);
+        /*
+        intent.putExtra(CurrentUser.EXTRA_CURRENT_USER, currentUser);
+         */
         startActivity(intent);
     }
 }

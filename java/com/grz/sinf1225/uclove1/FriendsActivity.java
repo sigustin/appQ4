@@ -16,6 +16,10 @@ public class FriendsActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends);
+
+        /*
+        CurrentUser currentUser = (CurrentUser) getIntent().getSerializableExtra(CurrentUser.EXTRA_CURRENT_USER);
+         */
     }
 
     @Override
@@ -55,11 +59,24 @@ public class FriendsActivity extends AppCompatActivity
         {
             case R.id.first_friend_box:
                 Log.d("BOX", "First friend selected");
+                displayFriend(null);
                 return true;
             case R.id.second_friend_box:
                 Log.d("BOX", "Second friend selected");
+                displayFriend(null);
                 return true;
         }
         return false;
+    }
+
+    public boolean displayFriend(String pseudo)
+    {
+        //check pseudo (if found -> return true else false)
+        Intent intent = new Intent(this, ProfileActivity.class);
+        /*
+        intent.putExtra(CurrentUser.EXTRA_CURRENT_USER, currentUser);
+         */
+        startActivity(intent);
+        return true;
     }
 }

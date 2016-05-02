@@ -27,6 +27,10 @@ public class EditProfileActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
 
+        /*
+        CurrentUser currentUser = (CurrentUser) getIntent().getSerializableExtra(CurrentUser.EXTRA_CURRENT_USER);
+         */
+
         ImageView profilePicture = (ImageView) findViewById(R.id.profile_picture);
         profilePicture.setImageResource(profilePictureRes);
 
@@ -109,6 +113,9 @@ public class EditProfileActivity extends AppCompatActivity
     public void saveInformations(View view)
     {
         Log.d("BUTTON", "Save informations");
+        /*
+        currentUser.set...
+         */
         finish();
     }
 

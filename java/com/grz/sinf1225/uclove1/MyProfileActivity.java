@@ -23,6 +23,10 @@ public class MyProfileActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_profile);
 
+        /*
+        CurrentUser currentUser = (CurrentUser) getIntent().getSerializableExtra(CurrentUser.EXTRA_CURRENT_USER);
+         */
+
         ImageView profilePicture = (ImageView) findViewById(R.id.profile_picture);
         profilePicture.setImageResource(profilePictureRes);
         TextView pseudo = (TextView) findViewById(R.id.pseudo);
@@ -68,7 +72,7 @@ public class MyProfileActivity extends AppCompatActivity
         {
             case R.id.top_menu_item_change_informations:
                 Log.d("TOPMENU", "Edit selected");
-                onEditButtonClicked(null);
+                goToEditProfileActivity();
                 return  true;
             case R.id.top_menu_item_quit:
                 Log.d("TOPMENU", "Quit selected");
@@ -80,7 +84,15 @@ public class MyProfileActivity extends AppCompatActivity
     public void onEditButtonClicked(View view)
     {
         Log.d("BUTTON", "Edit mode selected");
+        goToEditProfileActivity();
+    }
+
+    public void goToEditProfileActivity()
+    {
         Intent intent = new Intent(this, EditProfileActivity.class);
+        /*
+        intent.putExtra(CurrentUser.EXTRA_CURRENT_USER, currentUser);
+         */
         startActivity(intent);
     }
 

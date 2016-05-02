@@ -24,6 +24,10 @@ public class ProfileActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        /*
+        CurrentUser currentUser = (CurrentUser) getIntent().
+         */
+
         addViews();
     }
 
@@ -134,6 +138,9 @@ public class ProfileActivity extends AppCompatActivity
             case R.id.top_menu_item_settings:
                 Log.d("TOPMENU", "Settings selected");
                 Intent intent = new Intent(this, SettingsActivity.class);
+                /*
+                intent.putExtra(CurrentUser.EXTRA_CURRENT_USER, currentUser);
+                 */
                 startActivity(intent);
                 return true;
             case R.id.top_menu_item_quit:

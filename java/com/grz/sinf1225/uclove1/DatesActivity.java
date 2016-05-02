@@ -18,6 +18,10 @@ public class DatesActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dates);
+
+        /*
+        CurrentUser currentUser = (CurrentUser) getIntent().getSerializableExtra(CurrentUser.EXTRA_CURRENT_USER);
+         */
     }
 
     @Override

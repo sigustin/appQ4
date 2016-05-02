@@ -35,6 +35,9 @@
         <activity
             android:name=".DatesActivity"
             android:label="@string/dates_activity_title" />
+        <activity
+            android:name=".ProfileActivity"
+            android:label="@string/profile_activity_title" />
     </application>
 
 </manifest>
