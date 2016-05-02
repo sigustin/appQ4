@@ -1,0 +1,73 @@
+<resources>
+
+    <string name="app_name">UCLove1</string>
+
+    <!-- main activity -->
+    <string name="app_title">UCLove</string>
+
+    <string name="login_pseudo_hint">Pseudo</string>
+    <string name="login_password_hint">Password</string>
+
+    <string name="login_button">Log in</string>
+
+    <string name="login_not_yet_registered">Not yet registered?</string>
+    <string name="register_button">Register</string>
+
+    <!-- menu activity -->
+    <string name="menu_activity_title">Menu</string>
+
+    <string name="top_menu_settings_title">Settings</string>
+    <string name="top_menu_quit_title">Close app</string>
+
+    <string name="overview">Overview</string>
+
+    <string name="button_my_profile">My profile</string>
+    <string name="button_find_friends">Find matches</string>
+    <string name="button_my_friends">My friends</string>
+    <string name="button_messages">Messages</string>
+    <string name="button_dates">My dates</string>
+    <string name="button_settings">Settings</string>
+
+    <!-- settings activity -->
+    <string name="settings_activity_title">Settings</string>
+
+    <string name="enable_sounds">Allow the app to play sounds</string>
+    <string name="enable_notifications">Enable notifications</string>
+    <string name="choose_theme">App theme</string>
+    <string name="about">About the app</string>
+
+    <!-- my profile activity -->
+    <string name="my_profile_activity_title">My profile</string>
+
+    <string name="top_menu_change_informations">Edit my profile</string>
+    <string name="button_change_informations">Edit my profile informations</string>
+
+    <string name="pseudo">Pseudo</string>
+    <string name="family_name">Last name</string>
+    <string name="name">Name</string>
+    <string name="first_name">First name</string>
+    <string name="birth_date">Birth date</string>
+    <string name="age">Age</string>
+    <string name="gender">Gender</string>
+    <string name="love_status">Love status</string>
+    <string name="height">Height</string>
+    <string name="description">Description</string>
+    <string name="smoker">Smoker</string>
+    <string name="interested_in">Interested in</string>
+    <string name="children_nb">Number of children</string>
+    <string name="country">Country</string>
+    <string name="city">City</string>
+    <string name="title_activity_tmp">Tmp</string>
+
+    <!-- edit profile activity -->
+    <string name="edit_profile_activity_title">Edit my profile</string>
+
+    <string name="top_menu_save_title">Save</string>
+
+    <!-- friends activity -->
+    <string name="friends_activity_title">My friends</string>
+
+    <!-- dates activity -->
+    <string name="dates_activity_title">My dates</string>
+
+</resources>

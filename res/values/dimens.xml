@@ -1,0 +1,60 @@
+<resources>
+
+    <dimen name="list_separator_thickness">1dp</dimen>
+    <dimen name="list_separator_margins">16dp</dimen>
+
+    <dimen name="list_item_padding_vertical">12dp</dimen>
+    <dimen name="list_item_padding_horizontal">5dp</dimen>
+
+    <dimen name="spinner_list_width">190dp</dimen>
+    <dimen name="edit_text_list_width">190dp</dimen>
+
+    <dimen name="view_elevation">2dp</dimen>
+    <dimen name="box_spacing">8dp</dimen>
+
+    <dimen name="floating_button_margin">16dp</dimen>
+
+    <dimen name="profile_picture_margin">20dp</dimen>
+
+    <!-- login activity. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="app_title_size">40sp</dimen>
+
+    <dimen name="logo_size">160dp</dimen>
+
+    <dimen name="edit_text_padding">5dp</dimen>
+    <dimen name="edit_text_margin_horizontal">10dp</dimen>
+    <dimen name="edit_text_margin_vertical">4dp</dimen>
+
+    <dimen name="big_button_padding">5dp</dimen>
+    <dimen name="big_button_margin_horizontal">5dp</dimen>
+    <dimen name="small_button_padding">2dp</dimen>
+    <dimen name="small_button_margin_horizontal">30dp</dimen>
+    <dimen name="button_margin_vertical">5dp</dimen>
+
+    <!-- menu activity -->
+    <dimen name="profile_picture_height">170dp</dimen>
+    <dimen name="profile_picture_padding">15dp</dimen>
+    <dimen name="textview_title_margin_vertical">15dp</dimen>
+    <dimen name="textview_margin_horizontal">20dp</dimen>
+    <dimen name="textview_margin_vertical">0dp</dimen>
+
+    <dimen name="overview_text_size">18sp</dimen>
+
+    <dimen name="colon_gap">4dp</dimen>
+
+    <!-- settings activity -->
+    <dimen name="fab_margin">16dp</dimen>
+
+    <!-- my profile activity -->
+    <dimen name="big_profile_picture_height">200dp</dimen>
+
+    <!-- friends activity -->
+    <dimen name="small_profile_picture_width">130dp</dimen>
+    <dimen name="small_profile_picture_height">130dp</dimen>
+    <dimen name="small_profile_picture_padding_vertical">5dp</dimen>
+    <dimen name="text_padding">10dp</dimen>
+
+</resources>

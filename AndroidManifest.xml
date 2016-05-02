@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.grz.sinf1225.uclove1">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MenuActivity"
+            android:label="@string/menu_activity_title" />
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/settings_activity_title" />
+        <activity
+            android:name=".MyProfileActivity"
+            android:label="@string/my_profile_activity_title" />
+        <activity
+            android:name=".EditProfileActivity"
+            android:label="@string/edit_profile_activity_title" />
+        <activity
+            android:name=".FriendsActivity"
+            android:label="@string/friends_activity_title" />
+        <activity
+            android:name=".DatesActivity"
+            android:label="@string/dates_activity_title" />
+    </application>
+
+</manifest>
