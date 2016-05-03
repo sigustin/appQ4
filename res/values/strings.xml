@@ -76,7 +76,13 @@
     <!-- profile activity -->
     <string name="profile_activity_title">Profile</string>
 
-    <string name="invisible">Invisible</string>
+    <string name="invisible">Not visible</string>
+
+    <string name="ask_as_friend">Ask as friend</string>
+    <string name="accept_request">Accept request</string>
+    <string name="request_sent">Request sent</string>
+    <string name="blocked">Blocked</string>
+    <string name="unfriend">Unfriend</string>
 
     <!-- profile overview -->
     <string name="request">Request</string>

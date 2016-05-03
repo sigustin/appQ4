@@ -26,6 +26,9 @@ public class MenuActivity extends AppCompatActivity
     private RecyclerView m_recyclerView;
     private RecyclerView.Adapter m_recyclerViewAdapter;
     private RecyclerView.LayoutManager m_recyclerViewLayoutManager;
+    /*
+    private CurrentUser currentUser;
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState)

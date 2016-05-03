@@ -97,6 +97,7 @@ public class FriendsActivity extends AppCompatActivity
         Intent intent = new Intent(this, ProfileActivity.class);
         /*
         intent.putExtra(CurrentUser.EXTRA_CURRENT_USER, currentUser);
+        intent.putExtra(User.EXTRA_PSEUDO, pseudo);
          */
         startActivity(intent);
         return true;
