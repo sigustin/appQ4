@@ -88,6 +88,7 @@ public class FriendsActivity extends AppCompatActivity
     public void onFriendOverviewClicked(String pseudo)
     {
         Log.d("SIG", "You clicked friend " + pseudo);
+        displayFriend(pseudo);
     }
 
     public boolean displayFriend(String pseudo)
