@@ -24,11 +24,9 @@ public class FriendsActivity extends AppCompatActivity
 
     private List<OverviewData> tmpFriendsOverview;
     private final int tmpProfilePictureRes1 = R.drawable.angelina_jolie_profile_picture;
-    private final String tmpPseudo1 = "angelina24";
-    private final String tmpAge1 = "42 years old";
+    private final String tmpPseudo1 = "angelina24", tmpAge1 = "42 years old", tmpCity1 = "New York";
     private final int tmpProfilePictureRes2 = R.drawable.adele_profile_picture;
-    private final String tmpPseudo2 = "A.D.E.LE";
-    private final String tmpAge2 = "27 years old";
+    private final String tmpPseudo2 = "A.D.E.LE", tmpAge2 = "27 years old", tmpCity2 = "London";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -37,8 +35,8 @@ public class FriendsActivity extends AppCompatActivity
         setContentView(R.layout.activity_friends);
 
         tmpFriendsOverview = new ArrayList<>();
-        tmpFriendsOverview.add(new OverviewData(tmpProfilePictureRes1, tmpPseudo1, tmpAge1));
-        tmpFriendsOverview.add(new OverviewData(tmpProfilePictureRes2, tmpPseudo2, tmpAge2));
+        tmpFriendsOverview.add(new OverviewData(tmpProfilePictureRes1, tmpPseudo1, tmpAge1, tmpCity1));
+        tmpFriendsOverview.add(new OverviewData(tmpProfilePictureRes2, tmpPseudo2, tmpAge2, tmpCity2));
         /*
         CurrentUser currentUser = (CurrentUser) getIntent().getSerializableExtra(CurrentUser.EXTRA_CURRENT_USER);
          */

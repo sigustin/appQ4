@@ -23,6 +23,7 @@ public class ProfileOverviewAdapter extends RecyclerView.Adapter<ProfileOverview
         ImageView profilePicture;
         TextView pseudo;
         TextView age;
+        TextView city;
 
         public ViewHolder(View boxView)
         {
@@ -31,6 +32,7 @@ public class ProfileOverviewAdapter extends RecyclerView.Adapter<ProfileOverview
             profilePicture = (ImageView) boxView.findViewById(R.id.profile_picture);
             pseudo = (TextView) boxView.findViewById(R.id.pseudo);
             age = (TextView) boxView.findViewById(R.id.age);
+            city = (TextView) boxView.findViewById(R.id.city);
         }
     }
 
@@ -52,6 +54,7 @@ public class ProfileOverviewAdapter extends RecyclerView.Adapter<ProfileOverview
         holder.profilePicture.setImageResource(m_data.get(position).m_profilePictureRes);
         holder.pseudo.setText(m_data.get(position).m_pseudo);
         holder.age.setText(m_data.get(position).m_age);
+        holder.city.setText(m_data.get(position).m_city);
     }
 
     @Override
