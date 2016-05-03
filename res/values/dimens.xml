@@ -56,5 +56,7 @@
     <dimen name="small_profile_picture_height">130dp</dimen>
     <dimen name="small_profile_picture_padding_vertical">5dp</dimen>
     <dimen name="text_padding">10dp</dimen>
+    <dimen name="box_margin_vertical">4dp</dimen>
+    <dimen name="box_margin_horizontal">0dp</dimen>
 
 </resources>
