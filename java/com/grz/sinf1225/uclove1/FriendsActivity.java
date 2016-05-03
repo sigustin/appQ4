@@ -23,9 +23,9 @@ public class FriendsActivity extends AppCompatActivity
     private RecyclerView.LayoutManager m_recyclerViewLayoutManager;
 
     private List<OverviewData> tmpFriendsOverview;
-    private final int tmpProfilePictureRes1 = R.drawable.angelina_jolie_profile_picture;
+    private final int tmpProfilePictureRes1 = R.drawable.angelina_jolie_profile_picture, tmpRequest1 = OverviewData.REQUEST;
     private final String tmpPseudo1 = "angelina24", tmpAge1 = "42 years old", tmpCity1 = "New York";
-    private final int tmpProfilePictureRes2 = R.drawable.adele_profile_picture;
+    private final int tmpProfilePictureRes2 = R.drawable.adele_profile_picture, tmpRequest2 = OverviewData.FRIEND;
     private final String tmpPseudo2 = "A.D.E.LE", tmpAge2 = "27 years old", tmpCity2 = "London";
 
     @Override
@@ -35,8 +35,8 @@ public class FriendsActivity extends AppCompatActivity
         setContentView(R.layout.activity_friends);
 
         tmpFriendsOverview = new ArrayList<>();
-        tmpFriendsOverview.add(new OverviewData(tmpProfilePictureRes1, tmpPseudo1, tmpAge1, tmpCity1));
-        tmpFriendsOverview.add(new OverviewData(tmpProfilePictureRes2, tmpPseudo2, tmpAge2, tmpCity2));
+        tmpFriendsOverview.add(new OverviewData(tmpProfilePictureRes1, tmpPseudo1, tmpAge1, tmpCity1, tmpRequest1));
+        tmpFriendsOverview.add(new OverviewData(tmpProfilePictureRes2, tmpPseudo2, tmpAge2, tmpCity2, tmpRequest2));
         /*
         CurrentUser currentUser = (CurrentUser) getIntent().getSerializableExtra(CurrentUser.EXTRA_CURRENT_USER);
          */
@@ -50,7 +50,7 @@ public class FriendsActivity extends AppCompatActivity
                 Log.d("OVERVIEWLISTENER", "RelativeLayoutClicked " + pseudo);
                 onFriendOverviewClicked(pseudo);
             }
-        });
+        }, this);
         m_recyclerView.setAdapter(m_recyclerViewAdapter);
     }
 

@@ -1,5 +1,8 @@
 package com.grz.sinf1225.uclove1;
 
+import android.app.Activity;
+import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +30,7 @@ public class ProfileOverviewAdapter extends RecyclerView.Adapter<ProfileOverview
         TextView pseudo;
         TextView age;
         TextView city;
+        TextView relationshipStatusEmblem;
 
         public ViewHolder(View boxView)
         {
@@ -36,16 +40,20 @@ public class ProfileOverviewAdapter extends RecyclerView.Adapter<ProfileOverview
             pseudo = (TextView) boxView.findViewById(R.id.pseudo);
             age = (TextView) boxView.findViewById(R.id.age);
             city = (TextView) boxView.findViewById(R.id.city);
+            relationshipStatusEmblem = (TextView) boxView.findViewById(R.id.relationship_status_emblem);
         }
     }
 
+
     List<OverviewData> m_data;
     OnOverviewClickedListener m_listener;
+    Context m_context;
 
-    public ProfileOverviewAdapter(List<OverviewData> data, OnOverviewClickedListener listener)
+    public ProfileOverviewAdapter(List<OverviewData> data, OnOverviewClickedListener listener, Context context)
     {
         m_data = data;
         m_listener = listener;
+        m_context = context;
     }
 
     @Override
@@ -58,17 +66,32 @@ public class ProfileOverviewAdapter extends RecyclerView.Adapter<ProfileOverview
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position)
     {
-        holder.profilePicture.setImageResource(m_data.get(position).m_profilePictureRes);
-        holder.pseudo.setText(m_data.get(position).m_pseudo);
-        holder.age.setText(m_data.get(position).m_age);
-        holder.city.setText(m_data.get(position).m_city);
-
         holder.overviewBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 m_listener.onOverviewClicked(m_data.get(position).m_pseudo);
             }
         });
+
+        holder.profilePicture.setImageResource(m_data.get(position).m_profilePictureRes);
+        holder.pseudo.setText(m_data.get(position).m_pseudo);
+        holder.age.setText(m_data.get(position).m_age);
+        holder.city.setText(m_data.get(position).m_city);
+
+        switch (m_data.get(position).m_relationshipStatus)
+        {
+            case OverviewData.REQUEST:
+                holder.relationshipStatusEmblem.setBackgroundColor(ContextCompat.getColor(m_context, R.color.colorPrimaryLight));
+                holder.relationshipStatusEmblem.setText(m_context.getResources().getString(R.string.request));
+                break;
+            case OverviewData.REJECTION:
+                holder.relationshipStatusEmblem.setBackgroundColor(ContextCompat.getColor(m_context, R.color.colorPrimaryLight));
+                holder.relationshipStatusEmblem.setText(m_context.getResources().getString(R.string.rejection));
+                break;
+            default:
+                holder.relationshipStatusEmblem.setText(null);
+                break;
+        }
     }
 
     @Override

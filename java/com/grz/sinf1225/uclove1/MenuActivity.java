@@ -21,7 +21,7 @@ public class MenuActivity extends AppCompatActivity
 {
     private List<OverviewData> tmpOverviewCurrentPseudoList;
     final String tmpPseudo = "++Jesus++", tmpAge = "225 years old", tmpCity = "Louvain-La-Neuve";
-    final int profilePictureRes = R.drawable.hollande_profile_picture;
+    final int profilePictureRes = R.drawable.hollande_profile_picture, tmpRequest = OverviewData.ONESELF;
 
     private RecyclerView m_recyclerView;
     private RecyclerView.Adapter m_recyclerViewAdapter;
@@ -34,7 +34,7 @@ public class MenuActivity extends AppCompatActivity
         setContentView(R.layout.activity_menu);
 
         tmpOverviewCurrentPseudoList = new ArrayList<OverviewData>();
-        tmpOverviewCurrentPseudoList.add(new OverviewData(profilePictureRes, tmpPseudo, tmpAge, tmpCity));
+        tmpOverviewCurrentPseudoList.add(new OverviewData(profilePictureRes, tmpPseudo, tmpAge, tmpCity, tmpRequest));
         /*
         CurrentUser currentUser = (CurrentUser) getIntent().getSerializableExtra(CurrentUser.EXTRA_CURRENT_USER);
          */
@@ -47,15 +47,8 @@ public class MenuActivity extends AppCompatActivity
             public void onOverviewClicked(String pseudo) {
                 onProfileOverviewClicked(pseudo);
             }
-        });
+        }, this);
         m_recyclerView.setAdapter(m_recyclerViewAdapter);
-
-        /*ImageView profilePicture = (ImageView) findViewById(R.id.profile_picture);
-        profilePicture.setImageResource(profilePictureRes);
-        TextView pseudoDisplay = (TextView) findViewById(R.id.pseudo);
-        pseudoDisplay.setText(tmpPseudo);
-        TextView ageDisplay = (TextView) findViewById(R.id.age);
-        ageDisplay.setText(tmpAge);*/
     }
 
     @Override

@@ -68,6 +68,7 @@
 
     <!-- friends activity -->
     <string name="friends_activity_title">My friends</string>
+    <string name="relationship_status">Relationship status</string>
 
     <!-- dates activity -->
     <string name="dates_activity_title">My dates</string>
@@ -76,5 +77,9 @@
     <string name="profile_activity_title">Profile</string>
 
     <string name="invisible">Invisible</string>
+
+    <!-- profile overview -->
+    <string name="request">Request</string>
+    <string name="rejection">Blocked</string>
 
 </resources>

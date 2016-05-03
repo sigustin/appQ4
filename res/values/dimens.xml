@@ -58,4 +58,7 @@
     <dimen name="textview_margin_horizontal">20dp</dimen>
     <dimen name="textview_margin_vertical">5dp</dimen>
 
+    <dimen name="relationship_status_emblem_padding">10dp</dimen>
+    <dimen name="relationship_status_emblem_elevation">3dp</dimen>
+
 </resources>
