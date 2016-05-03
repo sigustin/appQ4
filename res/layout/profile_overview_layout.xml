@@ -18,10 +18,7 @@
         android:layout_marginBottom="@dimen/box_spacing_vertical"
 
         android:background="@color/white"
-        android:elevation="@dimen/view_elevation"
-
-        android:clickable="true"
-        android:onClick="onFriendOverviewClicked"/>
+        android:elevation="@dimen/view_elevation" />
 
     <TextView
         android:id="@+id/pseudo"

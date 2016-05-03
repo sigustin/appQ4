@@ -15,7 +15,10 @@ import java.util.List;
  */
 public class ProfileOverviewAdapter extends RecyclerView.Adapter<ProfileOverviewAdapter.ViewHolder>
 {
-    List<OverviewData> m_data;
+    public interface OnOverviewClickedListener
+    {
+        void onOverviewClicked(String pseudo);
+    }
 
     public static class ViewHolder extends RecyclerView.ViewHolder
     {
@@ -36,9 +39,13 @@ public class ProfileOverviewAdapter extends RecyclerView.Adapter<ProfileOverview
         }
     }
 
-    public ProfileOverviewAdapter(List<OverviewData> data)
+    List<OverviewData> m_data;
+    OnOverviewClickedListener m_listener;
+
+    public ProfileOverviewAdapter(List<OverviewData> data, OnOverviewClickedListener listener)
     {
         m_data = data;
+        m_listener = listener;
     }
 
     @Override
@@ -49,12 +56,19 @@ public class ProfileOverviewAdapter extends RecyclerView.Adapter<ProfileOverview
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position)
+    public void onBindViewHolder(final ViewHolder holder, final int position)
     {
         holder.profilePicture.setImageResource(m_data.get(position).m_profilePictureRes);
         holder.pseudo.setText(m_data.get(position).m_pseudo);
         holder.age.setText(m_data.get(position).m_age);
         holder.city.setText(m_data.get(position).m_city);
+
+        holder.overviewBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                m_listener.onOverviewClicked(m_data.get(position).m_pseudo);
+            }
+        });
     }
 
     @Override
