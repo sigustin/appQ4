@@ -3,6 +3,8 @@ package com.grz.sinf1225.uclove1;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Layout;
 import android.util.Log;
 import android.view.Menu;
@@ -12,11 +14,21 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class FriendsActivity extends AppCompatActivity
 {
+    private RecyclerView m_recyclerView;
+    private RecyclerView.Adapter m_recyclerViewAdapter;
+    private RecyclerView.LayoutManager m_recyclerViewLayoutManager;
 
-    final int tmpNbFriends = 2;
+    private List<OverviewData> tmpFriendsOverview;
+    private final int tmpProfilePictureRes1 = R.drawable.angelina_jolie_profile_picture;
+    private final String tmpPseudo1 = "angelina24";
+    private final String tmpAge1 = "42 years old";
+    private final int tmpProfilePictureRes2 = R.drawable.adele_profile_picture;
+    private final String tmpPseudo2 = "A.D.E.LE";
+    private final String tmpAge2 = "27 years old";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -24,15 +36,24 @@ public class FriendsActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends);
 
+        tmpFriendsOverview = new ArrayList<>();
+        tmpFriendsOverview.add(new OverviewData(tmpProfilePictureRes1, tmpPseudo1, tmpAge1));
+        tmpFriendsOverview.add(new OverviewData(tmpProfilePictureRes2, tmpPseudo2, tmpAge2));
         /*
         CurrentUser currentUser = (CurrentUser) getIntent().getSerializableExtra(CurrentUser.EXTRA_CURRENT_USER);
          */
 
-        RelativeLayout baseLayout = (RelativeLayout) findViewById(R.id.relative_layout_base);
+        m_recyclerView = (RecyclerView) findViewById(R.id.profile_overviews_recycler_view);
+        m_recyclerViewLayoutManager = new LinearLayoutManager(this);
+        m_recyclerView.setLayoutManager(m_recyclerViewLayoutManager);
+        m_recyclerViewAdapter = new ProfileOverviewAdapter(tmpFriendsOverview);
+        m_recyclerView.setAdapter(m_recyclerViewAdapter);
+
+        /*RelativeLayout baseLayout = (RelativeLayout) findViewById(R.id.relative_layout_base);
         ArrayList<View> friendBoxes = new ArrayList<>();
 
         for (int i=0; i<tmpNbFriends; i++)
-            friendBoxes.add( addFriendView(baseLayout, friendBoxes) );
+            friendBoxes.add( addFriendView(baseLayout, friendBoxes) );*/
 
         /*ImageView profilePicture = new ImageView(this);
         profilePicture.setId(View.generateViewId());
@@ -89,7 +110,7 @@ public class FriendsActivity extends AppCompatActivity
         return false;
     }
 
-    public View addFriendView(ViewGroup baseLayout, ArrayList<View> boxes)
+    /*public View addFriendView(ViewGroup baseLayout, ArrayList<View> boxes)
     {
         View box = new View(this);
         box.setId(View.generateViewId());
@@ -113,7 +134,7 @@ public class FriendsActivity extends AppCompatActivity
 
 
         return box;
-    }
+    }*/
 
     public boolean onAddFriendsButtonClicked(View view)
     {
@@ -121,7 +142,13 @@ public class FriendsActivity extends AppCompatActivity
         return true;
     }
 
-    public boolean onFriendSelected(View view)
+    public boolean onFriendOverviewClicked(View view)
+    {
+        Log.d("OVERVIEW", "Friend overview clicked");
+        return true;
+    }
+
+    /*public boolean onFriendSelected(View view)
     {
         switch (view.getId())
         {
@@ -135,7 +162,7 @@ public class FriendsActivity extends AppCompatActivity
                 return true;
         }
         return false;
-    }
+    }*/
 
     public boolean displayFriend(String pseudo)
     {
