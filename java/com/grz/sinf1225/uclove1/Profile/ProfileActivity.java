@@ -44,39 +44,8 @@ public class ProfileActivity extends AppCompatActivity
 
     private void setViews()
     {
-        /*RelativeLayout baseLayout = (RelativeLayout) findViewById(R.id.base_layout);
-
-        ImageView profilePicture = new ImageView(this);
-        profilePicture.setId(View.generateViewId());
-        RelativeLayout.LayoutParams profilePictureParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, (int) getResources().getDimension(R.dimen.big_profile_picture_height));
-        profilePictureParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-        profilePictureParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE); profilePictureParams.addRule(RelativeLayout.ALIGN_PARENT_END, RelativeLayout.TRUE);
-        profilePictureParams.setMargins(
-                (int) getResources().getDimension(R.dimen.profile_picture_margin),
-                (int) getResources().getDimension(R.dimen.profile_picture_margin),
-                (int) getResources().getDimension(R.dimen.profile_picture_margin),
-                (int) getResources().getDimension(R.dimen.profile_picture_margin));
-        profilePicture.setImageResource(profilePictureRes);
-        baseLayout.addView(profilePicture, profilePictureParams);
-
-        TextView pseudo = new TextView(this);
-        RelativeLayout.LayoutParams pseudoParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        pseudoParams.addRule(RelativeLayout.BELOW, profilePicture.getId());
-        pseudoParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE); pseudoParams.addRule(RelativeLayout.ALIGN_PARENT_END, RelativeLayout.TRUE);
-        pseudo.setText(tmpPseudo);
-        setListItemPadding(pseudo);
-        baseLayout.addView(pseudo, pseudoParams);
-
-        TextView name = new TextView(this);
-        RelativeLayout.LayoutParams nameParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        nameParams.addRule(RelativeLayout.BELOW, R.id.separator1);
-        nameParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE); nameParams.addRule(RelativeLayout.ALIGN_PARENT_END, RelativeLayout.TRUE);
-        name.setText(tmpName);
-        setListItemPadding(name);
-        baseLayout.addView(name, nameParams);*/
-
         ImageView profilePicture = (ImageView) findViewById(R.id.profile_picture);
-        if (/*Database.isVisible(tmpPseudo, (int) Database.PROFILE_PICTURE, currentUser.getPseudo()*/true)
+        if (/*Database.isVisible(userDisplayed.getPseudo(), (int) Database.PROFILE_PICTURE, currentUser.getPseudo())*/true)
             profilePicture.setImageResource(profilePictureRes);
         else
             profilePicture.setImageResource(R.drawable.ic_person_black_48dp);
@@ -135,6 +104,7 @@ public class ProfileActivity extends AppCompatActivity
         {
             actionButton.setText(getResources().getString(R.string.ask_as_friend));
             actionButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_add_black_24dp, 0, 0, 0);
+
         }
         else if (/*Database.getRelationshipStatus(currentUser.getPseudo(), pseudoUserDisplayed)) == Database.REQUEST*/true)
         {
@@ -169,7 +139,7 @@ public class ProfileActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu)
     {
         super.onCreateOptionsMenu(menu);
-        getMenuInflater().inflate(R.menu.top_menu_my_profile_activity, menu);
+        getMenuInflater().inflate(R.menu.top_menu_menu_activity, menu);
         return true;
     }
 

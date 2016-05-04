@@ -15,6 +15,7 @@ import com.grz.sinf1225.uclove1.Dating.DatesActivity;
 import com.grz.sinf1225.uclove1.Matching.FriendsActivity;
 import com.grz.sinf1225.uclove1.Matching.OverviewData;
 import com.grz.sinf1225.uclove1.Profile.MyProfileActivity;
+import com.grz.sinf1225.uclove1.Profile.ProfileActivity;
 import com.grz.sinf1225.uclove1.Profile.ProfileOverviewAdapter;
 
 import java.util.ArrayList;
@@ -84,7 +85,7 @@ public class MenuActivity extends AppCompatActivity
     public void onMyProfileButtonClicked(View view)
     {
         Log.d("BUTTON", "my profile button clicked");
-        goToActivity(MyProfileActivity.class);
+        goToActivity(ProfileActivity.class);
     }
 
     public void onFindFriendsButtonClicked(View view)
@@ -120,7 +121,7 @@ public class MenuActivity extends AppCompatActivity
     public void onProfileOverviewClicked(String pseudo)
     {
         Log.d("OVERVIEW", "Overview clicked");
-        goToActivity(MyProfileActivity.class);
+        goToActivity(ProfileActivity.class);
     }
 
     public void goToActivity(Class<?> activityClass)
