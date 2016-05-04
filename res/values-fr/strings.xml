@@ -6,20 +6,20 @@
     <string name="app_title">UCLove</string>
 
     <string name="login_pseudo_hint">Pseudo</string>
-    <string name="login_password_hint">Password</string>
+    <string name="login_password_hint">Mot de passe</string>
 
     <string name="login_button">Connexion</string>
 
     <string name="login_not_yet_registered">Pas encore inscrit ?</string>
     <string name="register_button">Inscription</string>
 
-    <string name="invalid_password">Le pseudo ou mot de passe n'est pas valide</string>
+    <string name="invalid_password">Le pseudo ou mot de passe n\'est pas valide</string>
 
     <!-- menu activity -->
     <string name="menu_activity_title">Menu</string>
 
     <string name="top_menu_settings_title">Paramètres</string>
-    <string name="top_menu_quit_title">Fermer l'application</string>
+    <string name="top_menu_quit_title">Fermer l\'application</string>
 
     <string name="overview">Aperçu</string>
 
@@ -36,13 +36,13 @@
     <string name="enable_sounds">Son</string>
     <string name="enable_notifications">Notifications</string>
     <string name="choose_theme">Thème</string>
-    <string name="about">A propos de l'application</string>
+    <string name="about">A propos de l\'application</string>
 
     <!-- my profile activity -->
     <string name="my_profile_activity_title">Mon profil</string>
 
     <string name="top_menu_change_informations">Modifier le profil</string>
-    <string name="button_change_informations">Informations du profil</string>
+    <string name="button_change_informations">Changer les informations</string>
 
     <string name="pseudo">Pseudo</string>
     <string name="family_name">Nom de famille</string>
@@ -54,9 +54,9 @@
     <string name="love_status">Situation amoureuse</string>
     <string name="height">Taille</string>
     <string name="description">Description</string>
-    <string name="smoker">Fumer</string>
+    <string name="smoker">Fumeur</string>
     <string name="interested_in">Interessé par</string>
-    <string name="children_nb">Nombre d'enfant(s)</string>
+    <string name="children_nb">Nombre d\'enfant(s)</string>
     <string name="country">Pays</string>
     <string name="city">Ville</string>
     <string name="title_activity_tmp">Tmp</string>
