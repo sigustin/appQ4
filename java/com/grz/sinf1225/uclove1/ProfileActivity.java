@@ -2,6 +2,7 @@ package com.grz.sinf1225.uclove1;
 
 import android.content.Intent;
 import android.media.Image;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -18,6 +20,11 @@ public class ProfileActivity extends AppCompatActivity
     final String tmpPseudo = "angelina24", tmpName = "Angelina Jolie", tmpBirthDate = "01/01/1984", tmpAge = "42 years old", tmpGender = "F", tmpLoveStatus = "Married", tmpInterestedIn = "Both", tmpHeight = "1m70", tmpDescription = "Famous actress", tmpSmoker = "No", tmpChildrenNb = "10", tmpCountry = "Etats-Unis", tmpCity = "Washington D.C.";
     final int profilePictureRes = R.drawable.angelina_jolie_profile_picture;
 
+    /*
+    private CurrentUser currentUser;
+    private String pseudoUserDisplayed;
+     */
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -25,7 +32,8 @@ public class ProfileActivity extends AppCompatActivity
         setContentView(R.layout.activity_profile);
 
         /*
-        CurrentUser currentUser = (CurrentUser) getIntent().
+        currentUser = (CurrentUser) getIntent().getSerializableExtra(CurrentUser.EXTRA_CURRENT_USER);
+        pseudoUserDisplayed = (String) getIntent().getStringExtra(User.EXTRA_PSEUDO);
          */
 
         addViews();
@@ -65,7 +73,7 @@ public class ProfileActivity extends AppCompatActivity
         baseLayout.addView(name, nameParams);*/
 
         ImageView profilePicture = (ImageView) findViewById(R.id.profile_picture);
-        if (/*profilePicture can be viewed*/true)
+        if (/*Database.isVisible(tmpPseudo, (int) Database.PROFILE_PICTURE, currentUser.getPseudo()*/true)
             profilePicture.setImageResource(profilePictureRes);
         else
             profilePicture.setImageResource(R.drawable.ic_person_black_48dp);
@@ -75,6 +83,8 @@ public class ProfileActivity extends AppCompatActivity
             pseudo.setText(tmpPseudo);
         else
             pseudo.setText(R.string.invisible);
+
+        //...$
 
         TextView name = (TextView) findViewById(R.id.name);
         name.setText(tmpName);
@@ -111,6 +121,36 @@ public class ProfileActivity extends AppCompatActivity
 
         TextView city = (TextView) findViewById(R.id.city);
         city.setText(tmpCity);
+
+        Button actionButton = (Button) findViewById(R.id.action_button);
+        if (/*pseudoUserDisplayed == currentUser.getPseudo()*/false)
+        {
+            actionButton.setText(getResources().getString(R.string.button_change_informations));
+            actionButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_mode_edit_black_24dp, 0, 0, 0);
+        }
+        else if (/*Database.getRelationshipStatus(currentUser.getPseudo(), pseudoUserDisplayed)) == Database.NONE*/false)
+        {
+            actionButton.setText(getResources().getString(R.string.ask_as_friend));
+            actionButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_add_black_24dp, 0, 0, 0);
+        }
+        else if (/*Database.getRelationshipStatus(currentUser.getPseudo(), pseudoUserDisplayed)) == Database.REQUEST*/true)
+        {
+            actionButton.setText(getResources().getString(R.string.accept_request));
+            actionButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_done_black_24dp, 0, 0, 0);
+        }
+        else if (/*Database.getRelationshipStatus(currentUser.getPseudo(), pseudoUserDisplayed)) == Database.REQUEST_SENT*/false)
+        {
+            actionButton.setText(getResources().getString(R.string.request_sent));
+        }
+        else if (/*Database.getRelationshipStatus(currentUser.getPseudo(), pseudoUserDisplayed)) == Database.REJECTION*/false)
+        {
+            actionButton.setText(getResources().getString(R.string.blocked));
+        }
+        else if (/*Database.getRelationshipStatus(currentUser.getPseudo(), pseudoUserDisplayed)) == Database.FRIENDS*/false)
+        {
+            actionButton.setText(getResources().getString(R.string.unfriend));
+            actionButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_cancel_black_24dp, 0, 0, 0);
+        }
     }
 
     private void setListItemPadding(View view)
@@ -148,5 +188,11 @@ public class ProfileActivity extends AppCompatActivity
                 return true;
         }
         return false;
+    }
+
+
+    public void onActionButtonClick(View view)
+    {
+        Log.d("BUTTON", "Action button pressed");
     }
 }

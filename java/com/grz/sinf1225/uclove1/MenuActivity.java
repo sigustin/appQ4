@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,11 +14,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.lang.annotation.Documented;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MenuActivity extends AppCompatActivity
 {
-    final String tmpPseudo = "++Jesus++", tmpAge = "225 years old";
-    final int profilePictureRes = R.drawable.hollande_profile_picture;
+    private List<OverviewData> tmpOverviewCurrentPseudoList;
+    final String tmpPseudo = "++Jesus++", tmpAge = "225 years old", tmpCity = "Louvain-La-Neuve";
+    final int profilePictureRes = R.drawable.hollande_profile_picture, tmpRequest = OverviewData.ONESELF;
+
+    private RecyclerView m_recyclerView;
+    private RecyclerView.Adapter m_recyclerViewAdapter;
+    private RecyclerView.LayoutManager m_recyclerViewLayoutManager;
+    /*
+    private CurrentUser currentUser;
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -24,16 +36,22 @@ public class MenuActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
+        tmpOverviewCurrentPseudoList = new ArrayList<OverviewData>();
+        tmpOverviewCurrentPseudoList.add(new OverviewData(profilePictureRes, tmpPseudo, tmpAge, tmpCity, tmpRequest));
         /*
         CurrentUser currentUser = (CurrentUser) getIntent().getSerializableExtra(CurrentUser.EXTRA_CURRENT_USER);
          */
 
-        ImageView profilePicture = (ImageView) findViewById(R.id.profile_picture);
-        profilePicture.setImageResource(profilePictureRes);
-        TextView pseudoDisplay = (TextView) findViewById(R.id.pseudo);
-        pseudoDisplay.setText(tmpPseudo);
-        TextView ageDisplay = (TextView) findViewById(R.id.age);
-        ageDisplay.setText(tmpAge);
+        m_recyclerView = (RecyclerView) findViewById(R.id.profile_overviews_recycler_view);
+        m_recyclerViewLayoutManager = new LinearLayoutManager(this);
+        m_recyclerView.setLayoutManager(m_recyclerViewLayoutManager);
+        m_recyclerViewAdapter = new ProfileOverviewAdapter(tmpOverviewCurrentPseudoList, new ProfileOverviewAdapter.OnOverviewClickedListener() {
+            @Override
+            public void onOverviewClicked(String pseudo) {
+                onProfileOverviewClicked(pseudo);
+            }
+        }, this);
+        m_recyclerView.setAdapter(m_recyclerViewAdapter);
     }
 
     @Override
@@ -95,7 +113,7 @@ public class MenuActivity extends AppCompatActivity
         startActivity(intent);
     }
 
-    public void onOverviewClicked(View view)
+    public void onProfileOverviewClicked(String pseudo)
     {
         Log.d("OVERVIEW", "Overview clicked");
         goToActivity(MyProfileActivity.class);
