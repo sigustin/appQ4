@@ -1,6 +1,5 @@
-package com.grz.sinf1225.uclove1;
+package com.grz.sinf1225.uclove1.Profile;
 
-import android.app.Activity;
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
@@ -8,8 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.grz.sinf1225.uclove1.Matching.OverviewData;
+import com.grz.sinf1225.uclove1.R;
 
 import java.util.List;
 

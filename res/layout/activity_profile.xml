@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.grz.sinf1225.uclove1.MyProfileActivity">
+    tools:context=".Profile.MyProfileActivity">
 
     <RelativeLayout
         android:id="@+id/base_layout"

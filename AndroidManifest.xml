@@ -25,25 +25,25 @@
             android:name=".SettingsActivity"
             android:label="@string/settings_activity_title" />
         <activity
-            android:name=".MyProfileActivity"
+            android:name=".Profile.MyProfileActivity"
             android:label="@string/my_profile_activity_title" />
         <activity
-            android:name=".EditProfileActivity"
+            android:name=".Profile.EditProfileActivity"
             android:label="@string/edit_profile_activity_title" />
         <activity
-            android:name=".FriendsActivity"
+            android:name=".Matching.FriendsActivity"
             android:label="@string/friends_activity_title" />
         <activity
-            android:name=".DatesActivity"
+            android:name=".Dating.DatesActivity"
             android:label="@string/dates_activity_title" />
         <activity
-            android:name=".ProfileActivity"
+            android:name=".Profile.ProfileActivity"
             android:label="@string/profile_activity_title" />
         <activity
-            android:name=".ConversationsActivity"
+            android:name=".Chat.ConversationsActivity"
             android:label="@string/conversations_activity_title" />
         <activity
-            android:name=".ChatActivity"
+            android:name=".Chat.ChatActivity"
             android:label="@string/chat_activity_title"/>
     </application>
 

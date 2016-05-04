@@ -1,4 +1,4 @@
-package com.grz.sinf1225.uclove1;
+package com.grz.sinf1225.uclove1.Profile;
 
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +12,8 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+
+import com.grz.sinf1225.uclove1.R;
 
 public class EditProfileActivity extends AppCompatActivity
 {

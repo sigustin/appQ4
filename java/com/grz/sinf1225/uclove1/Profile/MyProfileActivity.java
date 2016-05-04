@@ -1,8 +1,6 @@
-package com.grz.sinf1225.uclove1;
+package com.grz.sinf1225.uclove1.Profile;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +9,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.grz.sinf1225.uclove1.Profile.EditProfileActivity;
+import com.grz.sinf1225.uclove1.R;
 
 public class MyProfileActivity extends AppCompatActivity
 {

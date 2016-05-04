@@ -1,4 +1,4 @@
-package com.grz.sinf1225.uclove1;
+package com.grz.sinf1225.uclove1.Profile;
 
 import android.content.Intent;
 import android.media.Image;
@@ -14,6 +14,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.grz.sinf1225.uclove1.R;
+import com.grz.sinf1225.uclove1.SettingsActivity;
 
 public class ProfileActivity extends AppCompatActivity
 {

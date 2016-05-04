@@ -1,4 +1,4 @@
-package com.grz.sinf1225.uclove1;
+package com.grz.sinf1225.uclove1.Dating;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +7,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import com.grz.sinf1225.uclove1.R;
+import com.grz.sinf1225.uclove1.SettingsActivity;
 
 import java.util.Set;
 

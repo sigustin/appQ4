@@ -1,4 +1,4 @@
-package com.grz.sinf1225.uclove1;
+package com.grz.sinf1225.uclove1.Chat;
 
 /**
  * Created by simon on 4/05/16.

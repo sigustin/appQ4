@@ -12,7 +12,7 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
-        tools:context="com.grz.sinf1225.uclove1.MyProfileActivity">
+        tools:context=".Profile.MyProfileActivity">
 
         <ImageView
             android:id="@+id/profile_picture"

@@ -1,7 +1,6 @@
-package com.grz.sinf1225.uclove1;
+package com.grz.sinf1225.uclove1.Chat;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +11,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+
+import com.grz.sinf1225.uclove1.Chat.ConversationsActivity;
+import com.grz.sinf1225.uclove1.Chat.MessageData;
+import com.grz.sinf1225.uclove1.Chat.MessageViewAdapter;
+import com.grz.sinf1225.uclove1.R;
+import com.grz.sinf1225.uclove1.SettingsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
