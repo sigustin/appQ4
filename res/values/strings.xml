@@ -143,7 +143,7 @@
     <string name="saturday">Saturday</string>
     <string name="sunday">Sunday</string>
 
-    <!-- edit text -->
+    <!-- edit profile activity -->
     <string name="must_enter_pseudo">You must specify a pseudo</string>
     <string name="must_enter_family_name">You must specify a last name</string>
     <string name="must_enter_first_name">You must specify a first name</string>
@@ -151,5 +151,13 @@
     <string name="must_enter_country">You must specify the country you live in</string>
     <string name="must_enter_city">You must specify the city you live close to</string>
     <string name="pseudo_taken">This pseudo is already taken</string>
+
+    <!-- find matches activity -->
+    <string name="set_filter">Set filter</string>
+
+    <!-- set filter activity -->
+    <string name="height_fork">Height (~10cm)</string>
+    <string name="no_filter">No filter</string>
+    <string name="save_filters">Save filters</string>
 
 </resources>

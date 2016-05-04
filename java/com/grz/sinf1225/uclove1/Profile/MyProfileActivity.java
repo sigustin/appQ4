@@ -75,9 +75,6 @@ public class MyProfileActivity extends AppCompatActivity
                 Log.d("TOPMENU", "Edit selected");
                 goToEditProfileActivity();
                 return  true;
-            case R.id.top_menu_item_quit:
-                Log.d("TOPMENU", "Quit selected");
-                return true;
         }
         return false;
     }

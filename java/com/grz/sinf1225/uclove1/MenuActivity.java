@@ -12,6 +12,7 @@ import android.view.View;
 
 import com.grz.sinf1225.uclove1.Chat.ConversationsActivity;
 import com.grz.sinf1225.uclove1.Dating.DatesActivity;
+import com.grz.sinf1225.uclove1.Matching.FindMatchsActivity;
 import com.grz.sinf1225.uclove1.Matching.FriendsActivity;
 import com.grz.sinf1225.uclove1.Matching.OverviewData;
 import com.grz.sinf1225.uclove1.Profile.MyProfileActivity;
@@ -75,9 +76,6 @@ public class MenuActivity extends AppCompatActivity
                 Log.d("TOPMENU", "top menu item settings selected");
                 onSettingsButtonClicked(null);;
                 return true;
-            case R.id.top_menu_item_quit:
-                Log.d("TOPMENU", "top menu item quit selected");
-                return true;
         }
         return false;
     }
@@ -91,6 +89,7 @@ public class MenuActivity extends AppCompatActivity
     public void onFindFriendsButtonClicked(View view)
     {
         Log.d("BUTTON", "find friends button clicked");
+        goToActivity(FindMatchsActivity.class);
     }
 
     public void onMyFriendsButtonClicked(View view)

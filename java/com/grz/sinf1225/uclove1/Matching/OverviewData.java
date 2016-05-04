@@ -5,7 +5,7 @@ package com.grz.sinf1225.uclove1.Matching;
  */
 public class OverviewData
 {
-    public static final int REQUEST = 0, FRIEND = 1, REJECTION = 2, ONESELF = 3;
+    public static final int REQUEST = 0, FRIEND = 1, REJECTION = 2, ONESELF = 3, NONE = 4;
 
     public int m_profilePictureRes;
     public String m_pseudo, m_age, m_city;

@@ -2,10 +2,4 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item
-        android:id="@+id/top_menu_item_quit"
-        android:title="@string/top_menu_quit_title"
-        android:orderInCategory="1"
-        app:showAsAction="never" />
-
 </menu>

@@ -18,7 +18,7 @@ import com.grz.sinf1225.uclove1.SettingsActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FriendsActivity extends AppCompatActivity
+public class FindMatchsActivity extends AppCompatActivity
 {
     private RecyclerView m_recyclerView;
     private RecyclerView.Adapter m_recyclerViewAdapter;
@@ -28,16 +28,16 @@ public class FriendsActivity extends AppCompatActivity
      */
 
     private List<OverviewData> tmpFriendsOverview;
-    private final int tmpProfilePictureRes1 = R.drawable.angelina_jolie_profile_picture, tmpRequest1 = OverviewData.REQUEST;
+    private final int tmpProfilePictureRes1 = R.drawable.angelina_jolie_profile_picture, tmpRequest1 = OverviewData.NONE;
     private final String tmpPseudo1 = "angelina24", tmpAge1 = "42 years old", tmpCity1 = "New York";
-    private final int tmpProfilePictureRes2 = R.drawable.adele_profile_picture, tmpRequest2 = OverviewData.FRIEND;
+    private final int tmpProfilePictureRes2 = R.drawable.adele_profile_picture, tmpRequest2 = OverviewData.NONE;
     private final String tmpPseudo2 = "A.D.E.LE", tmpAge2 = "27 years old", tmpCity2 = "London";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_friends);
+        setContentView(R.layout.activity_find_matchs);
 
         tmpFriendsOverview = new ArrayList<>();
         tmpFriendsOverview.add(new OverviewData(tmpProfilePictureRes1, tmpPseudo1, tmpAge1, tmpCity1, tmpRequest1));
@@ -81,12 +81,6 @@ public class FriendsActivity extends AppCompatActivity
         return false;
     }
 
-    public boolean onAddFriendsButtonClicked(View view)
-    {
-        Log.d("FLOATINGBUTTON", "Add friends button clicked");
-        return true;
-    }
-
     public void onFriendOverviewClicked(String pseudo)
     {
         Log.d("SIG", "You clicked friend " + pseudo);
@@ -103,5 +97,15 @@ public class FriendsActivity extends AppCompatActivity
          */
         startActivity(intent);
         return true;
+    }
+
+    public void onSetFilterButtonClicked(View view)
+    {
+        Log.d("BUTTON", "Set filter button pressed");
+        Intent intent = new Intent(this, SetFilterActivity.class);
+        /*
+        intent.putExtra(CurrentUser.EXTRA_CURRENT_USER, currentUser);
+         */
+        startActivity(intent);
     }
 }

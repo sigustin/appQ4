@@ -45,7 +45,10 @@
         <activity
             android:name=".Chat.ChatActivity"
             android:label="@string/chat_activity_title" />
-        <activity android:name=".Dating.SetDateActivity"></activity>
+        <activity android:name=".Dating.SetDateActivity" />
+        <activity android:name=".Matching.indMatchsActivity" />
+        <activity android:name=".Matching.FindMatchsActivity" />
+        <activity android:name=".Matching.SetFilterActivity"></activity>
     </application>
 
 </manifest>

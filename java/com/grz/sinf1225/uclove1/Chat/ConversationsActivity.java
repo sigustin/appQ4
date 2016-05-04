@@ -80,9 +80,6 @@ public class ConversationsActivity extends AppCompatActivity
                 Intent intent = new Intent(this, SettingsActivity.class);
                 startActivity(intent);
                 return true;
-            case R.id.top_menu_item_quit:
-                Log.d("TOPMENU", "Quit selected");
-                return true;
         }
         return false;
     }

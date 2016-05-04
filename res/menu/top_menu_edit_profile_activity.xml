@@ -9,10 +9,4 @@
         android:orderInCategory="1"
         app:showAsAction="ifRoom"/>
 
-    <item
-        android:id="@+id/top_menu_item_quit"
-        android:title="@string/top_menu_quit_title"
-        android:orderInCategory="2"
-        app:showAsAction="never"/>
-
 </menu>
