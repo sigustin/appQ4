@@ -118,8 +118,10 @@
     <string name="on">On </string>
 
     <!-- set date activity -->
+    <string name="set_date_activity_title_new">Set new date</string>
     <string name="set_date_activity_title_part">Set date with</string>
-    <string name="enter_your_disponibilities">Enter your disponibilities for the week to come</string>
+    <string name="enter_friends_pseudo">Enter your friend\'s pseudo</string>
+    <string name="enter_your_disponibilities">Enter your disponibilities for the upcoming week</string>
     <string name="enter_a_location">Enter the location of the date</string>
     <string name="save_date">Done</string>
 

@@ -91,6 +91,8 @@ public class DatesActivity extends AppCompatActivity
     public boolean onAddDateButtonClicked(View view)
     {
         Log.d("FLOATINGBUTTON", "Add date");
+        Intent intent = new Intent(this, SetDateActivity.class);
+        startActivity(intent);
         return true;
     }
 

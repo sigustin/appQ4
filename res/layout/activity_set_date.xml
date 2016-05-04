@@ -10,6 +10,8 @@
     tools:context="com.grz.sinf1225.uclove1.Dating.SetDateActivity">
 
     <LinearLayout
+        android:id="@+id/base_linear_layout"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -101,6 +103,7 @@
 
             android:drawableLeft="@drawable/ic_done_black_24dp"
             android:text="@string/save_date"
+            android:inputType=""
 
             android:onClick="onSaveDateButtonClicked"/>
 

@@ -9,8 +9,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import com.grz.sinf1225.uclove1.Matching.OverviewData;
 import com.grz.sinf1225.uclove1.Profile.ProfileActivity;
@@ -35,6 +37,8 @@ public class SetDateActivity extends AppCompatActivity
     private RecyclerView.Adapter m_recyclerViewAdapter;
     private RecyclerView.LayoutManager m_recyclerViewLayoutManager;
     private String m_friendPseudo;
+    private EditText m_enterPseudo;
+    private boolean m_newDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -48,24 +52,42 @@ public class SetDateActivity extends AppCompatActivity
          */
         m_friendPseudo = (String) getIntent().getStringExtra(DatesActivity.EXTRA_PSEUDO);
 
-        setTitle(getResources().getString(R.string.set_date_activity_title_part) +" "+ m_friendPseudo);
+        if (m_friendPseudo != null)
+        {
+            m_newDate = false;
 
-        tmpFriendOverview = new ArrayList<>();
-        tmpFriendOverview.add(new OverviewData(tmpFriendProfilePictureRes, tmpFriendPseudo, tmpFriendAge, tmpFriendCity, OverviewData.FRIEND));
+            setTitle(getResources().getString(R.string.set_date_activity_title_part) + " " + m_friendPseudo);
 
-        m_recyclerView = (RecyclerView) findViewById(R.id.profile_overview_recycler_view);
-        if (m_recyclerView == null)
-            Log.d("DEBUG", "AAAAAAAAAAAAa");
-        m_recyclerViewLayoutManager = new LinearLayoutManager(this);
-        m_recyclerView.setLayoutManager(m_recyclerViewLayoutManager);
-        m_recyclerViewAdapter = new ProfileOverviewAdapter(tmpFriendOverview, new ProfileOverviewAdapter.OnOverviewClickedListener() {
-            public void onOverviewClicked(String pseudo)
-            {
-                Log.d("OVERVIEWLISTENER", "RelativeLayoutClicked " + pseudo);
-                onFriendOverviewClicked(pseudo);
-            }
-        }, this);
-        m_recyclerView.setAdapter(m_recyclerViewAdapter);
+            tmpFriendOverview = new ArrayList<>();
+            tmpFriendOverview.add(new OverviewData(tmpFriendProfilePictureRes, tmpFriendPseudo, tmpFriendAge, tmpFriendCity, OverviewData.FRIEND));
+
+            m_recyclerView = (RecyclerView) findViewById(R.id.profile_overview_recycler_view);
+            m_recyclerViewLayoutManager = new LinearLayoutManager(this);
+            m_recyclerView.setLayoutManager(m_recyclerViewLayoutManager);
+            m_recyclerViewAdapter = new ProfileOverviewAdapter(tmpFriendOverview, new ProfileOverviewAdapter.OnOverviewClickedListener() {
+                public void onOverviewClicked(String pseudo)
+                {
+                    Log.d("OVERVIEWLISTENER", "RelativeLayoutClicked " + pseudo);
+                    onFriendOverviewClicked(pseudo);
+                }
+            }, this);
+            m_recyclerView.setAdapter(m_recyclerViewAdapter);
+        }
+        else
+        {
+            m_newDate = true;
+
+            setTitle(getResources().getString(R.string.set_date_activity_title_new));
+
+            LinearLayout baseLayout = (LinearLayout) findViewById(R.id.base_linear_layout);
+            EditText enterPseudo = new EditText(this);
+            enterPseudo.setHint(getResources().getString(R.string.enter_friends_pseudo));
+            enterPseudo.setSingleLine(true);
+            enterPseudo.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            baseLayout.addView(enterPseudo, 0);
+
+            m_enterPseudo = enterPseudo;
+        }
     }
 
     @Override
@@ -106,6 +128,10 @@ public class SetDateActivity extends AppCompatActivity
 
     public void onSaveDateButtonClicked(View view)
     {
+        String enteredPseudo = "";
+        if (m_newDate)
+            enteredPseudo = m_enterPseudo.getText().toString();
+
         boolean[] disponibilities = new boolean[7];
         CheckBox currentCheckBox;
         currentCheckBox = (CheckBox) findViewById(R.id.monday_checkbox);
@@ -128,7 +154,10 @@ public class SetDateActivity extends AppCompatActivity
         String tmp = "";
         for (int i=0; i<7; i++)
             tmp += disponibilities[i] +" ";
-        Log.d("BUTTON", "Save date button clicked " + location +" "+ tmp);
+        if (m_newDate)
+            Log.d("BUTTON", "Save date button clicked " + enteredPseudo +" "+ location +" "+ tmp);
+        else
+            Log.d("BUTTON", "Save date button clicked " + location +" "+ tmp);
         finish();
     }
 
