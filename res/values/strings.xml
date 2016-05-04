@@ -110,11 +110,25 @@
     <!-- date overview -->
     <string name="date_time_or_asked">Datetime or asked</string>
     <string name="new_date_to_set">Yet to set</string>
-    
+
     <!-- date activity -->
     <string name="date_details">Date details</string>
     <string name="date_with">Date with</string>
     <string name="at">At :</string>
     <string name="on">On </string>
+
+    <!-- set date activity -->
+    <string name="set_date_activity_title_part">Set date with</string>
+    <string name="enter_your_disponibilities">Enter your disponibilities for the week to come</string>
+    <string name="enter_a_location">Enter the location of the date</string>
+    <string name="save_date">Done</string>
+
+    <string name="monday">Monday</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="thursday">Thursday</string>
+    <string name="friday">Friday</string>
+    <string name="saturday">Saturday</string>
+    <string name="sunday">Sunday</string>
 
 </resources>

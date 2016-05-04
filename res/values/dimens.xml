@@ -75,4 +75,9 @@
     <dimen name="chat_activity_bottom_padding">8dp</dimen>
     <dimen name="chat_activity_horizontal_padding">8dp</dimen>
 
+    <!-- set date activity -->
+    <dimen name="title_font_size">16sp</dimen>
+    <dimen name="title_margins">10dp</dimen>
+    <dimen name="location_edit_text_margin_top">10dp</dimen>
+
 </resources>

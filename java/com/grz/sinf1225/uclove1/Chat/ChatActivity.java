@@ -49,7 +49,6 @@ public class ChatActivity extends AppCompatActivity
         m_interlocutorPseudo = (String) getIntent().getStringExtra(User.EXTRA_PSEUDO);
          */
 
-        //m_interlocutorPseudo = tmpPseudo1;
         m_interlocutorPseudo = (String) getIntent().getStringExtra(ConversationsActivity.EXTRA_PSEUDO);
         setTitle(m_interlocutorPseudo);
 

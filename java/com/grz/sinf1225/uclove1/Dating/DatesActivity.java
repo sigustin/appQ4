@@ -23,6 +23,7 @@ import java.util.Set;
 
 public class DatesActivity extends AppCompatActivity
 {
+    public static final String EXTRA_PSEUDO = "UCLove.EXTRA_PSEUDO";
 
     private RecyclerView m_recyclerView;
     private RecyclerView.Adapter m_recyclerViewAdapter;
@@ -106,6 +107,17 @@ public class DatesActivity extends AppCompatActivity
                     .setMessage(msgToDisplay)
                     .setNegativeButton(getResources().getString(R.string.close_popup), null)
                     .show();
+        }
+        else
+        {
+            Log.d("ACTIVITY", "Getting on setting date activity");
+            Intent intent = new Intent(this, SetDateActivity.class);
+            /*
+            intent.putExtra(CurrentUser.EXTRA_CURRENT_USER, currentUser);
+            intent.putExtra(User.EXTRA_PSEUDO, dateData.m_friendPseudo);
+             */
+            intent.putExtra(EXTRA_PSEUDO, dateData.m_friendPseudo);
+            startActivity(intent);
         }
     }
 

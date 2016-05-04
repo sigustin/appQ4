@@ -44,7 +44,8 @@
             android:label="@string/conversations_activity_title" />
         <activity
             android:name=".Chat.ChatActivity"
-            android:label="@string/chat_activity_title"/>
+            android:label="@string/chat_activity_title" />
+        <activity android:name=".Dating.SetDateActivity"></activity>
     </application>
 
 </manifest>
