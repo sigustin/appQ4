@@ -94,4 +94,12 @@
     <string name="message_read">Read</string>
     <string name="message_not_read">New message</string>
 
+    <!-- chat activity -->
+    <string name="chat_activity_title">Chat</string>
+    <string name="send">Send</string>
+    <string name="your_message">Your message</string>
+
+    <!-- message -->
+    <string name="message">Message</string>
+
 </resources>

@@ -76,5 +76,20 @@
     <string name="profile_activity_title">Profil</string>
 
     <string name="invisible">Invisible</string>
+    <string name="rejection">Bloqué</string>
+    <string name="relationship_status">Statut de la relation</string>
+    <string name="request">Demande</string>
+    <string name="request_sent">Demande envoyée</string>
+    <string name="send">Envoyer</string>
+    <string name="unfriend">Ne plus suivre</string>
+    <string name="your_message">Votre message</string>
+    <string name="message_not_read">Nouveau message</string>
+    <string name="message_read">Lu</string>
+    <string name="last_message">Dernier message</string>
+    <string name="blocked">Bloqué</string>
+    <string name="ask_as_friend">Demander comme ami</string>
+    <string name="accept_request">Accepter la demande</string>
+    <string name="conversations_activity_title">Conversations</string>
+    <string name="chat_activity_title">Chat</string>
 
 </resources>

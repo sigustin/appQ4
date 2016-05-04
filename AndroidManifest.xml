@@ -42,6 +42,9 @@
         <activity
             android:name=".ConversationsActivity"
             android:label="@string/conversations_activity_title" />
+        <activity
+            android:name=".ChatActivity"
+            android:label="@string/chat_activity_title"/>
     </application>
 
 </manifest>

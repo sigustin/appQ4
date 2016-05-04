@@ -28,7 +28,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true" android:layout_alignParentStart="true"
 
-        android:padding="@dimen/profile_picture_padding"
+        android:padding="@dimen/small_profile_picture_padding"
 
         android:elevation="@dimen/view_elevation"
 

@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity
         EditText passwordEditText = (EditText) findViewById(R.id.edit_text_password);
         String inputPassword = passwordEditText.getText().toString();
 
+        Log.d("ENTRIES", "Entered pseudo : " +inputPseudo+ " password : " +inputPassword);
+
         if(/*Database.isRightPassword(inputPseudo, inputPassword)*/true)
         {
 

@@ -1,5 +1,6 @@
 package com.grz.sinf1225.uclove1;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -8,6 +9,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import java.util.ArrayList;
@@ -24,7 +27,7 @@ public class ConversationsActivity extends AppCompatActivity
 
     private List<ConversationOverviewData> tmpConversationsData;
     private final int tmpProfilePictureRes1 = R.drawable.angelina_jolie_profile_picture;
-    private final String tmpPseudo1 = "Angelina244", tmpLastMessage1 = "Hey! this is my last message";
+    private final String tmpPseudo1 = "Angelina244", tmpLastMessage1 = "Hey! this is my last message. A very very long message";
     private final boolean tmpLastMessageRead1 = false;
     private final int tmpProfilePictureRes2 = R.drawable.adele_profile_picture;
     private final String tmpPseudo2 = "ADEL.E", tmpLastMessage2 = "Hey! I luv u";
@@ -56,6 +59,31 @@ public class ConversationsActivity extends AppCompatActivity
         m_recyclerView.setAdapter(m_recyclerViewAdapter);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.top_menu_menu_activity, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            case R.id.top_menu_item_settings:
+                Log.d("TOPMENU", "Settings selected");
+                Intent intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.top_menu_item_quit:
+                Log.d("TOPMENU", "Quit selected");
+                return true;
+        }
+        return false;
+    }
+
     public void onNewConversationOrMessageButtonClicked(View view)
     {
         Log.d("FAB", "New message button clicked");
@@ -64,5 +92,15 @@ public class ConversationsActivity extends AppCompatActivity
     public void onConversationOverviewClicked(String pseudo)
     {
         Log.d("OVERVIEW", "Conversation overview clicked : " + pseudo);
+        goToActivity(ChatActivity.class);
+    }
+
+    public void goToActivity(Class<?> activityClass)
+    {
+        Intent intent = new Intent(this, activityClass);
+        /*
+        intent.putExtra(CurrentUser.EXTRA_CURRENT_USER, currentUser);
+         */
+        startActivity(intent);
     }
 }
