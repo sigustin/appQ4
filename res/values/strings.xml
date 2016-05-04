@@ -88,4 +88,7 @@
     <string name="request">Request</string>
     <string name="rejection">Blocked</string>
 
+    <!-- conversations activity -->
+    <string name="conversations_activity_title">Conversations</string>
+
 </resources>
