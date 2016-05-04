@@ -7,13 +7,14 @@ import java.util.List;
  */
 public class DateData
 {
-    public String m_friendPseudo, m_dateTime;
+    public String m_friendPseudo, m_dateTime, m_location;
     public int m_friendProfilePictureRes;
 
-    public DateData(String friendPseudo, int friendProfilePictureRes, String dateTime)
+    public DateData(String friendPseudo, int friendProfilePictureRes, String dateTime, String location)
     {
         m_friendPseudo = friendPseudo;
         m_friendProfilePictureRes = friendProfilePictureRes;
         m_dateTime = dateTime;
+        m_location = location;
     }
 }

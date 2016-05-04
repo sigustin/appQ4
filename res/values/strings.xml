@@ -110,5 +110,11 @@
     <!-- date overview -->
     <string name="date_time_or_asked">Datetime or asked</string>
     <string name="new_date_to_set">Yet to set</string>
+    
+    <!-- date activity -->
+    <string name="date_details">Date details</string>
+    <string name="date_with">Date with</string>
+    <string name="at">At :</string>
+    <string name="on">On </string>
 
 </resources>

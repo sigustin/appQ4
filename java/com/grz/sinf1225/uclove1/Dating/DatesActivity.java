@@ -1,5 +1,6 @@
 package com.grz.sinf1225.uclove1.Dating;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -34,6 +35,7 @@ public class DatesActivity extends AppCompatActivity
     private String tmpPseudo1 = "angelina426", tmpPseudo2 = "AD.EL.E";
     private int tmpProfilePictureRes1 = R.drawable.angelina_jolie_profile_picture, tmpProfilePictureRes2 = R.drawable.adele_profile_picture;
     private String tmpDateTime1 = "01/06/2016";
+    private final String tmpLocation1 = "McDonalds Washington";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -42,8 +44,8 @@ public class DatesActivity extends AppCompatActivity
         setContentView(R.layout.activity_dates);
 
         tmpDateOverviews = new ArrayList<>();
-        tmpDateOverviews.add(new DateData(tmpPseudo1, tmpProfilePictureRes1, tmpDateTime1));
-        tmpDateOverviews.add(new DateData(tmpPseudo2, tmpProfilePictureRes2, null));
+        tmpDateOverviews.add(new DateData(tmpPseudo1, tmpProfilePictureRes1, tmpDateTime1, tmpLocation1));
+        tmpDateOverviews.add(new DateData(tmpPseudo2, tmpProfilePictureRes2, null, null));
         /*
         currentUser = (CurrentUser) getIntent().getSerializableExtra(CurrentUser.EXTRA_CURRENT_USER);
          */
@@ -94,6 +96,17 @@ public class DatesActivity extends AppCompatActivity
     public void onDateOverviewClicked(DateData dateData)
     {
         Log.d("DATE", "Date overview clicked : " +dateData.toString());
+        if (dateData.m_dateTime != null)
+        {
+            String msgToDisplay = getResources().getString(R.string.date_with) +" "+ dateData.m_friendPseudo +"\n";
+            msgToDisplay += getResources().getString(R.string.at) +" "+ dateData.m_location +"\n";
+            msgToDisplay += getResources().getString(R.string.on) +" "+ dateData.m_dateTime;
+            new AlertDialog.Builder(this)
+                    .setTitle(getResources().getString(R.string.date_details))
+                    .setMessage(msgToDisplay)
+                    .setNegativeButton(getResources().getString(R.string.close_popup), null)
+                    .show();
+        }
     }
 
 }
