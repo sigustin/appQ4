@@ -12,7 +12,9 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import com.grz.sinf1225.uclove1.MainActivity;
 import com.grz.sinf1225.uclove1.R;
 
 public class EditProfileActivity extends AppCompatActivity
@@ -23,69 +25,101 @@ public class EditProfileActivity extends AppCompatActivity
     final double tmpHeight = 1.75;
     final boolean tmpSmoker = false;
 
+    /*
+    CurrentUser currentUser;
+     */
+    private boolean m_isRegistration;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
 
-        /*
-        CurrentUser currentUser = (CurrentUser) getIntent().getSerializableExtra(CurrentUser.EXTRA_CURRENT_USER);
-         */
+        m_isRegistration = (boolean) getIntent().getBooleanExtra(MainActivity.EXTRA_IS_REGISTRATION, true);
+        if (!m_isRegistration)
+        {
+            /*
+            currentUser = (CurrentUser) getIntent().getSerializableExtra(CurrentUser.EXTRA_CURRENT_USER);
+             */
 
-        ImageView profilePicture = (ImageView) findViewById(R.id.profile_picture);
-        profilePicture.setImageResource(profilePictureRes);
+            ImageView profilePicture = (ImageView) findViewById(R.id.profile_picture);
+            profilePicture.setImageResource(profilePictureRes);
 
-        EditText pseudo = (EditText) findViewById(R.id.edit_text_pseudo);
-        pseudo.setText(tmpPseudo);
+            EditText pseudo = (EditText) findViewById(R.id.edit_text_pseudo);
+            pseudo.setText(tmpPseudo);
 
-        EditText firstName = (EditText) findViewById(R.id.edit_text_first_name);
-        firstName.setText(tmpFirstName);
+            EditText firstName = (EditText) findViewById(R.id.edit_text_first_name);
+            firstName.setText(tmpFirstName);
 
-        EditText familyName = (EditText) findViewById(R.id.edit_text_family_name);
-        familyName.setText(tmpFamilyName);
+            EditText familyName = (EditText) findViewById(R.id.edit_text_family_name);
+            familyName.setText(tmpFamilyName);
 
-        EditText birthDate = (EditText) findViewById(R.id.edit_text_birth_date);
-        birthDate.setText(tmpBirthDate);
+            EditText birthDate = (EditText) findViewById(R.id.edit_text_birth_date);
+            birthDate.setText(tmpBirthDate);
 
-        Spinner gender = (Spinner) findViewById(R.id.spinner_gender);
-        ArrayAdapter<CharSequence> genderAdapter = ArrayAdapter.createFromResource(this, R.array.array_genders, android.R.layout.simple_spinner_item);
-        genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        gender.setAdapter(genderAdapter);
-        gender.setSelection(tmpGender);
+            Spinner gender = (Spinner) findViewById(R.id.spinner_gender);
+            ArrayAdapter<CharSequence> genderAdapter = ArrayAdapter.createFromResource(this, R.array.array_genders, android.R.layout.simple_spinner_item);
+            genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            gender.setAdapter(genderAdapter);
+            gender.setSelection(tmpGender);
 
-        Spinner loveStatus = (Spinner) findViewById(R.id.spinner_love_status);
-        ArrayAdapter<CharSequence> loveStatusAdapter = ArrayAdapter.createFromResource(this, R.array.array_love_statuses, android.R.layout.simple_spinner_item);
-        loveStatusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        loveStatus.setAdapter(loveStatusAdapter);
-        loveStatus.setSelection(tmpLoveStatus);
+            Spinner loveStatus = (Spinner) findViewById(R.id.spinner_love_status);
+            ArrayAdapter<CharSequence> loveStatusAdapter = ArrayAdapter.createFromResource(this, R.array.array_love_statuses, android.R.layout.simple_spinner_item);
+            loveStatusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            loveStatus.setAdapter(loveStatusAdapter);
+            loveStatus.setSelection(tmpLoveStatus);
 
-        Spinner interestedIn = (Spinner) findViewById(R.id.spinner_interested_in);
-        ArrayAdapter<CharSequence> interestedInAdapter = ArrayAdapter.createFromResource(this, R.array.array_interested_in_values, android.R.layout.simple_spinner_item);
-        interestedInAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        interestedIn.setAdapter(interestedInAdapter);
-        interestedIn.setSelection(tmpInterestedIn);
+            Spinner interestedIn = (Spinner) findViewById(R.id.spinner_interested_in);
+            ArrayAdapter<CharSequence> interestedInAdapter = ArrayAdapter.createFromResource(this, R.array.array_interested_in_values, android.R.layout.simple_spinner_item);
+            interestedInAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            interestedIn.setAdapter(interestedInAdapter);
+            interestedIn.setSelection(tmpInterestedIn);
 
-        EditText height = (EditText) findViewById(R.id.edit_text_height);
-        height.setText(Double.toString(tmpHeight));
+            EditText height = (EditText) findViewById(R.id.edit_text_height);
+            height.setText(Double.toString(tmpHeight));
 
-        EditText description = (EditText) findViewById(R.id.description);
-        description.setText(tmpDescription);
+            EditText description = (EditText) findViewById(R.id.description);
+            description.setText(tmpDescription);
 
-        CheckBox smoker = (CheckBox) findViewById(R.id.checkbox_smoker);
-        smoker.setChecked(tmpSmoker);
+            CheckBox smoker = (CheckBox) findViewById(R.id.checkbox_smoker);
+            smoker.setChecked(tmpSmoker);
 
-        EditText childrenNb = (EditText) findViewById(R.id.edit_text_children_nb);
-        childrenNb.setText(tmpChildrenNb);
+            EditText childrenNb = (EditText) findViewById(R.id.edit_text_children_nb);
+            childrenNb.setText(tmpChildrenNb);
 
-        Spinner country = (Spinner) findViewById(R.id.spinner_country);
-        ArrayAdapter<CharSequence> countriesAdapter = ArrayAdapter.createFromResource(this, R.array.array_countries, android.R.layout.simple_spinner_item);
-        countriesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        country.setAdapter(countriesAdapter);
-        country.setSelection(tmpCountry);
+            Spinner country = (Spinner) findViewById(R.id.spinner_country);
+            ArrayAdapter<CharSequence> countriesAdapter = ArrayAdapter.createFromResource(this, R.array.array_countries, android.R.layout.simple_spinner_item);
+            countriesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            country.setAdapter(countriesAdapter);
+            country.setSelection(tmpCountry);
 
-        EditText city = (EditText) findViewById(R.id.edit_text_city);
-        city.setText(tmpCity);
+            EditText city = (EditText) findViewById(R.id.edit_text_city);
+            city.setText(tmpCity);
+        }
+        else
+        {
+            Spinner gender = (Spinner) findViewById(R.id.spinner_gender);
+            ArrayAdapter<CharSequence> genderAdapter = ArrayAdapter.createFromResource(this, R.array.array_genders, android.R.layout.simple_spinner_item);
+            genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            gender.setAdapter(genderAdapter);
+
+            Spinner loveStatus = (Spinner) findViewById(R.id.spinner_love_status);
+            ArrayAdapter<CharSequence> loveStatusAdapter = ArrayAdapter.createFromResource(this, R.array.array_love_statuses, android.R.layout.simple_spinner_item);
+            loveStatusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            loveStatus.setAdapter(loveStatusAdapter);
+
+            Spinner interestedIn = (Spinner) findViewById(R.id.spinner_interested_in);
+            ArrayAdapter<CharSequence> interestedInAdapter = ArrayAdapter.createFromResource(this, R.array.array_interested_in_values, android.R.layout.simple_spinner_item);
+            interestedInAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            interestedIn.setAdapter(interestedInAdapter);
+
+            Spinner country = (Spinner) findViewById(R.id.spinner_country);
+            ArrayAdapter<CharSequence> countriesAdapter = ArrayAdapter.createFromResource(this, R.array.array_countries, android.R.layout.simple_spinner_item);
+            countriesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            country.setAdapter(countriesAdapter);
+        }
     }
 
     @Override
@@ -115,9 +149,78 @@ public class EditProfileActivity extends AppCompatActivity
     public void saveInformations(View view)
     {
         Log.d("BUTTON", "Save informations");
+
         /*
         currentUser.set...
          */
+        EditText pseudoEditText = (EditText) findViewById(R.id.edit_text_pseudo);
+        String pseudo = pseudoEditText.getText().toString();
+        if (pseudo == null)
+        {
+            Toast noInput = Toast.makeText(this, R.string.must_enter_pseudo, Toast.LENGTH_LONG);
+            noInput.show();
+        }
+        if (m_isRegistration && /*Database.isPseudoTaken(pseudo)*/true)
+        {
+            Toast pseudoTaken = Toast.makeText(this, R.string.pseudo_taken, Toast.LENGTH_LONG);
+            pseudoTaken.show();
+        }
+
+        EditText firstNameEditText = (EditText) findViewById(R.id.edit_text_first_name);
+        String firstName = pseudoEditText.getText().toString();
+        if (firstName == null)
+        {
+            Toast noInput = Toast.makeText(this, R.string.must_enter_first_name, Toast.LENGTH_LONG);
+            noInput.show();
+        }
+
+        EditText familyNameEditText = (EditText) findViewById(R.id.edit_text_family_name);
+        String familyName = pseudoEditText.getText().toString();
+        if (familyName == null)
+        {
+            Toast noInput = Toast.makeText(this, R.string.must_enter_family_name, Toast.LENGTH_LONG);
+            noInput.show();
+        }
+
+        EditText birthDateEditText = (EditText) findViewById(R.id.edit_text_birth_date);
+        String birthDate = pseudoEditText.getText().toString();
+        if (birthDate == null)
+        {
+            Toast noInput = Toast.makeText(this, R.string.must_enter_birth_date, Toast.LENGTH_LONG);
+            noInput.show();
+        }
+
+        Spinner genderSpinner = (Spinner) findViewById(R.id.spinner_gender);
+        String gender = genderSpinner.getSelectedItem().toString();
+
+        Spinner loveStatusSpinner = (Spinner) findViewById(R.id.spinner_love_status);
+        String loveStatus = genderSpinner.getSelectedItem().toString();
+
+        Spinner interestedInSpinner = (Spinner) findViewById(R.id.spinner_interested_in);
+        String interestedIn = genderSpinner.getSelectedItem().toString();
+
+        EditText heightEditText = (EditText) findViewById(R.id.edit_text_height);
+        double height = Double.parseDouble(heightEditText.getText().toString());
+
+        EditText descriptionEditText = (EditText) findViewById(R.id.description);
+        String description = descriptionEditText.getText().toString();
+
+        CheckBox smokerCheckBox = (CheckBox) findViewById(R.id.checkbox_smoker);
+        boolean smoker = smokerCheckBox.isChecked();
+
+        EditText nbChildrenEditText = (EditText) findViewById(R.id.edit_text_children_nb);
+        int nbChildren = Integer.parseInt(nbChildrenEditText.getText().toString());
+
+        Spinner countrySpinner = (Spinner) findViewById(R.id.spinner_country);
+        String country = countrySpinner.getSelectedItem().toString();
+
+        EditText cityEditText = (EditText) findViewById(R.id.edit_text_city);
+        String city = pseudoEditText.getText().toString();
+        if (city == null)
+        {
+            Toast noInput = Toast.makeText(this, R.string.must_enter_city, Toast.LENGTH_LONG);
+            noInput.show();
+        }
         finish();
     }
 

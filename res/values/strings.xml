@@ -133,4 +133,13 @@
     <string name="saturday">Saturday</string>
     <string name="sunday">Sunday</string>
 
+    <!-- edit text -->
+    <string name="must_enter_pseudo">You must specify a pseudo</string>
+    <string name="must_enter_family_name">You must specify a last name</string>
+    <string name="must_enter_first_name">You must specify a first name</string>
+    <string name="must_enter_birth_date">You must specify your birth date</string>
+    <string name="must_enter_country">You must specify the country you live in</string>
+    <string name="must_enter_city">You must specify the city you live close to</string>
+    <string name="pseudo_taken">This pseudo is already taken</string>
+
 </resources>
