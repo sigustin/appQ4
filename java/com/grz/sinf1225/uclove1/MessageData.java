@@ -5,13 +5,13 @@ package com.grz.sinf1225.uclove1;
  */
 public class MessageData
 {
-    public String m_senderPseudo, m_message;
-    public boolean m_messageRead;
+    public String m_senderPseudo, m_message, m_sendingDate, m_readingDate;
 
-    public MessageData(String senderPseudo, String message, boolean messageRead)
+    public MessageData(String senderPseudo, String message, String sendingDate, String readingDate)
     {
         m_senderPseudo = senderPseudo;
         m_message = message;
-        m_messageRead = messageRead;
+        m_sendingDate = sendingDate;
+        m_readingDate = readingDate;
     }
 }

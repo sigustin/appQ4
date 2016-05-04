@@ -101,5 +101,10 @@
 
     <!-- message -->
     <string name="message">Message</string>
+    <string name="message_details">Message Details</string>
+    <string name="close_popup">Close</string>
+    <string name="sent_on">Sent on :</string>
+    <string name="read_on">Read on :</string>
+    <string name="not_read_yet">Not read yet</string>
 
 </resources>

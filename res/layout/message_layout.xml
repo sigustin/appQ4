@@ -21,7 +21,8 @@
         android:maxWidth="@dimen/message_width"
         android:elevation="@dimen/view_elevation"
 
-        android:text="@string/message"/>
+        android:text="@string/message"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/read_emblem"
@@ -31,7 +32,6 @@
         android:layout_gravity="end"
         android:elevation="@dimen/view_elevation"
 
-        android:textSize="@dimen/small_text_size"
-        android:textStyle="bold" />
+        android:textSize="@dimen/small_text_size" />
 
 </LinearLayout>

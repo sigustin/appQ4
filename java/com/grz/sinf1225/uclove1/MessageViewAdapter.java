@@ -18,6 +18,11 @@ import java.util.List;
  */
 public class MessageViewAdapter extends RecyclerView.Adapter<MessageViewAdapter.ViewHolder>
 {
+    public interface onMessageClickedListener
+    {
+        void onMessageClicked(MessageData data);
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder
     {
         LinearLayout messageBox;
@@ -34,12 +39,14 @@ public class MessageViewAdapter extends RecyclerView.Adapter<MessageViewAdapter.
     }
 
     private List<MessageData> m_data;
+    private onMessageClickedListener m_listener;
     private Context m_context;
     private String m_currentUserPseudo;
 
-    public MessageViewAdapter(List<MessageData> data, Context context, String currentUserPseudo)
+    public MessageViewAdapter(List<MessageData> data, onMessageClickedListener listener, Context context, String currentUserPseudo)
     {
         m_data = data;
+        m_listener = listener;
         m_context = context;
         m_currentUserPseudo = currentUserPseudo;
     }
@@ -54,6 +61,13 @@ public class MessageViewAdapter extends RecyclerView.Adapter<MessageViewAdapter.
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position)
     {
+        holder.messageBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                m_listener.onMessageClicked(m_data.get(position));
+            }
+        });
+
         holder.message.setText(m_data.get(position).m_message);
 
         if (m_data.get(position).m_senderPseudo == m_currentUserPseudo)
@@ -64,7 +78,7 @@ public class MessageViewAdapter extends RecyclerView.Adapter<MessageViewAdapter.
         {
             holder.messageBox.setBackgroundResource(R.color.colorPrimaryLight);
             holder.messageBox.setGravity(Gravity.START);
-            if (m_data.get(position).m_messageRead)
+            if (m_data.get(position).m_readingDate != null)
                 holder.readEmblem.setText(m_context.getResources().getString(R.string.message_read));
         }
     }

@@ -68,7 +68,7 @@
 
     <!-- message -->
     <dimen name="message_width">250dp</dimen>
-    <dimen name="small_text_size">11sp</dimen>
+    <dimen name="small_text_size">10sp</dimen>
     <dimen name="message_margins">10dp</dimen>
     <dimen name="message_padding">5dp</dimen>
 

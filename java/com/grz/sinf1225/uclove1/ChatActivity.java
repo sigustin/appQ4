@@ -1,5 +1,7 @@
 package com.grz.sinf1225.uclove1;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,7 +23,8 @@ public class ChatActivity extends AppCompatActivity
     private List<MessageData> tmpMessages;
     private final String tmpPseudo1 = "angelina", tmpPseudo2 = "Jesus";
     private final String tmpMsg1 = "This is a message", tmpMsg2 = "Hello", tmpMsg3 = "How are you?";
-    private final boolean tmpRead1 = true, tmpRead2 = true, tmpRead3 = false;
+    private final String tmpSent1 = "01/01/2016", tmpSent2 = "05/01/2016", tmpSent3 = "05/03/2016";
+    private final String tmpRead1 = "01/01/2016", tmpRead2 = "05/01/2016";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -32,14 +35,19 @@ public class ChatActivity extends AppCompatActivity
         setTitle(tmpPseudo1);
 
         tmpMessages = new ArrayList<MessageData>();
-        tmpMessages.add(new MessageData(tmpPseudo1, tmpMsg1, tmpRead1));
-        tmpMessages.add(new MessageData(tmpPseudo2, tmpMsg2, tmpRead2));
-        tmpMessages.add(new MessageData(tmpPseudo2, tmpMsg3, tmpRead3));
+        tmpMessages.add(new MessageData(tmpPseudo1, tmpMsg1, tmpSent1, tmpRead1));
+        tmpMessages.add(new MessageData(tmpPseudo2, tmpMsg2, tmpSent2, tmpRead2));
+        tmpMessages.add(new MessageData(tmpPseudo2, tmpMsg3, tmpSent3, null));
 
         m_recyclerView = (RecyclerView) findViewById(R.id.messages_recycler_view);
         m_recyclerViewLayoutManager = new LinearLayoutManager(this);
         m_recyclerView.setLayoutManager(m_recyclerViewLayoutManager);
-        m_recyclerViewAdapter = new MessageViewAdapter(tmpMessages, this, tmpPseudo1);
+        m_recyclerViewAdapter = new MessageViewAdapter(tmpMessages, new MessageViewAdapter.onMessageClickedListener() {
+            @Override
+            public void onMessageClicked(MessageData data) {
+                showDetailsMessage(data);
+            }
+        }, this, tmpPseudo1);
         m_recyclerView.setAdapter(m_recyclerViewAdapter);
     }
 
@@ -66,5 +74,20 @@ public class ChatActivity extends AppCompatActivity
                 return true;
         }
         return false;
+    }
+
+    public void showDetailsMessage(MessageData data)
+    {
+        Log.d("MSG", "Message selected " +data.toString());
+        String msgToDisplay = getResources().getString(R.string.sent_on) +" "+ data.m_sendingDate +"\n";
+        if (data.m_readingDate != null)
+            msgToDisplay += getResources().getString(R.string.read_on) +" "+ data.m_readingDate;
+        else
+            msgToDisplay += getResources().getString(R.string.not_read_yet);
+        new AlertDialog.Builder(this)
+                .setTitle(getResources().getString(R.string.message_details))
+                .setMessage(msgToDisplay)
+                .setNegativeButton(getResources().getString(R.string.close_popup), null)
+                .show();
     }
 }
