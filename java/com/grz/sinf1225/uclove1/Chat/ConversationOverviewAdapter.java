@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.grz.sinf1225.uclove1.R;
@@ -24,7 +25,7 @@ public class ConversationOverviewAdapter extends RecyclerView.Adapter<Conversati
 
     public static class ViewHolder extends RecyclerView.ViewHolder
     {
-        View overviewBox;
+        RelativeLayout overviewBox;
         ImageView profilePicture;
         TextView pseudo;
         TextView lastMessage;
@@ -32,7 +33,7 @@ public class ConversationOverviewAdapter extends RecyclerView.Adapter<Conversati
         public ViewHolder(View boxView)
         {
             super(boxView);
-            overviewBox = (View) boxView.findViewById(R.id.conversation_overview_box);
+            overviewBox = (RelativeLayout) boxView.findViewById(R.id.conversation_overview_relative_layout);
             profilePicture = (ImageView) boxView.findViewById(R.id.profile_picture);
             pseudo = (TextView) boxView.findViewById(R.id.pseudo);
             lastMessage = (TextView) boxView.findViewById(R.id.last_message);

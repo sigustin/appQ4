@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.grz.sinf1225.uclove1.Matching.OverviewData;
@@ -26,7 +27,7 @@ public class ProfileOverviewAdapter extends RecyclerView.Adapter<ProfileOverview
 
     public static class ViewHolder extends RecyclerView.ViewHolder
     {
-        View overviewBox;
+        RelativeLayout overviewBox;
         ImageView profilePicture;
         TextView pseudo;
         TextView age;
@@ -36,7 +37,7 @@ public class ProfileOverviewAdapter extends RecyclerView.Adapter<ProfileOverview
         public ViewHolder(View boxView)
         {
             super(boxView);
-            overviewBox = (View) boxView.findViewById(R.id.profile_overview_box);
+            overviewBox = (RelativeLayout) boxView.findViewById(R.id.profile_overview_relative_layout);
             profilePicture = (ImageView) boxView.findViewById(R.id.profile_picture);
             pseudo = (TextView) boxView.findViewById(R.id.pseudo);
             age = (TextView) boxView.findViewById(R.id.age);

@@ -107,4 +107,8 @@
     <string name="read_on">Read on :</string>
     <string name="not_read_yet">Not read yet</string>
 
+    <!-- date overview -->
+    <string name="date_time_or_asked">Datetime or asked</string>
+    <string name="new_date_to_set">Yet to set</string>
+
 </resources>

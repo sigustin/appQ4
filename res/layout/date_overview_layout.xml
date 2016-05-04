@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    android:id="@+id/conversation_overview_relative_layout"
-
     xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:id="@+id/date_overview_box"
+
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
 
@@ -12,18 +13,18 @@
     android:elevation="@dimen/view_elevation">
 
     <ImageView
-        android:id="@+id/profile_picture"
+        android:id="@+id/small_profile_picture"
 
         android:layout_width="@dimen/small_profile_picture_edge_size"
         android:layout_height="@dimen/small_profile_picture_edge_size"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true" android:layout_alignParentStart="true"
 
-        android:padding="@dimen/small_profile_picture_padding"
-
         android:elevation="@dimen/view_elevation"
 
-        android:src="@drawable/ic_person_black_48dp" />
+        android:padding="@dimen/small_profile_picture_padding"
+
+        android:src="@drawable/ic_person_black_48dp"/>
 
     <TextView
         android:id="@+id/pseudo"
@@ -41,10 +42,10 @@
         android:elevation="@dimen/view_elevation"
 
         android:textStyle="bold"
-        android:text="@string/pseudo" />
+        android:text="@string/pseudo"/>
 
     <TextView
-        android:id="@+id/last_message"
+        android:id="@+id/date_time_or_asked"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -58,10 +59,6 @@
 
         android:elevation="@dimen/view_elevation"
 
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:maxWidth="@dimen/last_message_max_width"
-
-        android:text="@string/last_message" />
+        android:text="@string/date_time_or_asked"/>
 
 </RelativeLayout>
