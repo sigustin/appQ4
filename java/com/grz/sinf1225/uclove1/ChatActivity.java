@@ -19,7 +19,7 @@ import java.util.List;
 public class ChatActivity extends AppCompatActivity
 {
     private List<MessageData> tmpMessages;
-    private final String tmpPseudo1 = "angelina", tmpPseudo2 = "Jesus";
+    private final String tmpPseudo1 = "Angelina244", tmpPseudo2 = "ADEL.E";
     private final String tmpMsg1 = "This is a message", tmpMsg2 = "Hello", tmpMsg3 = "How are you?";
     private final String tmpSent1 = "01/01/2016", tmpSent2 = "05/01/2016", tmpSent3 = "05/03/2016";
     private final String tmpRead1 = "01/01/2016", tmpRead2 = "05/01/2016";
@@ -61,7 +61,7 @@ public class ChatActivity extends AppCompatActivity
             public void onMessageClicked(MessageData data) {
                 showDetailsMessage(data);
             }
-        }, this, tmpPseudo1);
+        }, this, m_interlocutorPseudo);
         m_recyclerView.setAdapter(m_recyclerViewAdapter);
     }
 
