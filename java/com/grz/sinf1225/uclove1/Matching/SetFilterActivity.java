@@ -61,7 +61,8 @@ public class SetFilterActivity extends AppCompatActivity
         switch (item.getItemId())
         {
             case R.id.top_menu_save_filters:
-                Log.d("TOPMENU", "Save filters");
+                Log.d("TOPMENU", "Save filters selected");
+                saveFilter();
                 return true;
             case R.id.top_menu_item_settings:
                 Log.d("TOPMENU", "Settings selected");
@@ -70,5 +71,10 @@ public class SetFilterActivity extends AppCompatActivity
                 return true;
         }
         return false;
+    }
+
+    public void saveFilter()
+    {
+        Log.d("TOPMENU", "Save filters");
     }
 }

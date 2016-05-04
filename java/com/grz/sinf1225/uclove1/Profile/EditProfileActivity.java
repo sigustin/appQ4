@@ -141,13 +141,14 @@ public class EditProfileActivity extends AppCompatActivity
         {
             case R.id.top_menu_item_save:
                 Log.d("TOPMENU", "Save");
-                saveInformations(null);
+                if(saveInformations())
+                    finish();
                 return true;
         }
         return false;
     }
 
-    public void saveInformations(View view)
+    public boolean saveInformations()
     {
         Log.d("BUTTON", "Save informations");
 
@@ -159,23 +160,19 @@ public class EditProfileActivity extends AppCompatActivity
             Toast noInput = Toast.makeText(this, R.string.must_enter_pseudo, Toast.LENGTH_LONG);
             noInput.show();
             validEntries = false;
-            reloadActivity();
         }
         if (m_isRegistration  && validEntries && /*Database.isPseudoTaken(pseudo)*/false) {
             Toast pseudoTaken = Toast.makeText(this, R.string.pseudo_taken, Toast.LENGTH_LONG);
             pseudoTaken.show();
             validEntries = false;
-            reloadActivity();
         }
 
         EditText firstNameEditText = (EditText) findViewById(R.id.edit_text_first_name);
         String firstName = firstNameEditText.getText().toString();
-        Log.d("DEBUG", firstName +"\n"+ String.valueOf(firstName.equals("")));
         if (firstName.equals("") && validEntries) {
             Toast noInput = Toast.makeText(this, R.string.must_enter_first_name, Toast.LENGTH_LONG);
             noInput.show();
             validEntries = false;
-            reloadActivity();
         }
 
         EditText familyNameEditText = (EditText) findViewById(R.id.edit_text_family_name);
@@ -184,7 +181,6 @@ public class EditProfileActivity extends AppCompatActivity
             Toast noInput = Toast.makeText(this, R.string.must_enter_family_name, Toast.LENGTH_LONG);
             noInput.show();
             validEntries = false;
-            reloadActivity();
         }
 
         EditText birthDateEditText = (EditText) findViewById(R.id.edit_text_birth_date);
@@ -193,7 +189,6 @@ public class EditProfileActivity extends AppCompatActivity
             Toast noInput = Toast.makeText(this, R.string.must_enter_birth_date, Toast.LENGTH_LONG);
             noInput.show();
             validEntries = false;
-            reloadActivity();
         }
 
         Spinner genderSpinner = (Spinner) findViewById(R.id.spinner_gender);
@@ -234,32 +229,21 @@ public class EditProfileActivity extends AppCompatActivity
             Toast noInput = Toast.makeText(this, R.string.must_enter_city, Toast.LENGTH_LONG);
             noInput.show();
             validEntries = false;
-            reloadActivity();
         }
 
         Log.d("DEBUG", String.valueOf(validEntries));
-        if (!validEntries)
-            reloadActivity();
-        /*
-        currentUser.set...
-         */
-
-        finish();
+        if (validEntries)
+        {
+            /*
+            currentUser.set...
+             */
+        }
+        return validEntries;
     }
 
     public boolean changeProfilePicture(View view)
     {
         Log.d("IMAGE", "Change profile picture");
         return false;
-    }
-
-    private void reloadActivity()
-    {
-        Intent backToHere = new Intent(this, EditProfileActivity.class);
-        /*
-        if (!m_registration)
-            intent.putExtra(CurrentUser.EXTRA_CURRENT_USER, currentUser);
-        */
-        startActivity(backToHere);
     }
 }
