@@ -40,7 +40,7 @@ public class MenuActivity extends AppCompatActivity
         tmpOverviewCurrentPseudoList = new ArrayList<OverviewData>();
         tmpOverviewCurrentPseudoList.add(new OverviewData(profilePictureRes, tmpPseudo, tmpAge, tmpCity, tmpRequest));
         /*
-        CurrentUser currentUser = (CurrentUser) getIntent().getSerializableExtra(CurrentUser.EXTRA_CURRENT_USER);
+        currentUser = (CurrentUser) getIntent().getSerializableExtra(CurrentUser.EXTRA_CURRENT_USER);
          */
 
         m_recyclerView = (RecyclerView) findViewById(R.id.profile_overviews_recycler_view);

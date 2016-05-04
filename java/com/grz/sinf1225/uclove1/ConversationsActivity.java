@@ -18,13 +18,6 @@ import java.util.List;
 
 public class ConversationsActivity extends AppCompatActivity
 {
-    private RecyclerView m_recyclerView;
-    private RecyclerView.Adapter m_recyclerViewAdapter;
-    private RecyclerView.LayoutManager m_recyclerViewLayoutManager;
-    /*
-    CurrentUser currentUser;
-     */
-
     private List<ConversationOverviewData> tmpConversationsData;
     private final int tmpProfilePictureRes1 = R.drawable.angelina_jolie_profile_picture;
     private final String tmpPseudo1 = "Angelina244", tmpLastMessage1 = "Hey! this is my last message. A very very long message";
@@ -32,6 +25,16 @@ public class ConversationsActivity extends AppCompatActivity
     private final int tmpProfilePictureRes2 = R.drawable.adele_profile_picture;
     private final String tmpPseudo2 = "ADEL.E", tmpLastMessage2 = "Hey! I luv u";
     private final boolean tmpLastMessageRead2 = true;
+
+    public final static String EXTRA_PSEUDO = "UCLove.PSEUDO";
+
+
+    private RecyclerView m_recyclerView;
+    private RecyclerView.Adapter m_recyclerViewAdapter;
+    private RecyclerView.LayoutManager m_recyclerViewLayoutManager;
+    /*
+    CurrentUser currentUser;
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -92,15 +95,12 @@ public class ConversationsActivity extends AppCompatActivity
     public void onConversationOverviewClicked(String pseudo)
     {
         Log.d("OVERVIEW", "Conversation overview clicked : " + pseudo);
-        goToActivity(ChatActivity.class);
-    }
-
-    public void goToActivity(Class<?> activityClass)
-    {
-        Intent intent = new Intent(this, activityClass);
+        Intent intent = new Intent(this, ChatActivity.class);
         /*
         intent.putExtra(CurrentUser.EXTRA_CURRENT_USER, currentUser);
+        intent.putExtra(User.EXTRA_PSEUDO, pseudo);
          */
+        intent.putExtra(EXTRA_PSEUDO, pseudo);//tmp
         startActivity(intent);
     }
 }

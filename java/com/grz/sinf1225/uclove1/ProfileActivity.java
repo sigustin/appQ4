@@ -22,7 +22,7 @@ public class ProfileActivity extends AppCompatActivity
 
     /*
     private CurrentUser currentUser;
-    private String pseudoUserDisplayed;
+    private User userDisplayed;
      */
 
     @Override
@@ -33,7 +33,7 @@ public class ProfileActivity extends AppCompatActivity
 
         /*
         currentUser = (CurrentUser) getIntent().getSerializableExtra(CurrentUser.EXTRA_CURRENT_USER);
-        pseudoUserDisplayed = (String) getIntent().getStringExtra(User.EXTRA_PSEUDO);
+        userDisplayed = (User) getIntent().getSerializableExtra(User.EXTRA_PSEUDO);
          */
 
         setViews();

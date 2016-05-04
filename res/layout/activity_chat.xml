@@ -39,7 +39,7 @@
             android:layout_weight="1"
             android:inputType="textMultiLine"
 
-            android:hint="@string/your_message"/>
+            android:hint="@string/your_message" />
 
         <Button
             android:id="@+id/send_button"
@@ -48,7 +48,9 @@
             android:layout_height="wrap_content"
 
             android:text="@string/send"
-            android:drawableLeft="@drawable/ic_send_black_24dp"/>
+            android:drawableLeft="@drawable/ic_send_black_24dp"
+
+            android:onClick="onSendButtonClicked"/>
 
     </LinearLayout>
 
