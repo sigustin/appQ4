@@ -1,0 +1,80 @@
+<resources>
+
+    <string name="app_name">UCLove1</string>
+
+    <!-- main activity -->
+    <string name="app_title">UCLove</string>
+
+    <string name="login_pseudo_hint">Pseudo</string>
+    <string name="login_password_hint">Password</string>
+
+    <string name="login_button">Connexion</string>
+
+    <string name="login_not_yet_registered">Pas encore inscrit ?</string>
+    <string name="register_button">Inscription</string>
+
+    <string name="invalid_password">Le pseudo ou mot de passe n'est pas valide</string>
+
+    <!-- menu activity -->
+    <string name="menu_activity_title">Menu</string>
+
+    <string name="top_menu_settings_title">Paramètres</string>
+    <string name="top_menu_quit_title">Fermer l'application</string>
+
+    <string name="overview">Aperçu</string>
+
+    <string name="button_my_profile">Mon profil</string>
+    <string name="button_find_friends">Trouver des matchs</string>
+    <string name="button_my_friends">Mes amis</string>
+    <string name="button_messages">Messages</string>
+    <string name="button_dates">Mes rendez-vous</string>
+    <string name="button_settings">Pamamètres</string>
+
+    <!-- settings activity -->
+    <string name="settings_activity_title">Pamamètres</string>
+
+    <string name="enable_sounds">Son</string>
+    <string name="enable_notifications">Notifications</string>
+    <string name="choose_theme">Thème</string>
+    <string name="about">A propos de l'application</string>
+
+    <!-- my profile activity -->
+    <string name="my_profile_activity_title">Mon profil</string>
+
+    <string name="top_menu_change_informations">Modifier le profil</string>
+    <string name="button_change_informations">Informations du profil</string>
+
+    <string name="pseudo">Pseudo</string>
+    <string name="family_name">Nom de famille</string>
+    <string name="name">Nom </string>
+    <string name="first_name">Prénom</string>
+    <string name="birth_date">Date de naissance</string>
+    <string name="age">Age</string>
+    <string name="gender">Genre</string>
+    <string name="love_status">Situation amoureuse</string>
+    <string name="height">Taille</string>
+    <string name="description">Description</string>
+    <string name="smoker">Fumer</string>
+    <string name="interested_in">Interessé par</string>
+    <string name="children_nb">Nombre d'enfant(s)</string>
+    <string name="country">Pays</string>
+    <string name="city">Ville</string>
+    <string name="title_activity_tmp">Tmp</string>
+
+    <!-- edit profile activity -->
+    <string name="edit_profile_activity_title">Modifier le profil</string>
+
+    <string name="top_menu_save_title">Sauvegarder</string>
+
+    <!-- friends activity -->
+    <string name="friends_activity_title">Mes amis</string>
+
+    <!-- dates activity -->
+    <string name="dates_activity_title">Mes rendez-vous</string>
+
+    <!-- profile activity -->
+    <string name="profile_activity_title">Profil</string>
+
+    <string name="invisible">Invisible</string>
+
+</resources>
