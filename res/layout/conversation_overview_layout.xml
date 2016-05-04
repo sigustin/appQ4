@@ -67,6 +67,10 @@
 
         android:elevation="@dimen/view_elevation"
 
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:maxWidth="@dimen/last_message_max_width"
+
         android:text="@string/last_message" />
 
 </RelativeLayout>

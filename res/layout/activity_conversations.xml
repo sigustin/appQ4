@@ -15,7 +15,7 @@
 
         android:onClick="onNewConversationOrMessageButtonClicked"/>
 
-    <RelativeLayout
+    <ScrollView
         android:id="@+id/relative_layout_base"
 
         android:layout_width="match_parent"
@@ -31,6 +31,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-    </RelativeLayout>
+    </ScrollView>
 
 </android.support.design.widget.CoordinatorLayout>
