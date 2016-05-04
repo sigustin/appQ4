@@ -1,5 +1,6 @@
 package com.grz.sinf1225.uclove1.Profile;
 
+import android.content.Intent;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -100,6 +101,9 @@ public class EditProfileActivity extends AppCompatActivity
         }
         else
         {
+            ImageView profilePicture = (ImageView) findViewById(R.id.profile_picture);
+            profilePicture.setImageResource(R.drawable.ic_person_black_48dp);
+
             Spinner gender = (Spinner) findViewById(R.id.spinner_gender);
             ArrayAdapter<CharSequence> genderAdapter = ArrayAdapter.createFromResource(this, R.array.array_genders, android.R.layout.simple_spinner_item);
             genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -150,57 +154,66 @@ public class EditProfileActivity extends AppCompatActivity
     {
         Log.d("BUTTON", "Save informations");
 
-        /*
-        currentUser.set...
-         */
+        boolean validEntries = true;
+
         EditText pseudoEditText = (EditText) findViewById(R.id.edit_text_pseudo);
         String pseudo = pseudoEditText.getText().toString();
-        if (pseudo == null)
-        {
+        if (pseudo.equals("")) {
             Toast noInput = Toast.makeText(this, R.string.must_enter_pseudo, Toast.LENGTH_LONG);
             noInput.show();
+            validEntries = false;
+            reloadActivity();
         }
-        if (m_isRegistration && /*Database.isPseudoTaken(pseudo)*/true)
-        {
+        if (m_isRegistration  && validEntries && /*Database.isPseudoTaken(pseudo)*/false) {
             Toast pseudoTaken = Toast.makeText(this, R.string.pseudo_taken, Toast.LENGTH_LONG);
             pseudoTaken.show();
+            validEntries = false;
+            reloadActivity();
         }
 
         EditText firstNameEditText = (EditText) findViewById(R.id.edit_text_first_name);
-        String firstName = pseudoEditText.getText().toString();
-        if (firstName == null)
-        {
+        String firstName = firstNameEditText.getText().toString();
+        Log.d("DEBUG", firstName +"\n"+ String.valueOf(firstName.equals("")));
+        if (firstName.equals("") && validEntries) {
             Toast noInput = Toast.makeText(this, R.string.must_enter_first_name, Toast.LENGTH_LONG);
             noInput.show();
+            validEntries = false;
+            reloadActivity();
         }
 
         EditText familyNameEditText = (EditText) findViewById(R.id.edit_text_family_name);
-        String familyName = pseudoEditText.getText().toString();
-        if (familyName == null)
-        {
+        String familyName = familyNameEditText.getText().toString();
+        if (familyName.equals("")  && validEntries) {
             Toast noInput = Toast.makeText(this, R.string.must_enter_family_name, Toast.LENGTH_LONG);
             noInput.show();
+            validEntries = false;
+            reloadActivity();
         }
 
         EditText birthDateEditText = (EditText) findViewById(R.id.edit_text_birth_date);
-        String birthDate = pseudoEditText.getText().toString();
-        if (birthDate == null)
-        {
+        String birthDate = birthDateEditText.getText().toString();
+        if (birthDate.equals("") && validEntries) {
             Toast noInput = Toast.makeText(this, R.string.must_enter_birth_date, Toast.LENGTH_LONG);
             noInput.show();
+            validEntries = false;
+            reloadActivity();
         }
 
         Spinner genderSpinner = (Spinner) findViewById(R.id.spinner_gender);
         String gender = genderSpinner.getSelectedItem().toString();
 
         Spinner loveStatusSpinner = (Spinner) findViewById(R.id.spinner_love_status);
-        String loveStatus = genderSpinner.getSelectedItem().toString();
+        String loveStatus = loveStatusSpinner.getSelectedItem().toString();
 
         Spinner interestedInSpinner = (Spinner) findViewById(R.id.spinner_interested_in);
-        String interestedIn = genderSpinner.getSelectedItem().toString();
+        String interestedIn = interestedInSpinner.getSelectedItem().toString();
 
         EditText heightEditText = (EditText) findViewById(R.id.edit_text_height);
-        double height = Double.parseDouble(heightEditText.getText().toString());
+        double height;
+        if (heightEditText.getText().toString().equals(""))
+            height = 0.0;
+        else
+            height = Double.parseDouble(heightEditText.getText().toString());
 
         EditText descriptionEditText = (EditText) findViewById(R.id.description);
         String description = descriptionEditText.getText().toString();
@@ -209,18 +222,31 @@ public class EditProfileActivity extends AppCompatActivity
         boolean smoker = smokerCheckBox.isChecked();
 
         EditText nbChildrenEditText = (EditText) findViewById(R.id.edit_text_children_nb);
-        int nbChildren = Integer.parseInt(nbChildrenEditText.getText().toString());
+        int nbChildren;
+        if (nbChildrenEditText.getText().toString().equals(""))
+            nbChildren = 0;
+        else
+            nbChildren = Integer.parseInt(nbChildrenEditText.getText().toString());
 
         Spinner countrySpinner = (Spinner) findViewById(R.id.spinner_country);
         String country = countrySpinner.getSelectedItem().toString();
 
         EditText cityEditText = (EditText) findViewById(R.id.edit_text_city);
-        String city = pseudoEditText.getText().toString();
-        if (city == null)
-        {
+        String city = cityEditText.getText().toString();
+        if (city.equals("") && validEntries) {
             Toast noInput = Toast.makeText(this, R.string.must_enter_city, Toast.LENGTH_LONG);
             noInput.show();
+            validEntries = false;
+            reloadActivity();
         }
+
+        Log.d("DEBUG", String.valueOf(validEntries));
+        if (!validEntries)
+            reloadActivity();
+        /*
+        currentUser.set...
+         */
+
         finish();
     }
 
@@ -228,5 +254,15 @@ public class EditProfileActivity extends AppCompatActivity
     {
         Log.d("IMAGE", "Change profile picture");
         return false;
+    }
+
+    private void reloadActivity()
+    {
+        Intent backToHere = new Intent(this, EditProfileActivity.class);
+        /*
+        if (!m_registration)
+            intent.putExtra(CurrentUser.EXTRA_CURRENT_USER, currentUser);
+        */
+        startActivity(backToHere);
     }
 }

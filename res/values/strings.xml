@@ -64,6 +64,16 @@
     <!-- edit profile activity -->
     <string name="edit_profile_activity_title">Edit my profile</string>
 
+    <string name="have_to_be_filled">*Have to be filled</string>
+    <string name="star_pseudo">Pseudo*</string>
+    <string name="star_family_name">Last name*</string>
+    <string name="star_first_name">First name*</string>
+    <string name="star_birth_date">Birth date*</string>
+    <string name="star_gender">Gender*</string>
+    <string name="star_love_status">Love status*</string>
+    <string name="star_country">Country*</string>
+    <string name="star_city">City*</string>
+
     <string name="top_menu_save_title">Save</string>
 
     <!-- friends activity -->

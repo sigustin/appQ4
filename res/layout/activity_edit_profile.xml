@@ -42,7 +42,7 @@ android:layout_height="match_parent">
             android:paddingLeft="@dimen/list_item_padding_horizontal"
             android:paddingRight="@dimen/list_item_padding_horizontal"
 
-            android:text="@string/pseudo"/>
+            android:text="@string/star_pseudo"/>
 
         <EditText
             android:id="@+id/edit_text_pseudo"
@@ -91,7 +91,7 @@ android:layout_height="match_parent">
             android:paddingLeft="@dimen/list_item_padding_horizontal"
             android:paddingRight="@dimen/list_item_padding_horizontal"
 
-            android:text="@string/first_name"/>
+            android:text="@string/star_first_name"/>
 
         <EditText
             android:id="@+id/edit_text_first_name"
@@ -140,7 +140,7 @@ android:layout_height="match_parent">
             android:paddingLeft="@dimen/list_item_padding_horizontal"
             android:paddingRight="@dimen/list_item_padding_horizontal"
 
-            android:text="@string/family_name"/>
+            android:text="@string/star_family_name"/>
 
         <EditText
             android:id="@+id/edit_text_family_name"
@@ -190,7 +190,7 @@ android:layout_height="match_parent">
             android:paddingLeft="@dimen/list_item_padding_horizontal"
             android:paddingRight="@dimen/list_item_padding_horizontal"
 
-            android:text="@string/birth_date"/>
+            android:text="@string/star_birth_date"/>
 
         <EditText
             android:id="@+id/edit_text_birth_date"
@@ -241,7 +241,7 @@ android:layout_height="match_parent">
             android:paddingLeft="@dimen/list_item_padding_horizontal"
             android:paddingRight="@dimen/list_item_padding_horizontal"
 
-            android:text="@string/gender"/>
+            android:text="@string/star_gender"/>
 
         <Spinner
             android:id="@+id/spinner_gender"
@@ -290,7 +290,7 @@ android:layout_height="match_parent">
             android:paddingLeft="@dimen/list_item_padding_horizontal"
             android:paddingRight="@dimen/list_item_padding_horizontal"
 
-            android:text="@string/love_status"/>
+            android:text="@string/star_love_status"/>
 
 
         <Spinner
@@ -593,7 +593,7 @@ android:layout_height="match_parent">
             android:paddingLeft="@dimen/list_item_padding_horizontal"
             android:paddingRight="@dimen/list_item_padding_horizontal"
 
-            android:text="@string/country"/>
+            android:text="@string/star_country"/>
 
 
         <Spinner
@@ -643,7 +643,7 @@ android:layout_height="match_parent">
             android:paddingLeft="@dimen/list_item_padding_horizontal"
             android:paddingRight="@dimen/list_item_padding_horizontal"
 
-            android:text="@string/city"/>
+            android:text="@string/star_city"/>
 
         <EditText
             android:id="@+id/edit_text_city"
@@ -658,6 +658,16 @@ android:layout_height="match_parent">
             android:paddingBottom="@dimen/list_item_padding_vertical"
             android:paddingLeft="@dimen/list_item_padding_horizontal"
             android:paddingRight="@dimen/list_item_padding_horizontal"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/city_label"
+            android:layout_alignParentRight="true" android:layout_alignParentEnd="true"
+
+            android:textSize="@dimen/small_text_size"
+            android:textStyle="italic"
+            android:text="@string/have_to_be_filled"/>
 
     </RelativeLayout>
 
