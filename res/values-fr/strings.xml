@@ -49,7 +49,7 @@
     <string name="name">Nom </string>
     <string name="first_name">Prénom</string>
     <string name="birth_date">Date de naissance</string>
-    <string name="age">Age</string>
+    <string name="age">Âge</string>
     <string name="gender">Genre</string>
     <string name="love_status">Situation amoureuse</string>
     <string name="height">Taille</string>
@@ -91,5 +91,11 @@
     <string name="accept_request">Accepter la demande</string>
     <string name="conversations_activity_title">Conversations</string>
     <string name="chat_activity_title">Chat</string>
+    <string name="close_popup">Fermer</string>
+    <string name="message">Message</string>
+    <string name="message_details">Détails du message</string>
+    <string name="not_read_yet">Pas encore lu</string>
+    <string name="read_on">Lu le :</string>
+    <string name="sent_on">Envoyé le :</string>
 
 </resources>
