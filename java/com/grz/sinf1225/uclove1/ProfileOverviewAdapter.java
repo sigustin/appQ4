@@ -25,7 +25,7 @@ public class ProfileOverviewAdapter extends RecyclerView.Adapter<ProfileOverview
 
     public static class ViewHolder extends RecyclerView.ViewHolder
     {
-        RelativeLayout overviewBox;
+        View overviewBox;
         ImageView profilePicture;
         TextView pseudo;
         TextView age;
@@ -35,7 +35,7 @@ public class ProfileOverviewAdapter extends RecyclerView.Adapter<ProfileOverview
         public ViewHolder(View boxView)
         {
             super(boxView);
-            overviewBox = (RelativeLayout) boxView.findViewById(R.id.profile_overview_relative_layout);
+            overviewBox = (View) boxView.findViewById(R.id.profile_overview_box);
             profilePicture = (ImageView) boxView.findViewById(R.id.profile_picture);
             pseudo = (TextView) boxView.findViewById(R.id.pseudo);
             age = (TextView) boxView.findViewById(R.id.age);
@@ -99,6 +99,5 @@ public class ProfileOverviewAdapter extends RecyclerView.Adapter<ProfileOverview
     {
         return m_data.size();
     }
-
 
 }

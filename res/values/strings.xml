@@ -90,5 +90,8 @@
 
     <!-- conversations activity -->
     <string name="conversations_activity_title">Conversations</string>
+    <string name="last_message">Last message</string>
+    <string name="message_read">Read</string>
+    <string name="message_not_read">New message</string>
 
 </resources>

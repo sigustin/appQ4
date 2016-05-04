@@ -21,6 +21,9 @@ public class FriendsActivity extends AppCompatActivity
     private RecyclerView m_recyclerView;
     private RecyclerView.Adapter m_recyclerViewAdapter;
     private RecyclerView.LayoutManager m_recyclerViewLayoutManager;
+    /*
+    CurrentUser currentUser;
+     */
 
     private List<OverviewData> tmpFriendsOverview;
     private final int tmpProfilePictureRes1 = R.drawable.angelina_jolie_profile_picture, tmpRequest1 = OverviewData.REQUEST;
@@ -38,7 +41,7 @@ public class FriendsActivity extends AppCompatActivity
         tmpFriendsOverview.add(new OverviewData(tmpProfilePictureRes1, tmpPseudo1, tmpAge1, tmpCity1, tmpRequest1));
         tmpFriendsOverview.add(new OverviewData(tmpProfilePictureRes2, tmpPseudo2, tmpAge2, tmpCity2, tmpRequest2));
         /*
-        CurrentUser currentUser = (CurrentUser) getIntent().getSerializableExtra(CurrentUser.EXTRA_CURRENT_USER);
+        currentUser = (CurrentUser) getIntent().getSerializableExtra(CurrentUser.EXTRA_CURRENT_USER);
          */
 
         m_recyclerView = (RecyclerView) findViewById(R.id.profile_overviews_recycler_view);

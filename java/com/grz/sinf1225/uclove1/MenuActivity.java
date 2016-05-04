@@ -2,6 +2,7 @@ package com.grz.sinf1225.uclove1;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.provider.Telephony;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -98,6 +99,7 @@ public class MenuActivity extends AppCompatActivity
     public void onMessagesButtonClicked(View view)
     {
         Log.d("BUTTON", "messages button clicked");
+        goToActivity(ConversationsActivity.class);
     }
 
     public void onMyDatesButtonClicked(View view)

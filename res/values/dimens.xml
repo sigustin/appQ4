@@ -61,4 +61,7 @@
     <dimen name="relationship_status_emblem_padding">10dp</dimen>
     <dimen name="relationship_status_emblem_elevation">3dp</dimen>
 
+    <!-- conversation overview -->
+    <dimen name="small_profile_picture_edge_size">80dp</dimen>
+
 </resources>

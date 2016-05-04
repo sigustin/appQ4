@@ -36,10 +36,10 @@ public class ProfileActivity extends AppCompatActivity
         pseudoUserDisplayed = (String) getIntent().getStringExtra(User.EXTRA_PSEUDO);
          */
 
-        addViews();
+        setViews();
     }
 
-    private void addViews()
+    private void setViews()
     {
         /*RelativeLayout baseLayout = (RelativeLayout) findViewById(R.id.base_layout);
 
