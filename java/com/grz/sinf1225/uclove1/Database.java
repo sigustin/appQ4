@@ -73,6 +73,12 @@ public final class Database
     public static final String SQL_CREATE_DISPONIBILITY = "CREATE TABLE Disponibility(Pseudo TEXT NOT NULL, DisponibilityDate DATE NOT NULL, PRIMARY KEY (Pseudo, DisponibilityDate), FOREIGN KEY (Pseudo) REFERENCES User);";
     public static final String SQL_CREATE_APPOINTMENT = "CREATE TABLE Appointment(User1 TEXT NOT NULL, User2 TEXT NOT NULL, Date DATE NOT NULL, Location TEXT, PRIMARY KEY (User1, User2, Date), FOREIGN KEY (User1) REFERENCES User, FOREIGN KEY (User2) REFERENCES User);";
 
+    public enum UserInformation
+    {
+        PSEUDO, LAST_NAME, FIRST_NAME, BIRTH_DATE, AGE, GENDER, LOVE_STATUS, REGISTRATION_DATE, HEIGHT, DESCRIPTION,
+        SMOKER, INTERESTED_IN, PROFILE_PICTURE, CHILDREN_NB, COUNTRY, CITY, PASSWORD;
+    }
+
     public static class DBHelper extends SQLiteOpenHelper
     {
         public static final int DATABASE_VERSION = 1;
@@ -733,6 +739,8 @@ public final class Database
         ContentValues values = new ContentValues();
         values.put(columnName, newEntry);
 
+        Log.d("DB", "Update " +pseudo+ " -> " +columnName+ " : " +newEntry);
+
         writeDB = helper.getWritableDatabase();
         writeDB.update(UserEntries.TABLE_NAME, values, UserEntries.COL_PSEUDO +"=?", new String[] {pseudo});
         writeDB.close();
@@ -1031,6 +1039,39 @@ public final class Database
             return answer;
         }
         Log.e("DB", "Cursor empty");
+        return false;
+    }
+
+
+    //Relationship
+    public static User.RelationshipType getRelationshipType(String pseudo1, String pseudo2)
+    {
+        readDB = helper.getReadableDatabase();
+        Cursor cursor = readDB.query(RelationshipEntries.TABLE_NAME,
+                new String[] {RelationshipEntries.COL_RELATIONSHIP_TYPE},
+                "(" +RelationshipEntries.COL_USER1+ "=? AND " +RelationshipEntries.COL_USER2+ "=?) OR (" +RelationshipEntries.COL_USER1+ "=? AND " +RelationshipEntries.COL_USER2+ "=?)",
+                new String[] {pseudo1, pseudo2, pseudo2, pseudo1},
+                null, null, null, null);
+
+        if (cursor.moveToFirst())
+        {
+            String answer = cursor.getString( cursor.getColumnIndexOrThrow(RelationshipEntries.COL_RELATIONSHIP_TYPE) );
+            cursor.close();
+            if (answer.equals("Friends"))
+                return User.RelationshipType.FRIENDS;
+            else if (answer.equals("Request"))
+                return User.RelationshipType.REQUEST;
+            else if (answer.equals("Rejection"))
+                return User.RelationshipType.REJECTION;
+            else
+                return User.RelationshipType.NONE;
+        }
+        Log.e("DB", "Cursor empty");
+        return User.RelationshipType.NONE;
+    }
+
+    public static boolean isVisible(String pseudoToDisplay, UserInformation infoToDisplay, String currentUser)
+    {
         return false;
     }
 

@@ -138,6 +138,8 @@ public class MenuActivity extends AppCompatActivity
         /*
         intent.putExtra(CurrentUser.EXTRA_CURRENT_USER, currentUser);
          */
+        intent.putExtra(User.EXTRA_TMP, m_currentUser);
+        intent.putExtra(User.EXTRA_USER, m_currentUser);
         startActivity(intent);
     }
 }

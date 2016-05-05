@@ -17,7 +17,7 @@ public class User implements Serializable
     public static final String EXTRA_USER = "UCLove.USER";
     public static final String EXTRA_TMP = "UCLove.TMP";
 
-    public static enum RelationshipType
+    public enum RelationshipType
     {
         ONESELF, NONE, REQUEST, FRIENDS, REJECTION;
     }

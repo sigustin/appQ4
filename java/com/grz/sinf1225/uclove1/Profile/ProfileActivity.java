@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.grz.sinf1225.uclove1.R;
 import com.grz.sinf1225.uclove1.SettingsActivity;
+import com.grz.sinf1225.uclove1.User;
 
 public class ProfileActivity extends AppCompatActivity
 {
@@ -25,8 +26,9 @@ public class ProfileActivity extends AppCompatActivity
 
     /*
     private CurrentUser currentUser;
+    */
+    private User currentUser;
     private User userDisplayed;
-     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -36,8 +38,9 @@ public class ProfileActivity extends AppCompatActivity
 
         /*
         currentUser = (CurrentUser) getIntent().getSerializableExtra(CurrentUser.EXTRA_CURRENT_USER);
+        */
+        currentUser = (User) getIntent().getSerializableExtra(User.EXTRA_TMP);
         userDisplayed = (User) getIntent().getSerializableExtra(User.EXTRA_USER);
-         */
 
         setViews();
     }
@@ -46,7 +49,12 @@ public class ProfileActivity extends AppCompatActivity
     {
         ImageView profilePicture = (ImageView) findViewById(R.id.profile_picture);
         if (/*Database.isVisible(userDisplayed.getPseudo(), (int) Database.PROFILE_PICTURE, currentUser.getPseudo())*/true)
-            profilePicture.setImageResource(profilePictureRes);
+        {
+            if (profilePictureRes != 0)
+                profilePicture.setImageResource(profilePictureRes);
+            else
+                profilePicture.setImageResource(R.drawable.ic_person_black_48dp);
+        }
         else
             profilePicture.setImageResource(R.drawable.ic_person_black_48dp);
 
