@@ -96,6 +96,8 @@
 
     <string name="already_sent">You already sent a request to that user</string>
     <string name="cant_send_request">You can\'t send a request to that user</string>
+    <string name="unfriended">Unfriended</string>
+    <string name="request_accepted">Request accepted</string>
 
     <!-- profile overview -->
     <string name="request">Request</string>

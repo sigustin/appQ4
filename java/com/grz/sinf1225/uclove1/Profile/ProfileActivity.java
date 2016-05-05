@@ -215,30 +215,43 @@ public class ProfileActivity extends AppCompatActivity
         {
             //Ask friend
             Database.sendRequest(currentUser.getPseudo(), userDisplayed.getPseudo());
+            Toast requestSent = Toast.makeText(this, R.string.request_sent, Toast.LENGTH_LONG);
+            requestSent.show();
+
+            Button actionButton = (Button) findViewById(R.id.action_button);
+            actionButton.setText(getResources().getString(R.string.request_sent));
         }
         else if ((Database.getRelationshipType(currentUser.getPseudo(), userDisplayed.getPseudo()) == User.RelationshipType.REQUEST)
                 && !Database.hasSentRequest(currentUser.getPseudo(), userDisplayed.getPseudo()))
         {
             //Accept request
             Database.acceptRequest(currentUser.getPseudo(), userDisplayed.getPseudo());
+            Toast requestAccepted = Toast.makeText(this, R.string.request_accepted, Toast.LENGTH_LONG);
+            requestAccepted.show();
         }
         else if ( (Database.getRelationshipType(currentUser.getPseudo(), userDisplayed.getPseudo()) == User.RelationshipType.REQUEST)
                 && Database.hasSentRequest(currentUser.getPseudo(), userDisplayed.getPseudo()))
         {
             //Request sent (nothing to do)
-            Toast badInput = Toast.makeText(this, R.string.already_sent, Toast.LENGTH_LONG);
-            badInput.show();
+            Toast alreadySent = Toast.makeText(this, R.string.already_sent, Toast.LENGTH_LONG);
+            alreadySent.show();
         }
         else if (Database.getRelationshipType(currentUser.getPseudo(), userDisplayed.getPseudo()) == User.RelationshipType.REJECTION)
         {
             //Rejection (nothing to do)
-            Toast badInput = Toast.makeText(this, R.string.cant_send_request, Toast.LENGTH_LONG);
-            badInput.show();
+            Toast rejected = Toast.makeText(this, R.string.cant_send_request, Toast.LENGTH_LONG);
+            rejected.show();
         }
         else if (Database.getRelationshipType(currentUser.getPseudo(), userDisplayed.getPseudo()) == User.RelationshipType.FRIENDS)
         {
             //Unfriend
             Database.unfriend(currentUser.getPseudo(), userDisplayed.getPseudo());
+            Toast unfriended = Toast.makeText(this, R.string.unfriend, Toast.LENGTH_LONG);
+            unfriended.show();
+
+            Button actionButton = (Button) findViewById(R.id.action_button);
+            actionButton.setText(getResources().getString(R.string.ask_as_friend));
+            actionButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_add_black_24dp, 0, 0, 0);
         }
     }
 }
