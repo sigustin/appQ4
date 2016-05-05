@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="match_parent"
-android:layout_height="match_parent">
+<ScrollView 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -12,77 +13,14 @@ android:layout_height="match_parent">
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
-        tools:context=".Profile.MyProfileActivity">
-
-        <ImageView
-            android:id="@+id/profile_picture"
-
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/big_profile_picture_height"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-
-            android:clickable="true"
-            android:onClick="changeProfilePicture"/>
-
-        <TextView
-            android:id="@+id/pseudo_label"
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/profile_picture"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-
-            android:paddingTop="@dimen/list_item_padding_vertical"
-            android:paddingBottom="@dimen/list_item_padding_vertical"
-            android:paddingLeft="@dimen/list_item_padding_horizontal"
-            android:paddingRight="@dimen/list_item_padding_horizontal"
-
-            android:text="@string/star_pseudo"/>
-
-        <EditText
-            android:id="@+id/edit_text_pseudo"
-
-            android:layout_width="@dimen/edit_text_list_width"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/profile_picture"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-
-            android:paddingTop="@dimen/list_item_padding_vertical"
-            android:paddingBottom="@dimen/list_item_padding_vertical"
-            android:paddingLeft="@dimen/list_item_padding_horizontal"
-            android:paddingRight="@dimen/list_item_padding_horizontal"/>
-
-        <!-- separator -->
-        <View
-            android:id="@+id/separator1"
-
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/list_separator_thickness"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@id/pseudo_label"
-
-            android:layout_marginLeft="@dimen/list_separator_margins"
-            android:layout_marginStart="@dimen/list_separator_margins"
-            android:layout_marginRight="@dimen/list_separator_margins"
-            android:layout_marginEnd="@dimen/list_separator_margins"
-
-            android:background="@color/gray" />
+        tools:context="com.grz.sinf1225.uclove1.Profile.EditVisibilityActivity">
 
         <TextView
             android:id="@+id/first_name_label"
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/separator1"
+            android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
 
@@ -91,14 +29,14 @@ android:layout_height="match_parent">
             android:paddingLeft="@dimen/list_item_padding_horizontal"
             android:paddingRight="@dimen/list_item_padding_horizontal"
 
-            android:text="@string/star_first_name"/>
+            android:text="@string/first_name"/>
 
-        <EditText
-            android:id="@+id/edit_text_first_name"
+        <Spinner
+            android:id="@+id/spinner_first_name"
 
-            android:layout_width="@dimen/edit_text_list_width"
+            android:layout_width="@dimen/spinner_list_width"
             android:layout_height="wrap_content"
-            android:layout_below="@id/separator1"
+            android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
 
@@ -140,12 +78,12 @@ android:layout_height="match_parent">
             android:paddingLeft="@dimen/list_item_padding_horizontal"
             android:paddingRight="@dimen/list_item_padding_horizontal"
 
-            android:text="@string/star_family_name"/>
+            android:text="@string/family_name"/>
 
-        <EditText
-            android:id="@+id/edit_text_family_name"
+        <Spinner
+            android:id="@+id/spinner_family_name"
 
-            android:layout_width="@dimen/edit_text_list_width"
+            android:layout_width="@dimen/spinner_list_width"
             android:layout_height="wrap_content"
             android:layout_below="@id/separator2"
             android:layout_alignParentRight="true"
@@ -190,12 +128,12 @@ android:layout_height="match_parent">
             android:paddingLeft="@dimen/list_item_padding_horizontal"
             android:paddingRight="@dimen/list_item_padding_horizontal"
 
-            android:text="@string/star_birth_date"/>
+            android:text="@string/birth_date"/>
 
-        <EditText
-            android:id="@+id/edit_text_birth_date"
+        <Spinner
+            android:id="@+id/spinner_birth_date"
 
-            android:layout_width="@dimen/edit_text_list_width"
+            android:layout_width="@dimen/spinner_list_width"
             android:layout_height="wrap_content"
             android:layout_below="@id/separator3"
             android:layout_alignParentRight="true"
@@ -241,7 +179,7 @@ android:layout_height="match_parent">
             android:paddingLeft="@dimen/list_item_padding_horizontal"
             android:paddingRight="@dimen/list_item_padding_horizontal"
 
-            android:text="@string/star_gender"/>
+            android:text="@string/gender"/>
 
         <Spinner
             android:id="@+id/spinner_gender"
@@ -290,7 +228,7 @@ android:layout_height="match_parent">
             android:paddingLeft="@dimen/list_item_padding_horizontal"
             android:paddingRight="@dimen/list_item_padding_horizontal"
 
-            android:text="@string/star_love_status"/>
+            android:text="@string/love_status"/>
 
 
         <Spinner
@@ -309,55 +247,6 @@ android:layout_height="match_parent">
 
         <!-- separator -->
         <View
-            android:id="@+id/separator6"
-
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/list_separator_thickness"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@id/love_status_label"
-
-            android:layout_marginLeft="@dimen/list_separator_margins"
-            android:layout_marginStart="@dimen/list_separator_margins"
-            android:layout_marginRight="@dimen/list_separator_margins"
-            android:layout_marginEnd="@dimen/list_separator_margins"
-
-            android:background="@color/gray" />
-
-        <TextView
-            android:id="@+id/interested_in_label"
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/separator6"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-
-            android:paddingTop="@dimen/list_item_padding_vertical"
-            android:paddingBottom="@dimen/list_item_padding_vertical"
-            android:paddingLeft="@dimen/list_item_padding_horizontal"
-            android:paddingRight="@dimen/list_item_padding_horizontal"
-
-            android:text="@string/interested_in"/>
-
-        <Spinner
-            android:id="@+id/spinner_interested_in"
-
-            android:layout_width="@dimen/spinner_list_width"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/separator6"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-
-            android:paddingTop="@dimen/list_item_padding_vertical"
-            android:paddingBottom="@dimen/list_item_padding_vertical"
-            android:paddingLeft="@dimen/list_item_padding_horizontal"
-            android:paddingRight="@dimen/list_item_padding_horizontal"/>
-
-        <!-- separator -->
-        <View
             android:id="@+id/separator7"
 
             android:layout_width="match_parent"
@@ -366,7 +255,7 @@ android:layout_height="match_parent">
             android:layout_alignParentStart="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_below="@id/interested_in_label"
+            android:layout_below="@id/love_status_label"
 
             android:layout_marginLeft="@dimen/list_separator_margins"
             android:layout_marginStart="@dimen/list_separator_margins"
@@ -391,10 +280,10 @@ android:layout_height="match_parent">
 
             android:text="@string/height"/>
 
-        <EditText
-            android:id="@+id/edit_text_height"
+        <Spinner
+            android:id="@+id/spinner_height"
 
-            android:layout_width="@dimen/edit_text_list_width"
+            android:layout_width="@dimen/spinner_list_width"
             android:layout_height="wrap_content"
             android:layout_below="@id/separator7"
             android:layout_alignParentRight="true"
@@ -409,58 +298,6 @@ android:layout_height="match_parent">
 
         <!-- separator -->
         <View
-            android:id="@+id/separator8"
-
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/list_separator_thickness"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@id/height_label"
-
-            android:layout_marginLeft="@dimen/list_separator_margins"
-            android:layout_marginStart="@dimen/list_separator_margins"
-            android:layout_marginRight="@dimen/list_separator_margins"
-            android:layout_marginEnd="@dimen/list_separator_margins"
-
-            android:background="@color/gray" />
-
-        <TextView
-            android:id="@+id/description_label"
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/separator8"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-
-            android:paddingTop="@dimen/list_item_padding_vertical"
-            android:paddingBottom="@dimen/list_item_padding_vertical"
-            android:paddingLeft="@dimen/list_item_padding_horizontal"
-            android:paddingRight="@dimen/list_item_padding_horizontal"
-
-            android:text="@string/description"/>
-
-        <EditText
-            android:id="@+id/description"
-
-            android:layout_width="@dimen/edit_text_list_width"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/separator8"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-
-            android:paddingTop="@dimen/list_item_padding_vertical"
-            android:paddingBottom="@dimen/list_item_padding_vertical"
-            android:paddingLeft="@dimen/list_item_padding_horizontal"
-            android:paddingRight="@dimen/list_item_padding_horizontal"
-
-            android:inputType="textMultiLine"/>
-
-
-        <!-- separator -->
-        <View
             android:id="@+id/separator9"
 
             android:layout_width="match_parent"
@@ -469,7 +306,7 @@ android:layout_height="match_parent">
             android:layout_alignParentStart="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_below="@id/description_label"
+            android:layout_below="@id/height_label"
 
             android:layout_marginLeft="@dimen/list_separator_margins"
             android:layout_marginStart="@dimen/list_separator_margins"
@@ -494,10 +331,10 @@ android:layout_height="match_parent">
 
             android:text="@string/smoker"/>
 
-        <CheckBox
-            android:id="@+id/checkbox_smoker"
+        <Spinner
+            android:id="@+id/spinner_smoker"
 
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/spinner_list_width"
             android:layout_height="wrap_content"
             android:layout_below="@id/separator9"
             android:layout_alignParentRight="true"
@@ -544,10 +381,10 @@ android:layout_height="match_parent">
 
             android:text="@string/children_nb"/>
 
-        <EditText
-            android:id="@+id/edit_text_children_nb"
+        <Spinner
+            android:id="@+id/spinner_children_nb"
 
-            android:layout_width="@dimen/edit_text_list_width"
+            android:layout_width="@dimen/spinner_list_width"
             android:layout_height="wrap_content"
             android:layout_below="@id/separator10"
             android:layout_alignParentRight="true"
@@ -562,56 +399,6 @@ android:layout_height="match_parent">
 
         <!-- separator -->
         <View
-            android:id="@+id/separator11"
-
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/list_separator_thickness"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@id/children_nb_label"
-
-            android:layout_marginLeft="@dimen/list_separator_margins"
-            android:layout_marginStart="@dimen/list_separator_margins"
-            android:layout_marginRight="@dimen/list_separator_margins"
-            android:layout_marginEnd="@dimen/list_separator_margins"
-
-            android:background="@color/gray" />
-
-        <TextView
-            android:id="@+id/country_label"
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/separator11"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-
-            android:paddingTop="@dimen/list_item_padding_vertical"
-            android:paddingBottom="@dimen/list_item_padding_vertical"
-            android:paddingLeft="@dimen/list_item_padding_horizontal"
-            android:paddingRight="@dimen/list_item_padding_horizontal"
-
-            android:text="@string/star_country"/>
-
-
-        <Spinner
-            android:id="@+id/spinner_country"
-
-            android:layout_width="@dimen/spinner_list_width"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/separator11"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-
-            android:paddingTop="@dimen/list_item_padding_vertical"
-            android:paddingBottom="@dimen/list_item_padding_vertical"
-            android:paddingLeft="@dimen/list_item_padding_horizontal"
-            android:paddingRight="@dimen/list_item_padding_horizontal" />
-
-        <!-- separator -->
-        <View
             android:id="@+id/separator12"
 
             android:layout_width="match_parent"
@@ -620,7 +407,7 @@ android:layout_height="match_parent">
             android:layout_alignParentStart="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_below="@id/country_label"
+            android:layout_below="@id/children_nb_label"
 
             android:layout_marginLeft="@dimen/list_separator_margins"
             android:layout_marginStart="@dimen/list_separator_margins"
@@ -643,12 +430,12 @@ android:layout_height="match_parent">
             android:paddingLeft="@dimen/list_item_padding_horizontal"
             android:paddingRight="@dimen/list_item_padding_horizontal"
 
-            android:text="@string/star_city"/>
+            android:text="@string/city"/>
 
-        <EditText
-            android:id="@+id/edit_text_city"
+        <Spinner
+            android:id="@+id/spinner_city"
 
-            android:layout_width="@dimen/edit_text_list_width"
+            android:layout_width="@dimen/spinner_list_width"
             android:layout_height="wrap_content"
             android:layout_below="@id/separator12"
             android:layout_alignParentRight="true"
@@ -658,31 +445,6 @@ android:layout_height="match_parent">
             android:paddingBottom="@dimen/list_item_padding_vertical"
             android:paddingLeft="@dimen/list_item_padding_horizontal"
             android:paddingRight="@dimen/list_item_padding_horizontal"/>
-
-        <TextView
-            android:id="@+id/remark_filling"
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/city_label"
-            android:layout_alignParentRight="true" android:layout_alignParentEnd="true"
-
-            android:textSize="@dimen/small_text_size"
-            android:textStyle="italic"
-            android:text="@string/have_to_be_filled"/>
-
-        <Button
-            android:id="@+id/button_edit_visibility"
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/remark_filling"
-            android:layout_alignParentRight="true" android:layout_alignParentEnd="true"
-
-            android:drawableLeft="@drawable/ic_mode_edit_black_24dp"
-            android:text="@string/edit_visibility_activity_title"
-
-            android:onClick="onEditVisibilityButtonClicked"/>
 
     </RelativeLayout>
 

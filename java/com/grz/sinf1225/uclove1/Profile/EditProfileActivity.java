@@ -246,4 +246,14 @@ public class EditProfileActivity extends AppCompatActivity
         Log.d("IMAGE", "Change profile picture");
         return false;
     }
+
+    public void onEditVisibilityButtonClicked(View view)
+    {
+        Log.d("BUTTON", "Edit visibility button clicked");
+        Intent intent = new Intent(this, EditVisibilityActivity.class);
+        /*
+        intent.putExtra(CurrentUser.EXTRA_CURRENT_USER, currentUser);
+         */
+        startActivity(intent);
+    }
 }

@@ -176,4 +176,12 @@
     <string name="widower">Widower</string>
     <string name="complicated">It\'s complicated</string>
 
+    <!-- edit visibility activity -->
+    <string name="edit_visibility_activity_title">Edit the visibility of my informations</string>
+    <string name="profil_picture">Profile picture</string>
+
+    <string name="visibility_public">Public</string>
+    <string name="visibility_private">Private</string>
+    <string name="visibility_friends">Friends</string>
+
 </resources>

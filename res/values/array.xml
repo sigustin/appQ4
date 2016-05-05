@@ -545,4 +545,10 @@
         <item>@string/Yes</item>
     </string-array>
 
+    <string-array name="array_visibilities">
+        <item>@string/visibility_private</item>
+        <item>@string/visibility_friends</item>
+        <item>@string/visibility_public</item>
+    </string-array>
+
 </resources>
