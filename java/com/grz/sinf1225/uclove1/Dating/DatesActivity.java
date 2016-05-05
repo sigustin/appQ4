@@ -16,6 +16,7 @@ import com.grz.sinf1225.uclove1.Profile.ProfileActivity;
 import com.grz.sinf1225.uclove1.Profile.ProfileOverviewAdapter;
 import com.grz.sinf1225.uclove1.R;
 import com.grz.sinf1225.uclove1.SettingsActivity;
+import com.grz.sinf1225.uclove1.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,7 @@ import java.util.Set;
 
 public class DatesActivity extends AppCompatActivity
 {
-    public static final String EXTRA_PSEUDO = "UCLove.EXTRA_PSEUDO";
+    public static final String EXTRA_DATE_PSEUDO = "UCLove.EXTRA_DATE_PSEUDO";
 
     private RecyclerView m_recyclerView;
     private RecyclerView.Adapter m_recyclerViewAdapter;
@@ -31,6 +32,7 @@ public class DatesActivity extends AppCompatActivity
     /*
     CurrentUser currentUser;
      */
+    User currentUser;
 
     private List<DateData> tmpDateOverviews;
     private String tmpPseudo1 = "angelina426", tmpPseudo2 = "AD.EL.E";
@@ -43,6 +45,12 @@ public class DatesActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dates);
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
 
         tmpDateOverviews = new ArrayList<>();
         tmpDateOverviews.add(new DateData(tmpPseudo1, tmpProfilePictureRes1, tmpDateTime1, tmpLocation1));
@@ -50,6 +58,8 @@ public class DatesActivity extends AppCompatActivity
         /*
         currentUser = (CurrentUser) getIntent().getSerializableExtra(CurrentUser.EXTRA_CURRENT_USER);
          */
+        String currentPseudo = getIntent().getStringExtra(User.EXTRA_PSEUDO);
+        currentUser = new User(currentPseudo);
 
         m_recyclerView = (RecyclerView) findViewById(R.id.date_overviews_recycler_view);
         m_recyclerViewLayoutManager = new LinearLayoutManager(this);
@@ -115,7 +125,7 @@ public class DatesActivity extends AppCompatActivity
             intent.putExtra(CurrentUser.EXTRA_CURRENT_USER, currentUser);
             intent.putExtra(User.EXTRA_PSEUDO, dateData.m_friendPseudo);
              */
-            intent.putExtra(EXTRA_PSEUDO, dateData.m_friendPseudo);
+            intent.putExtra(EXTRA_DATE_PSEUDO, dateData.m_friendPseudo);
             startActivity(intent);
         }
     }

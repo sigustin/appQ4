@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         Database.init(this);
-        Database.tmpWrite(123456);
     }
 
     public void login(View view)

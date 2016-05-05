@@ -9,6 +9,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
 import android.util.Log;
 
+import com.grz.sinf1225.uclove1.Dating.Meeting;
+
 import java.security.PublicKey;
 import java.sql.Blob;
 import java.util.ArrayList;
@@ -73,7 +75,7 @@ public final class Database
     public static final String SQL_CREATE_PICTURES = "CREATE TABLE Pictures(Pseudo TEXT NOT NULL, Picture BLOB NOT NULL, PRIMARY KEY (Pseudo, Picture), FOREIGN KEY (Pseudo) REFERENCES User);";
     public static final String SQL_CREATE_MESSAGE = "CREATE TABLE Message(Sender TEXT NOT NULL, SendingDate DATE NOT NULL, Receiver TEXT NOT NULL, ReceptionDate DATE, Msg TEXT NOT NULL, PRIMARY KEY (Sender, SendingDate, Receiver), FOREIGN KEY (Sender) REFERENCES User, FOREIGN KEY (Receiver) REFERENCES User);";
     public static final String SQL_CREATE_DISPONIBILITY = "CREATE TABLE Disponibility(Pseudo TEXT NOT NULL, DisponibilityDate DATE NOT NULL, PRIMARY KEY (Pseudo, DisponibilityDate), FOREIGN KEY (Pseudo) REFERENCES User);";
-    public static final String SQL_CREATE_APPOINTMENT = "CREATE TABLE Appointment(User1 TEXT NOT NULL, User2 TEXT NOT NULL, Date DATE NOT NULL, Location TEXT, PRIMARY KEY (User1, User2, Date), FOREIGN KEY (User1) REFERENCES User, FOREIGN KEY (User2) REFERENCES User);";
+    public static final String SQL_CREATE_APPOINTMENT = "CREATE TABLE Appointment(User1 TEXT NOT NULL, User2 TEXT NOT NULL, Date DATE, Location TEXT, PRIMARY KEY (User1, User2, Date), FOREIGN KEY (User1) REFERENCES User, FOREIGN KEY (User2) REFERENCES User);";
 
     public static final String REQUEST = "Request", FRIENDS = "Friends", REJECTION = "Rejection";
 
@@ -87,7 +89,7 @@ public final class Database
 
     public static class DBHelper extends SQLiteOpenHelper
     {
-        public static final int DATABASE_VERSION = 1;
+        public static final int DATABASE_VERSION = 2;
         public static final String DATABASE_NAME = "UCLoveDB.sqlite";
 
         public DBHelper(Context context)
@@ -121,6 +123,13 @@ public final class Database
 
     private static DBHelper helper;
     private static SQLiteDatabase writeDB, readDB;
+
+    public static void tmpDrop()
+    {
+        writeDB = helper.getWritableDatabase();
+        writeDB.execSQL("DROP TABLE IF EXISTS " + AppointmentEntries.TABLE_NAME);
+        writeDB.close();
+    }
 
     public static void init(Context context)
     {
@@ -1243,6 +1252,121 @@ public final class Database
             } while(cursor.moveToNext());
         }
         return userList;
+    }
+
+
+    //Meeting
+    public static void addMeeting(Meeting meeting)
+    {
+        String[] pseudos = new String[2];
+        pseudos = meeting.getUserPseudos();
+        ContentValues values = new ContentValues();
+        values.put(AppointmentEntries.COL_USER1, pseudos[0]);
+        values.put(AppointmentEntries.COL_USER2, pseudos[1]);
+        values.put(AppointmentEntries.COL_DATE, meeting.getDate());
+        values.put(AppointmentEntries.COL_LOCATION, meeting.getLocation());
+
+        writeDB = helper.getWritableDatabase();
+        writeDB.insert(AppointmentEntries.TABLE_NAME, null, values);
+        writeDB.close();
+    }
+
+    public static String getLocationMeeting(String pseudo1, String pseudo2)
+    {
+        readDB = helper.getReadableDatabase();
+        Cursor cursor = readDB.query(AppointmentEntries.TABLE_NAME,
+                new String[] {AppointmentEntries.COL_LOCATION},
+                "("+ AppointmentEntries.COL_USER1 +"=? AND "+ AppointmentEntries.COL_USER2 +"=?) OR ("+ AppointmentEntries.COL_USER1 +"=? AND "+ AppointmentEntries.COL_USER2 +"=?)",
+                new String[] {pseudo1, pseudo2, pseudo2, pseudo1},
+                null, null, null, null);
+
+        if (cursor.moveToFirst())
+        {
+            return cursor.getString(cursor.getColumnIndexOrThrow(AppointmentEntries.COL_LOCATION));
+        }
+        return null;
+    }
+
+    public static void updateLocation(Meeting meeting, String location)
+    {
+        ContentValues values = new ContentValues();
+        values.put(AppointmentEntries.COL_LOCATION, location);
+
+        String[] pseudos = new String[2];
+        pseudos = meeting.getUserPseudos();
+
+        writeDB = helper.getWritableDatabase();
+        writeDB.update(AppointmentEntries.TABLE_NAME,
+                values,
+                "("+ AppointmentEntries.COL_USER1 +"=? AND "+ AppointmentEntries.COL_USER2 +"=?) OR ("+ AppointmentEntries.COL_USER1 +"=? AND "+ AppointmentEntries.COL_USER2 +"=?)",
+                new String[] {pseudos[0], pseudos[1], pseudos[1], pseudos[0]});
+        writeDB.close();
+    }
+
+    public static void updateMeetingDay(Meeting meeting, String meetingDay)
+    {
+        ContentValues values = new ContentValues();
+        values.put(AppointmentEntries.COL_DATE, meetingDay);
+
+        String[] pseudos = new String[2];
+        pseudos = meeting.getUserPseudos();
+
+        writeDB = helper.getWritableDatabase();
+        writeDB.update(AppointmentEntries.TABLE_NAME,
+                values,
+                "("+ AppointmentEntries.COL_USER1 +"=? AND "+ AppointmentEntries.COL_USER2 +"=?) OR ("+ AppointmentEntries.COL_USER1 +"=? AND "+ AppointmentEntries.COL_USER2 +"=?)",
+                new String[] {pseudos[0], pseudos[1], pseudos[1], pseudos[0]});
+        writeDB.close();
+    }
+
+    //Disponibilities
+    public static void addDisponibilityDate(String pseudo, String date)
+    {
+        ContentValues values = new ContentValues();
+        values.put(DisponibilityEntries.COL_PSEUDO, pseudo);
+        values.put(DisponibilityEntries.COL_DISPONIBILITY_DATE, date);
+
+        writeDB = helper.getWritableDatabase();
+        writeDB.insert(DisponibilityEntries.TABLE_NAME, null, values);
+        writeDB.close();
+    }
+
+    public static void updateDisponibility(String pseudo, String newDate)
+    {
+        ContentValues values = new ContentValues();
+        values.put(DisponibilityEntries.COL_DISPONIBILITY_DATE, newDate);
+
+        writeDB = helper.getWritableDatabase();
+        writeDB.update(DisponibilityEntries.TABLE_NAME, values, DisponibilityEntries.COL_PSEUDO +"=?", new String[] {pseudo});
+        writeDB.close();
+    }
+
+    public static boolean[] getDisponibilityDates(String pseudo)
+    {
+        readDB = helper.getReadableDatabase();
+        Cursor cursor = readDB.query(DisponibilityEntries.TABLE_NAME,
+                new String[] {DisponibilityEntries.COL_DISPONIBILITY_DATE},
+                DisponibilityEntries.COL_PSEUDO+ "=?",
+                new String[] {pseudo},
+                null, null, null, null);
+
+        boolean[] disponibilities = new boolean[7];
+
+        if (cursor.moveToFirst())
+        {
+            int count = 0;
+            do
+            {
+                boolean current;
+                if (cursor.getInt(cursor.getColumnIndexOrThrow(DisponibilityEntries.COL_DISPONIBILITY_DATE)) == 0)
+                    current = false;
+                else
+                    current = true;
+                disponibilities[count] = current;
+                count++;
+            } while(cursor.moveToNext());
+        }
+        return disponibilities;
     }
 
     public static void updateDisponibility(User user, boolean[] tmp) {}

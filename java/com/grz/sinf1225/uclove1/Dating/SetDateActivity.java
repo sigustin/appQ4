@@ -14,6 +14,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import com.grz.sinf1225.uclove1.Database;
 import com.grz.sinf1225.uclove1.Matching.OverviewData;
 import com.grz.sinf1225.uclove1.Profile.ProfileActivity;
 import com.grz.sinf1225.uclove1.Profile.ProfileOverviewAdapter;
@@ -34,6 +35,8 @@ public class SetDateActivity extends AppCompatActivity
     /*
     CurrentUser currentUser;
      */
+    private User currentUser;
+
     private RecyclerView m_recyclerView;
     private RecyclerView.Adapter m_recyclerViewAdapter;
     private RecyclerView.LayoutManager m_recyclerViewLayoutManager;
@@ -51,7 +54,17 @@ public class SetDateActivity extends AppCompatActivity
         currentUser = (CurrentUser) getIntent().getSerializableExtra(CurrentUser.EXTRA_CURRENT_USER);
         m_friendPseudo = (String) getIntent().getStringExtra(User.EXTRA_PSEUDO);
          */
-        m_friendPseudo = (String) getIntent().getStringExtra(DatesActivity.EXTRA_PSEUDO);
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+
+        String currentPseudo = getIntent().getStringExtra(User.EXTRA_PSEUDO);
+        currentUser = new User(currentPseudo);
+
+        m_friendPseudo = (String) getIntent().getStringExtra(DatesActivity.EXTRA_DATE_PSEUDO);
 
         if (m_friendPseudo != null)
         {
@@ -73,6 +86,10 @@ public class SetDateActivity extends AppCompatActivity
                 }
             }, this);
             m_recyclerView.setAdapter(m_recyclerViewAdapter);
+
+            EditText msgEditText = (EditText) findViewById(R.id.edit_text_location);
+            String friendLocation = Database.getLocationMeeting(currentPseudo, m_friendPseudo);
+            msgEditText.setText(friendLocation);
         }
         else
         {
@@ -121,42 +138,105 @@ public class SetDateActivity extends AppCompatActivity
         intent.putExtra(CurrentUser.EXTRA_CURRENT_USER, currentUser);
         intent.putExtra(User.EXTRA_USER, Database.getUser(pseudo));
          */
+        intent.putExtra(User.EXTRA_PSEUDO, currentUser.getPseudo());
+        intent.putExtra(User.EXTRA_USER, new User(pseudo));
         startActivity(intent);
     }
 
     public void onSaveDateButtonClicked(View view)
     {
-        String enteredPseudo = "";
         if (m_newDate)
-            enteredPseudo = m_enterPseudo.getText().toString();
+        {
+            String enteredPseudo = m_enterPseudo.getText().toString();
 
-        boolean[] disponibilities = new boolean[7];
-        CheckBox currentCheckBox;
-        currentCheckBox = (CheckBox) findViewById(R.id.monday_checkbox);
-        disponibilities[0] = currentCheckBox.isChecked();
-        currentCheckBox = (CheckBox) findViewById(R.id.tuesday_checkbox);
-        disponibilities[1] = currentCheckBox.isChecked();
-        currentCheckBox = (CheckBox) findViewById(R.id.wednesday_checkbox);
-        disponibilities[2] = currentCheckBox.isChecked();
-        currentCheckBox = (CheckBox) findViewById(R.id.thursday_checkbox);
-        disponibilities[3] = currentCheckBox.isChecked();
-        currentCheckBox = (CheckBox) findViewById(R.id.friday_checkbox);
-        disponibilities[4] = currentCheckBox.isChecked();
-        currentCheckBox = (CheckBox) findViewById(R.id.saturday_checkbox);
-        disponibilities[5] = currentCheckBox.isChecked();
-        currentCheckBox = (CheckBox) findViewById(R.id.sunday_checkbox);
-        disponibilities[6] = currentCheckBox.isChecked();
+            boolean[] disponibilities = new boolean[7];
+            CheckBox currentCheckBox;
+            currentCheckBox = (CheckBox) findViewById(R.id.monday_checkbox);
+            disponibilities[0] = currentCheckBox.isChecked();
+            currentCheckBox = (CheckBox) findViewById(R.id.tuesday_checkbox);
+            disponibilities[1] = currentCheckBox.isChecked();
+            currentCheckBox = (CheckBox) findViewById(R.id.wednesday_checkbox);
+            disponibilities[2] = currentCheckBox.isChecked();
+            currentCheckBox = (CheckBox) findViewById(R.id.thursday_checkbox);
+            disponibilities[3] = currentCheckBox.isChecked();
+            currentCheckBox = (CheckBox) findViewById(R.id.friday_checkbox);
+            disponibilities[4] = currentCheckBox.isChecked();
+            currentCheckBox = (CheckBox) findViewById(R.id.saturday_checkbox);
+            disponibilities[5] = currentCheckBox.isChecked();
+            currentCheckBox = (CheckBox) findViewById(R.id.sunday_checkbox);
+            disponibilities[6] = currentCheckBox.isChecked();
 
-        EditText msgEditText = (EditText) findViewById(R.id.edit_text_location);
-        String location = msgEditText.getText().toString();
-        String tmp = "";
-        for (int i=0; i<7; i++)
-            tmp += disponibilities[i] +" ";
-        if (m_newDate)
-            Log.d("BUTTON", "Save date button clicked " + enteredPseudo +" "+ location +" "+ tmp);
+            EditText msgEditText = (EditText) findViewById(R.id.edit_text_location);
+            String location = msgEditText.getText().toString();
+
+            for (int i = 0; i < 7; i++)
+            {
+                switch (i)
+                {
+                    case 0:
+                        Database.addDisponibilityDate(currentUser.getPseudo(), getResources().getString(R.string.monday));
+                        break;
+                    case 1:
+                        Database.addDisponibilityDate(currentUser.getPseudo(), getResources().getString(R.string.tuesday));
+                        break;
+                    case 2:
+                        Database.addDisponibilityDate(currentUser.getPseudo(), getResources().getString(R.string.wednesday));
+                        break;
+                    case 3:
+                        Database.addDisponibilityDate(currentUser.getPseudo(), getResources().getString(R.string.thursday));
+                        break;
+                    case 4:
+                        Database.addDisponibilityDate(currentUser.getPseudo(), getResources().getString(R.string.friday));
+                        break;
+                    case 5:
+                        Database.addDisponibilityDate(currentUser.getPseudo(), getResources().getString(R.string.saturday));
+                        break;
+                    case 6:
+                        Database.addDisponibilityDate(currentUser.getPseudo(), getResources().getString(R.string.sunday));
+                        break;
+                }
+            }
+
+            Meeting meeting = new Meeting(currentUser.getPseudo(), enteredPseudo, location);
+            meeting.save();
+
+            String tmp = "";
+            for (int i = 0; i < 7; i++)
+                tmp += disponibilities[i] + " ";
+            if (m_newDate)
+                Log.d("BUTTON", "Save date button clicked " + enteredPseudo + " " + location + " " + tmp);
+            else
+                Log.d("BUTTON", "Save date button clicked " + location + " " + tmp);
+            finish();
+        }
         else
-            Log.d("BUTTON", "Save date button clicked " + location +" "+ tmp);
-        finish();
+        {
+            boolean[] disponibilities = new boolean[7];
+            CheckBox currentCheckBox;
+            currentCheckBox = (CheckBox) findViewById(R.id.monday_checkbox);
+            disponibilities[0] = currentCheckBox.isChecked();
+            currentCheckBox = (CheckBox) findViewById(R.id.tuesday_checkbox);
+            disponibilities[1] = currentCheckBox.isChecked();
+            currentCheckBox = (CheckBox) findViewById(R.id.wednesday_checkbox);
+            disponibilities[2] = currentCheckBox.isChecked();
+            currentCheckBox = (CheckBox) findViewById(R.id.thursday_checkbox);
+            disponibilities[3] = currentCheckBox.isChecked();
+            currentCheckBox = (CheckBox) findViewById(R.id.friday_checkbox);
+            disponibilities[4] = currentCheckBox.isChecked();
+            currentCheckBox = (CheckBox) findViewById(R.id.saturday_checkbox);
+            disponibilities[5] = currentCheckBox.isChecked();
+            currentCheckBox = (CheckBox) findViewById(R.id.sunday_checkbox);
+            disponibilities[6] = currentCheckBox.isChecked();
+
+            EditText msgEditText = (EditText) findViewById(R.id.edit_text_location);
+            String location = msgEditText.getText().toString();
+
+            Meeting meeting = new Meeting(currentUser.getPseudo(), m_friendPseudo, location);
+            meeting.arrangeDay(this);
+            Database.updateMeetingDay(meeting, meeting.getDate());
+
+            finish();
+        }
     }
 
 }
