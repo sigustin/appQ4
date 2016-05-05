@@ -541,8 +541,8 @@
 
     <string-array name="array_smoker_filter">
         <item>@string/no_filter</item>
-        <item>@string/No</item>
-        <item>@string/Yes</item>
+        <item>@string/no</item>
+        <item>@string/yes</item>
     </string-array>
 
     <string-array name="array_visibilities">

@@ -168,8 +168,8 @@
     <string name="save_filters">Save filters</string>
 
     <!-- arrays -->
-    <string name="Yes">Yes</string>
-    <string name="No">No</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
     <string name="other">Other</string>
     <string name="women">Women</string>
     <string name="men">Men</string>

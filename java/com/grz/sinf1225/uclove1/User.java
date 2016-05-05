@@ -112,6 +112,10 @@ public class User implements Serializable
         this.cityVisibility = Database.getCityVisibility(pseudo);
     }
 
+    public boolean isSameUser(String otherUserPseudo)
+    {
+        return (this.pseudo.equals(otherUserPseudo));
+    }
 
     public String getPseudo()
     {

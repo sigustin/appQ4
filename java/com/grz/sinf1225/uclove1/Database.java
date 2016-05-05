@@ -1070,11 +1070,86 @@ public final class Database
         return User.RelationshipType.NONE;
     }
 
-    public static boolean isVisible(String pseudoToDisplay, UserInformation infoToDisplay, String currentUser)
+    protected static String getVisibilityColumnName(UserInformation information)
     {
+        switch (information)
+        {
+            case LAST_NAME:
+                return UserEntries.COL_LAST_NAME_VISIBILITY;
+            case FIRST_NAME:
+                return UserEntries.COL_FIRST_NAME_VISIBILITY;
+            case BIRTH_DATE:
+                return UserEntries.COL_BIRTH_DATE_VISIBILITY;
+            case AGE:
+                return UserEntries.COL_BIRTH_DATE_VISIBILITY;
+            case GENDER:
+                return UserEntries.COL_GENDER_VISIBILITY;
+            case SMOKER:
+                return UserEntries.COL_SMOKER_VISIBILITY;
+            case LOVE_STATUS:
+                return UserEntries.COL_LOVE_STATUS_VISIBILITY;
+            case HEIGHT:
+                return UserEntries.COL_HEIGHT_VISIBILITY;
+            case CHILDREN_NB:
+                return UserEntries.COL_CHILDREN_NB_VISIBILITY;
+            case CITY:
+                return UserEntries.COL_CITY_VISIBILITY;
+            default:
+                return null;
+        }
+    }
+
+    public static boolean isVisible(String pseudoUserToDisplay, UserInformation infoToDisplay, String currentUserPseudo)
+    {
+        if (currentUserPseudo.equals(pseudoUserToDisplay))
+            return true;
+
+        readDB = helper.getReadableDatabase();
+
+        String columnName = getVisibilityColumnName(infoToDisplay);
+        if (columnName == null)
+            return false;
+
+        Cursor cursor = readDB.query(UserEntries.TABLE_NAME,
+                new String[] {columnName},
+                UserEntries.COL_PSEUDO + "=?",
+                new String[] {pseudoUserToDisplay},
+                null, null, null, null);
+
+        if (cursor.moveToFirst())
+        {
+            String visibility = cursor.getString(cursor.getColumnIndexOrThrow(columnName));
+            if (visibility.equals("Public"))
+                return true;
+            else if (visibility.equals("Private"))
+                return false;
+            else if (visibility.equals("Friends"))
+            {
+                User.RelationshipType relationship = getRelationshipType(currentUserPseudo, pseudoUserToDisplay);
+                if (relationship == User.RelationshipType.FRIENDS)
+                    return true;
+                else
+                    return false;
+            }
+        }
+        Log.e("DB", "Cursor empty");
         return false;
     }
 
+    public static boolean hasSentRequest(String pseudoSrc, String pseudoDestination)
+    {
+        readDB = helper.getReadableDatabase();
+        Cursor cursor = readDB.query(RelationshipEntries.TABLE_NAME,
+                new String[] {RelationshipEntries.COL_RELATIONSHIP_TYPE},
+                "(" +RelationshipEntries.COL_USER1+ "=? AND " +RelationshipEntries.COL_USER2+ "=?) OR (" +RelationshipEntries.COL_USER1+ "=? AND " +RelationshipEntries.COL_USER2+ "=?)",
+                new String[] {pseudoSrc, pseudoDestination},
+                null, null, null, null);
+
+        if (cursor.moveToFirst())
+            return true;
+        else
+            return false;
+    }
 
     public static void updateDisponibility(User user, boolean[] tmp) {}
     public static boolean[] getDisponibility(String pseudo) {return null;}
