@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.grz.sinf1225.uclove1.Database;
 import com.grz.sinf1225.uclove1.MainActivity;
 import com.grz.sinf1225.uclove1.R;
 
@@ -161,7 +162,7 @@ public class EditProfileActivity extends AppCompatActivity
             noInput.show();
             validEntries = false;
         }
-        if (m_isRegistration  && validEntries && /*Database.isPseudoTaken(pseudo)*/false) {
+        if (m_isRegistration  && validEntries && Database.isPseudoTaken(pseudo)) {
             Toast pseudoTaken = Toast.makeText(this, R.string.pseudo_taken, Toast.LENGTH_LONG);
             pseudoTaken.show();
             validEntries = false;

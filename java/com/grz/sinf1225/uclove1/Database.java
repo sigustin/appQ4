@@ -170,6 +170,23 @@ public final class Database
     }
 
     //User
+    public static boolean isPseudoTaken(String pseudo)
+    {
+        readDB = helper.getReadableDatabase();
+        Cursor cursor = readDB.query(UserEntries.TABLE_NAME,
+                new String[] {UserEntries.COL_PSEUDO},
+                UserEntries.COL_PSEUDO + "=?",
+                new String[] {pseudo},
+                null, null, null, null);
+
+        if (cursor.moveToFirst())
+        {
+            cursor.close();
+            return true;
+        }
+        return false;
+    }
+
     public static String getFamilyName(String pseudo)
     {
         readDB = helper.getReadableDatabase();
@@ -180,7 +197,11 @@ public final class Database
                 null, null, null, null);
 
         if (cursor.moveToFirst())
-            return cursor.getString(cursor.getColumnIndexOrThrow(UserEntries.COL_LAST_NAME));
+        {
+            String answer = cursor.getString(cursor.getColumnIndexOrThrow(UserEntries.COL_LAST_NAME));
+            cursor.close();
+            return answer;
+        }
         else
             return null;
     }
@@ -195,7 +216,11 @@ public final class Database
                 null, null, null, null);
 
         if (cursor.moveToFirst())
-            return cursor.getString(cursor.getColumnIndexOrThrow(UserEntries.COL_FIRST_NAME));
+        {
+            String answer = cursor.getString(cursor.getColumnIndexOrThrow(UserEntries.COL_FIRST_NAME));
+            cursor.close();
+            return answer;
+        }
         else
             return null;
     }
@@ -210,7 +235,11 @@ public final class Database
                 null, null, null, null);
 
         if (cursor.moveToFirst())
-            return cursor.getString(cursor.getColumnIndexOrThrow(UserEntries.COL_BIRTH_DATE));
+        {
+            String answer = cursor.getString(cursor.getColumnIndexOrThrow(UserEntries.COL_BIRTH_DATE));
+            cursor.close();
+            return answer;
+        }
         else
             return null;
     }
@@ -225,7 +254,11 @@ public final class Database
                 null, null, null, null);
 
         if (cursor.moveToFirst())
-            return cursor.getString(cursor.getColumnIndexOrThrow(UserEntries.COL_GENDER));
+        {
+            String answer = cursor.getString(cursor.getColumnIndexOrThrow(UserEntries.COL_GENDER));
+            cursor.close();
+            return answer;
+        }
         else
             return null;
     }
@@ -240,7 +273,11 @@ public final class Database
                 null, null, null, null);
 
         if (cursor.moveToFirst())
-            return cursor.getString(cursor.getColumnIndexOrThrow(UserEntries.COL_LOVE_STATUS));
+        {
+            String answer = cursor.getString(cursor.getColumnIndexOrThrow(UserEntries.COL_LOVE_STATUS));
+            cursor.close();
+            return answer;
+        }
         else
             return null;
     }
@@ -255,7 +292,11 @@ public final class Database
                 null, null, null, null);
 
         if (cursor.moveToFirst())
-            return cursor.getString(cursor.getColumnIndexOrThrow(UserEntries.COL_REGISTRATION_DATE));
+        {
+            String answer = cursor.getString(cursor.getColumnIndexOrThrow(UserEntries.COL_REGISTRATION_DATE));
+            cursor.close();
+            return answer;
+        }
         else
             return null;
     }
@@ -270,7 +311,11 @@ public final class Database
                 null, null, null, null);
 
         if (cursor.moveToFirst())
-            return cursor.getDouble(cursor.getColumnIndexOrThrow(UserEntries.COL_HEIGHT));
+        {
+            double answer = cursor.getDouble(cursor.getColumnIndexOrThrow(UserEntries.COL_HEIGHT));
+            cursor.close();
+            return answer;
+        }
         else
             return 0.0;
     }
@@ -285,7 +330,11 @@ public final class Database
                 null, null, null, null);
 
         if (cursor.moveToFirst())
-            return cursor.getString(cursor.getColumnIndexOrThrow(UserEntries.COL_DESCRIPTION));
+        {
+            String answer = cursor.getString(cursor.getColumnIndexOrThrow(UserEntries.COL_DESCRIPTION));
+            cursor.close();
+            return answer;
+        }
         else
             return null;
     }
@@ -300,7 +349,11 @@ public final class Database
                 null, null, null, null);
 
         if (cursor.moveToFirst())
-            return (cursor.getInt(cursor.getColumnIndexOrThrow(UserEntries.COL_SMOKER)) == 1);
+        {
+            if (cursor.getInt(cursor.getColumnIndexOrThrow(UserEntries.COL_SMOKER)) == 1)
+                return true;
+            return false;
+        }
         else
             return false;
     }
@@ -315,7 +368,11 @@ public final class Database
                 null, null, null, null);
 
         if (cursor.moveToFirst())
-            return cursor.getString(cursor.getColumnIndexOrThrow(UserEntries.COL_INTERESTED_IN));
+        {
+            String answer = cursor.getString(cursor.getColumnIndexOrThrow(UserEntries.COL_INTERESTED_IN));
+            cursor.close();
+            return answer;
+        }
         else
             return null;
     }
@@ -330,7 +387,11 @@ public final class Database
                 null, null, null, null);
 
         if (cursor.moveToFirst())
-            return cursor.getBlob(cursor.getColumnIndexOrThrow(UserEntries.COL_PROFILE_PICTURE));
+        {
+            byte[] answer = cursor.getBlob(cursor.getColumnIndexOrThrow(UserEntries.COL_PROFILE_PICTURE));
+            cursor.close();
+            return answer;
+        }
         else
             return null;
     }
@@ -345,7 +406,11 @@ public final class Database
                 null, null, null, null);
 
         if (cursor.moveToFirst())
-            return cursor.getInt(cursor.getColumnIndexOrThrow(UserEntries.COL_CHILDREN_NB));
+        {
+            int answer = cursor.getInt(cursor.getColumnIndexOrThrow(UserEntries.COL_CHILDREN_NB));
+            cursor.close();
+            return answer;
+        }
         else
             return 0;
     }
@@ -360,7 +425,11 @@ public final class Database
                 null, null, null, null);
 
         if (cursor.moveToFirst())
-            return cursor.getString(cursor.getColumnIndexOrThrow(UserEntries.COL_COUNTRY));
+        {
+            String answer = cursor.getString(cursor.getColumnIndexOrThrow(UserEntries.COL_COUNTRY));
+            cursor.close();
+            return answer;
+        }
         else
             return null;
     }
@@ -375,7 +444,11 @@ public final class Database
                 null, null, null, null);
 
         if (cursor.moveToFirst())
-            return cursor.getString(cursor.getColumnIndexOrThrow(UserEntries.COL_CITY));
+        {
+            String answer = cursor.getString(cursor.getColumnIndexOrThrow(UserEntries.COL_CITY));
+            cursor.close();
+            return answer;
+        }
         else
             return null;
     }
@@ -392,6 +465,7 @@ public final class Database
         if (cursor.moveToFirst())
         {
             String visibility = cursor.getString(cursor.getColumnIndexOrThrow(UserEntries.COL_LAST_NAME_VISIBILITY));
+            cursor.close();
             if (visibility.equals("Private"))
                 return User.PRIVATE;
             else if (visibility.equals("Friends"))
@@ -417,6 +491,7 @@ public final class Database
         if (cursor.moveToFirst())
         {
             String visibility = cursor.getString(cursor.getColumnIndexOrThrow(UserEntries.COL_FIRST_NAME_VISIBILITY));
+            cursor.close();
             if (visibility.equals("Private"))
                 return User.PRIVATE;
             else if (visibility.equals("Friends"))
@@ -442,6 +517,7 @@ public final class Database
         if (cursor.moveToFirst())
         {
             String visibility = cursor.getString(cursor.getColumnIndexOrThrow(UserEntries.COL_BIRTH_DATE_VISIBILITY));
+            cursor.close();
             if (visibility.equals("Private"))
                 return User.PRIVATE;
             else if (visibility.equals("Friends"))
@@ -467,6 +543,7 @@ public final class Database
         if (cursor.moveToFirst())
         {
             String visibility = cursor.getString(cursor.getColumnIndexOrThrow(UserEntries.COL_GENDER_VISIBILITY));
+            cursor.close();
             if (visibility.equals("Private"))
                 return User.PRIVATE;
             else if (visibility.equals("Friends"))
@@ -492,6 +569,7 @@ public final class Database
         if (cursor.moveToFirst())
         {
             String visibility = cursor.getString(cursor.getColumnIndexOrThrow(UserEntries.COL_LOVE_STATUS_VISIBILITY));
+            cursor.close();
             if (visibility.equals("Private"))
                 return User.PRIVATE;
             else if (visibility.equals("Friends"))
@@ -517,6 +595,7 @@ public final class Database
         if (cursor.moveToFirst())
         {
             String visibility = cursor.getString(cursor.getColumnIndexOrThrow(UserEntries.COL_HEIGHT_VISIBILITY));
+            cursor.close();
             if (visibility.equals("Private"))
                 return User.PRIVATE;
             else if (visibility.equals("Friends"))
@@ -542,6 +621,7 @@ public final class Database
         if (cursor.moveToFirst())
         {
             String visibility = cursor.getString(cursor.getColumnIndexOrThrow(UserEntries.COL_SMOKER_VISIBILITY));
+            cursor.close();
             if (visibility.equals("Private"))
                 return User.PRIVATE;
             else if (visibility.equals("Friends"))
@@ -567,6 +647,7 @@ public final class Database
         if (cursor.moveToFirst())
         {
             String visibility = cursor.getString(cursor.getColumnIndexOrThrow(UserEntries.COL_CHILDREN_NB_VISIBILITY));
+            cursor.close();
             if (visibility.equals("Private"))
                 return User.PRIVATE;
             else if (visibility.equals("Friends"))
@@ -592,6 +673,7 @@ public final class Database
         if (cursor.moveToFirst())
         {
             String visibility = cursor.getString(cursor.getColumnIndexOrThrow(UserEntries.COL_CITY_VISIBILITY));
+            cursor.close();
             if (visibility.equals("Private"))
                 return User.PRIVATE;
             else if (visibility.equals("Friends"))
