@@ -40,8 +40,11 @@ public class EditProfileActivity extends AppCompatActivity
 
         m_isRegistration = (boolean) getIntent().getBooleanExtra(Database.EXTRA_IS_REGISTRATION, true);
 
-        String currentPseudo = getIntent().getStringExtra(User.EXTRA_PSEUDO);
-        currentUser = new User(currentPseudo);
+        if (!m_isRegistration)
+        {
+            String currentPseudo = getIntent().getStringExtra(User.EXTRA_PSEUDO);
+            currentUser = new User(currentPseudo);
+        }
 
         displayInformations();
     }
@@ -51,7 +54,8 @@ public class EditProfileActivity extends AppCompatActivity
     {
         super.onResume();
 
-        currentUser = new User(currentUser.getPseudo());
+        if (!m_isRegistration)
+            currentUser = new User(currentUser.getPseudo());
         displayInformations();
     }
 

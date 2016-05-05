@@ -1,6 +1,7 @@
 package com.grz.sinf1225.uclove1.Matching;
 
 import android.content.Intent;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -28,6 +29,10 @@ public class FriendsActivity extends AppCompatActivity
     /*
     CurrentUser currentUser;
      */
+    User currentUser;
+
+    private List<User> friendsAndRequestList;
+    private List<OverviewData> friendsOverviewDataList;
 
     private List<OverviewData> tmpFriendsOverview;
     private final int tmpProfilePictureRes1 = R.drawable.angelina_jolie_profile_picture;
@@ -48,11 +53,28 @@ public class FriendsActivity extends AppCompatActivity
         /*
         currentUser = (CurrentUser) getIntent().getSerializableExtra(CurrentUser.EXTRA_CURRENT_USER);
          */
+        String currentPseudo = getIntent().getStringExtra(User.EXTRA_PSEUDO);
+        currentUser = new User(currentPseudo);
+
+        friendsAndRequestList = Database.getFriendsAndRequests(currentPseudo);
+        Log.d("DEBUG", "Number of friends : " +Integer.toString(friendsAndRequestList.size()));
+
+        friendsOverviewDataList = new ArrayList<OverviewData>();
+        for (int i=0; i<friendsAndRequestList.size(); i++)
+        {
+            User currentFriend = friendsAndRequestList.get(i);
+            friendsOverviewDataList.add(new OverviewData(currentFriend.getProfilePicture(),
+                    currentFriend.getPseudo(),
+                    Integer.toString(currentUser.getAge()) +" "+ getResources().getString(R.string.years_old),
+                    currentFriend.getCity(),
+                    Database.getRelationshipType(currentPseudo, currentFriend.getPseudo())));
+        }
+
 
         m_recyclerView = (RecyclerView) findViewById(R.id.profile_overviews_recycler_view);
         m_recyclerViewLayoutManager = new LinearLayoutManager(this);
         m_recyclerView.setLayoutManager(m_recyclerViewLayoutManager);
-        m_recyclerViewAdapter = new ProfileOverviewAdapter(tmpFriendsOverview, new ProfileOverviewAdapter.OnOverviewClickedListener() {
+        m_recyclerViewAdapter = new ProfileOverviewAdapter(friendsOverviewDataList, new ProfileOverviewAdapter.OnOverviewClickedListener() {
             public void onOverviewClicked(String pseudo)
             {
                 Log.d("OVERVIEWLISTENER", "RelativeLayoutClicked " + pseudo);
@@ -107,8 +129,9 @@ public class FriendsActivity extends AppCompatActivity
         Intent intent = new Intent(this, ProfileActivity.class);
         /*
         intent.putExtra(CurrentUser.EXTRA_CURRENT_USER, currentUser);
-        intent.putExtra(User.EXTRA_USER, Database.getUser(pseudo));
          */
+        intent.putExtra(User.EXTRA_PSEUDO, currentUser.getPseudo());
+        intent.putExtra(User.EXTRA_USER, new User(pseudo));
         startActivity(intent);
         return true;
     }

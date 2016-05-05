@@ -1163,7 +1163,7 @@ public final class Database
 
         ContentValues values = new ContentValues();
         values.put(RelationshipEntries.COL_USER1, pseudoSrc);
-        values.put(RelationshipEntries.COL_USER1, pseudoDestination);
+        values.put(RelationshipEntries.COL_USER2, pseudoDestination);
         values.put(RelationshipEntries.COL_RELATIONSHIP_TYPE, REQUEST);
         values.put(RelationshipEntries.COL_REQUEST_DATE, String.format("%1$td/%1$tm/%1$tY", Calendar.getInstance()));
 
@@ -1214,12 +1214,17 @@ public final class Database
             do
             {
                 User current;
-                if (cursor.getString(cursor.getColumnIndexOrThrow(RelationshipEntries.COL_USER1)) != pseudo)
+                Log.d("DEBUG", "User1 : " +cursor.getString(cursor.getColumnIndexOrThrow(RelationshipEntries.COL_USER1))+ " User2 : " +cursor.getString(cursor.getColumnIndexOrThrow(RelationshipEntries.COL_USER2)));
+                if ( !(cursor.getString(cursor.getColumnIndexOrThrow(RelationshipEntries.COL_USER1)).equals(pseudo)) ) {
+                    Log.d("DEBUG", "Current : " +pseudo+ " Returning user 1 " +cursor.getString(cursor.getColumnIndexOrThrow(RelationshipEntries.COL_USER1)));
                     current = new User(cursor.getString(cursor.getColumnIndexOrThrow(RelationshipEntries.COL_USER1)));
-                else
+                }
+                else {
+                    Log.d("DEBUG", "Returning user 2");
                     current = new User(cursor.getString(cursor.getColumnIndexOrThrow(RelationshipEntries.COL_USER2)));
+                }
                 userList.add(current);
-            } while(cursor.moveToNext())
+            } while(cursor.moveToNext());
         }
         return userList;
     }
