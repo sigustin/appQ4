@@ -52,7 +52,9 @@
         <activity
             android:name=".Matching.SetFilterActivity"
             android:label="@string/set_filters_activity_title" />
-        <activity android:name=".Profile.EditVisibilityActivity"></activity>
+        <activity
+            android:name=".Profile.EditVisibilityActivity"
+            android:label="@string/edit_profile_activity_title" />
     </application>
 
 </manifest>

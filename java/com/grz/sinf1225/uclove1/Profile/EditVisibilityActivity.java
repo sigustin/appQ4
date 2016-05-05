@@ -20,22 +20,22 @@ public class EditVisibilityActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_visibility);
 
-        Spinner firstName = (Spinner) findViewById(R.id.spinner_first_name);
+        Spinner firstNameSpinner = (Spinner) findViewById(R.id.spinner_first_name);
         ArrayAdapter<CharSequence> firstNameAdapter = ArrayAdapter.createFromResource(this, R.array.array_visibilities, android.R.layout.simple_spinner_item);
         firstNameAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        firstName.setAdapter(firstNameAdapter);
-        firstName.setSelection(tmpSpinnerPos);
+        firstNameSpinner.setAdapter(firstNameAdapter);
+        firstNameSpinner.setSelection(tmpSpinnerPos);
 
         Spinner familyName = (Spinner) findViewById(R.id.spinner_family_name);
         ArrayAdapter<CharSequence> familyNameAdapter = ArrayAdapter.createFromResource(this, R.array.array_visibilities, android.R.layout.simple_spinner_item);
         familyNameAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        familyName.setAdapter(firstNameAdapter);
+        familyName.setAdapter(familyNameAdapter);
         familyName.setSelection(tmpSpinnerPos);
 
         Spinner birthDate = (Spinner) findViewById(R.id.spinner_birth_date);
         ArrayAdapter<CharSequence> birthDateAdapter = ArrayAdapter.createFromResource(this, R.array.array_visibilities, android.R.layout.simple_spinner_item);
         birthDateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        birthDate.setAdapter(firstNameAdapter);
+        birthDate.setAdapter(birthDateAdapter);
         birthDate.setSelection(tmpSpinnerPos);
 
         Spinner gender = (Spinner) findViewById(R.id.spinner_gender);
@@ -47,31 +47,31 @@ public class EditVisibilityActivity extends AppCompatActivity
         Spinner loveStatus = (Spinner) findViewById(R.id.spinner_love_status);
         ArrayAdapter<CharSequence> loveStatusAdapter = ArrayAdapter.createFromResource(this, R.array.array_visibilities, android.R.layout.simple_spinner_item);
         loveStatusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        loveStatus.setAdapter(firstNameAdapter);
+        loveStatus.setAdapter(loveStatusAdapter);
         loveStatus.setSelection(tmpSpinnerPos);
 
         Spinner height = (Spinner) findViewById(R.id.spinner_height);
         ArrayAdapter<CharSequence> heightAdapter = ArrayAdapter.createFromResource(this, R.array.array_visibilities, android.R.layout.simple_spinner_item);
         heightAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        height.setAdapter(firstNameAdapter);
+        height.setAdapter(heightAdapter);
         height.setSelection(tmpSpinnerPos);
 
         Spinner smoker = (Spinner) findViewById(R.id.spinner_smoker);
         ArrayAdapter<CharSequence> smokerAdapter = ArrayAdapter.createFromResource(this, R.array.array_visibilities, android.R.layout.simple_spinner_item);
         smokerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        smoker.setAdapter(firstNameAdapter);
+        smoker.setAdapter(smokerAdapter);
         smoker.setSelection(tmpSpinnerPos);
 
         Spinner childrenNb = (Spinner) findViewById(R.id.spinner_children_nb);
         ArrayAdapter<CharSequence> childrenNbAdapter = ArrayAdapter.createFromResource(this, R.array.array_visibilities, android.R.layout.simple_spinner_item);
         childrenNbAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        childrenNb.setAdapter(firstNameAdapter);
+        childrenNb.setAdapter(childrenNbAdapter);
         childrenNb.setSelection(tmpSpinnerPos);
 
         Spinner city = (Spinner) findViewById(R.id.spinner_city);
         ArrayAdapter<CharSequence> cityAdapter = ArrayAdapter.createFromResource(this, R.array.array_visibilities, android.R.layout.simple_spinner_item);
         cityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        city.setAdapter(firstNameAdapter);
+        city.setAdapter(cityAdapter);
         city.setSelection(tmpSpinnerPos);
     }
 
@@ -99,6 +99,33 @@ public class EditVisibilityActivity extends AppCompatActivity
 
     public boolean saveVisibilities()
     {
+        Spinner firstNameSpinner = (Spinner) findViewById(R.id.spinner_first_name);
+        String firstName = firstNameSpinner.getSelectedItem().toString();
+
+        Spinner familyNameSpinner = (Spinner) findViewById(R.id.spinner_family_name);
+        String familyName = familyNameSpinner.getSelectedItem().toString();
+
+        Spinner birthDateSpinner = (Spinner) findViewById(R.id.spinner_birth_date);
+        String birthDate = birthDateSpinner.getSelectedItem().toString();
+
+        Spinner genderSpinner = (Spinner) findViewById(R.id.spinner_gender);
+        String gender = genderSpinner.getSelectedItem().toString();
+
+        Spinner loveStatusSpinner = (Spinner) findViewById(R.id.spinner_love_status);
+        String loveStatus = loveStatusSpinner.getSelectedItem().toString();
+
+        Spinner heightSpinner = (Spinner) findViewById(R.id.spinner_height);
+        String height = heightSpinner.getSelectedItem().toString();
+
+        Spinner smokerSpinner = (Spinner) findViewById(R.id.spinner_smoker);
+        String smoker = smokerSpinner.getSelectedItem().toString();
+
+        Spinner childrenNbSpinner = (Spinner) findViewById(R.id.spinner_children_nb);
+        String childrenNb = childrenNbSpinner.getSelectedItem().toString();
+
+        Spinner citySpinner = (Spinner) findViewById(R.id.spinner_city);
+        String city = citySpinner.getSelectedItem().toString();
+
         return true;
     }
 }
