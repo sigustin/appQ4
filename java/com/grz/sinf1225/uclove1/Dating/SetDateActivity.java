@@ -19,6 +19,7 @@ import com.grz.sinf1225.uclove1.Profile.ProfileActivity;
 import com.grz.sinf1225.uclove1.Profile.ProfileOverviewAdapter;
 import com.grz.sinf1225.uclove1.R;
 import com.grz.sinf1225.uclove1.SettingsActivity;
+import com.grz.sinf1225.uclove1.User;
 
 import java.util.ArrayList;
 import java.util.Currency;
@@ -59,7 +60,7 @@ public class SetDateActivity extends AppCompatActivity
             setTitle(getResources().getString(R.string.set_date_activity_title_part) + " " + m_friendPseudo);
 
             tmpFriendOverview = new ArrayList<>();
-            tmpFriendOverview.add(new OverviewData(tmpFriendProfilePictureRes, tmpFriendPseudo, tmpFriendAge, tmpFriendCity, OverviewData.FRIEND));
+            tmpFriendOverview.add(new OverviewData(tmpFriendProfilePictureRes, tmpFriendPseudo, tmpFriendAge, tmpFriendCity, User.RelationshipType.FRIENDS));
 
             m_recyclerView = (RecyclerView) findViewById(R.id.profile_overview_recycler_view);
             m_recyclerViewLayoutManager = new LinearLayoutManager(this);

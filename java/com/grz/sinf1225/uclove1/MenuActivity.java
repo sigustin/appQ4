@@ -24,9 +24,9 @@ import java.util.List;
 
 public class MenuActivity extends AppCompatActivity
 {
-    private List<OverviewData> tmpOverviewCurrentPseudoList;
     final String tmpPseudo = "++Jesus++", tmpAge = "225 years old", tmpCity = "Louvain-La-Neuve";
-    final int profilePictureRes = R.drawable.hollande_profile_picture, tmpRequest = OverviewData.ONESELF;
+    final int profilePictureRes = R.drawable.hollande_profile_picture;
+    final User.RelationshipType tmpRequest = User.RelationshipType.ONESELF;
 
     private RecyclerView m_recyclerView;
     private RecyclerView.Adapter m_recyclerViewAdapter;
@@ -34,6 +34,8 @@ public class MenuActivity extends AppCompatActivity
     /*
     private CurrentUser currentUser;
      */
+    private User m_currentUser;
+    private List<OverviewData> m_overviewCurrentPseudoList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -41,16 +43,23 @@ public class MenuActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        tmpOverviewCurrentPseudoList = new ArrayList<OverviewData>();
-        tmpOverviewCurrentPseudoList.add(new OverviewData(profilePictureRes, tmpPseudo, tmpAge, tmpCity, tmpRequest));
         /*
         currentUser = (CurrentUser) getIntent().getSerializableExtra(CurrentUser.EXTRA_CURRENT_USER);
          */
+        m_currentUser = (User) getIntent().getSerializableExtra(User.EXTRA_TMP);
+        Log.d("DEBUG", "User : " +m_currentUser.toString());
+        Log.d("DEBUG", "User : " +m_currentUser.getPseudo());
+        Log.d("DEBUG", "User : " +m_currentUser.getCity());
+
+        m_overviewCurrentPseudoList = new ArrayList<OverviewData>();
+        m_overviewCurrentPseudoList.add(new OverviewData(0, m_currentUser.getPseudo(),
+                Integer.toString(m_currentUser.getAge()) +" "+ getResources().getString(R.string.years_old),
+                m_currentUser.getCity(), User.RelationshipType.ONESELF));
 
         m_recyclerView = (RecyclerView) findViewById(R.id.profile_overviews_recycler_view);
         m_recyclerViewLayoutManager = new LinearLayoutManager(this);
         m_recyclerView.setLayoutManager(m_recyclerViewLayoutManager);
-        m_recyclerViewAdapter = new ProfileOverviewAdapter(tmpOverviewCurrentPseudoList, new ProfileOverviewAdapter.OnOverviewClickedListener() {
+        m_recyclerViewAdapter = new ProfileOverviewAdapter(m_overviewCurrentPseudoList, new ProfileOverviewAdapter.OnOverviewClickedListener() {
             @Override
             public void onOverviewClicked(String pseudo) {
                 onProfileOverviewClicked(pseudo);

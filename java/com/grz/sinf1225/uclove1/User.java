@@ -1,6 +1,7 @@
 package com.grz.sinf1225.uclove1;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.List;
 import java.util.ArrayList;
 import java.sql.*;
@@ -14,6 +15,12 @@ public class User implements Serializable
     public static final int DEFAULT_VISIBILITY = PUBLIC;
 
     public static final String EXTRA_USER = "UCLove.USER";
+    public static final String EXTRA_TMP = "UCLove.TMP";
+
+    public static enum RelationshipType
+    {
+        ONESELF, NONE, REQUEST, FRIENDS, REJECTION;
+    }
 
     private String pseudo;
     private String familyName;
@@ -77,6 +84,7 @@ public class User implements Serializable
 
     public User(String pseudo)
     {
+        this.pseudo = pseudo;
         this.familyName = Database.getFamilyName(pseudo);
         this.firstName = Database.getFirstName(pseudo);
         this.birthDate = Database.getBirthDate(pseudo);
@@ -123,6 +131,13 @@ public class User implements Serializable
     public String getBirthDate()
     {
         return this.birthDate;
+    }
+
+    public int getAge()
+    {
+        int birthyear = Integer.parseInt( this.birthDate.substring(birthDate.lastIndexOf('/')+1) );
+        int currentYear = Integer.parseInt( String.format("%1$tY", Calendar.getInstance()) );
+        return currentYear-birthyear;
     }
 
     public String getGender()

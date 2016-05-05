@@ -75,18 +75,21 @@ public class ProfileOverviewAdapter extends RecyclerView.Adapter<ProfileOverview
             }
         });
 
-        holder.profilePicture.setImageResource(m_data.get(position).m_profilePictureRes);
+        if (m_data.get(position).m_profilePictureRes == 0)
+            holder.profilePicture.setImageResource(R.drawable.ic_person_black_48dp);
+        else
+            holder.profilePicture.setImageResource(m_data.get(position).m_profilePictureRes);
         holder.pseudo.setText(m_data.get(position).m_pseudo);
         holder.age.setText(m_data.get(position).m_age);
         holder.city.setText(m_data.get(position).m_city);
 
         switch (m_data.get(position).m_relationshipStatus)
         {
-            case OverviewData.REQUEST:
+            case REQUEST:
                 holder.relationshipStatusEmblem.setBackgroundColor(ContextCompat.getColor(m_context, R.color.colorPrimaryLight));
                 holder.relationshipStatusEmblem.setText(m_context.getResources().getString(R.string.request));
                 break;
-            case OverviewData.REJECTION:
+            case REJECTION:
                 holder.relationshipStatusEmblem.setBackgroundColor(ContextCompat.getColor(m_context, R.color.colorPrimaryLight));
                 holder.relationshipStatusEmblem.setText(m_context.getResources().getString(R.string.rejection));
                 break;

@@ -97,6 +97,7 @@
     <!-- profile overview -->
     <string name="request">Request</string>
     <string name="rejection">Blocked</string>
+    <string name="years_old">years old</string>
 
     <!-- conversations activity -->
     <string name="conversations_activity_title">Conversations</string>

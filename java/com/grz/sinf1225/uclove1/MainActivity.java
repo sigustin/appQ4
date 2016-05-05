@@ -38,7 +38,12 @@ public class MainActivity extends AppCompatActivity
 
         Log.d("ENTRIES", "Entered pseudo : " +inputPseudo+ " password : " +inputPassword);
 
-        if(Database.isRightPassword(inputPseudo, inputPassword)/*true*/)
+        //----
+        inputPseudo = "attempt1";
+        inputPassword = "password";
+        //----
+
+        if(Database.isRightPassword(inputPseudo, inputPassword))
         {
 
             Intent intent = new Intent(this, MenuActivity.class);
@@ -46,7 +51,7 @@ public class MainActivity extends AppCompatActivity
             /*
             CurrentUser currentUser = new CurrentUser(inputPseudo);
             */
-            intent.putExtra(User.EXTRA_USER, currentUser);
+            intent.putExtra(User.EXTRA_TMP, currentUser);
             startActivity(intent);
         }
         else
