@@ -151,6 +151,8 @@
     <string name="must_enter_country">You must specify the country you live in</string>
     <string name="must_enter_city">You must specify the city you live close to</string>
     <string name="pseudo_taken">This pseudo is already taken</string>
+    <string name="star_password">Password*</string>
+    <string name="no_password">You must specify a password</string>
 
     <!-- find matches activity -->
     <string name="find_matches_activity_title">Find matches</string>

@@ -187,6 +187,44 @@ public final class Database
         return false;
     }
 
+    public static void addNewUser(User newUser, String password)
+    {
+        if (newUser != null)
+        {
+            Log.d("DB", "Adding new user : " +newUser.getPseudo());
+
+            ContentValues values = new ContentValues();
+            values.put(UserEntries.COL_PSEUDO, newUser.getPseudo());
+            values.put(UserEntries.COL_LAST_NAME, newUser.getFamilyName());
+            values.put(UserEntries.COL_BIRTH_DATE, newUser.getBirthDate());
+            values.put(UserEntries.COL_GENDER, newUser.getGender());
+            values.put(UserEntries.COL_LOVE_STATUS, newUser.getLoveStatus());
+            values.put(UserEntries.COL_REGISTRATION_DATE, newUser.getRegistrationDate());
+            values.put(UserEntries.COL_HEIGHT, newUser.getHeight());
+            values.put(UserEntries.COL_DESCRIPTION, newUser.getDescription());
+            values.put(UserEntries.COL_SMOKER, newUser.getSmoker());
+            values.put(UserEntries.COL_INTERESTED_IN, newUser.getInterestedIn());
+            values.put(UserEntries.COL_PROFILE_PICTURE, newUser.getProfilePicture());
+            values.put(UserEntries.COL_CHILDREN_NB, newUser.getChildrenNb());
+            values.put(UserEntries.COL_COUNTRY, newUser.getCountry());
+            values.put(UserEntries.COL_CITY, newUser.getCity());
+            values.put(UserEntries.COL_PASSWORD, password);
+            values.put(UserEntries.COL_LAST_NAME_VISIBILITY, newUser.getFamilyNameVisibility());
+            values.put(UserEntries.COL_FIRST_NAME_VISIBILITY, newUser.getFirstNameVisibility());
+            values.put(UserEntries.COL_BIRTH_DATE_VISIBILITY, newUser.getBirthDateVisibility());
+            values.put(UserEntries.COL_GENDER_VISIBILITY, newUser.getGenderVisibility());
+            values.put(UserEntries.COL_LOVE_STATUS_VISIBILITY, newUser.getLoveStatusVisibility());
+            values.put(UserEntries.COL_HEIGHT_VISIBILITY, newUser.getHeightVisibility());
+            values.put(UserEntries.COL_SMOKER_VISIBILITY, newUser.getSmokerVisibility());
+            values.put(UserEntries.COL_CHILDREN_NB_VISIBILITY, newUser.getChildrenNbVisibility());
+            values.put(UserEntries.COL_CITY_VISIBILITY, newUser.getCityVisibility());
+
+            writeDB = helper.getWritableDatabase();
+            writeDB.insert(UserEntries.TABLE_NAME, null, values);
+            writeDB.close();
+        }
+    }
+
     public static String getFamilyName(String pseudo)
     {
         readDB = helper.getReadableDatabase();

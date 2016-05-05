@@ -6,9 +6,11 @@ import java.sql.*;
 
 public class User
 {
-    public static int PRIVATE = 0;
-    public static int FRIENDS = 1;
-    public static int PUBLIC = 2;
+    public static final int PRIVATE = 0;
+    public static final int FRIENDS = 1;
+    public static final int PUBLIC = 2;
+
+    public static final  int DEFAULT_VISIBILITY = PUBLIC;
 
     private String pseudo;
     private String familyName;
@@ -36,6 +38,39 @@ public class User
     private int smokerVisibility;
     private int childrenNbVisibility;
     private int cityVisibility;
+
+    public User(String pseudo, String firstName, String familyName, String birthDate, String gender, String loveStatus, String registrationDate,
+                double height, String description, boolean smoker, String interestedIn, byte[] profilePicture, List<byte[]> pictures, int childrenNb,
+                String country, String city, boolean[] disponibility, int familyNameVisibility, int firstNameVisibility, int birthDateVisibility,
+                int genderVisibility, int loveStatusVisibility, int heightVisibility, int smokerVisibility, int childrenNbVisibility, int cityVisibility)
+    {
+        this.pseudo = pseudo;
+        this.familyName = familyName;
+        this.firstName = firstName;
+        this.birthDate = birthDate;
+        this.gender = gender;
+        this.loveStatus = loveStatus;
+        this.registrationDate = registrationDate;
+        this.height = height;
+        this.description = description;
+        this.smoker = smoker;
+        this.interestedIn = interestedIn;
+        this.profilPicture = profilePicture;
+        this.picture = pictures;
+        this.childrenNb = childrenNb;
+        this.country = country;
+        this.city = city;
+        this.disponibility = disponibility;
+        this.familyNameVisibility = familyNameVisibility;
+        this.firstNameVisibility = firstNameVisibility;
+        this.birthDateVisibility = birthDateVisibility;
+        this.genderVisibility = genderVisibility;
+        this.loveStatusVisibility = loveStatusVisibility;
+        this.heightVisibility = heightVisibility;
+        this.smokerVisibility = smokerVisibility;
+        this.childrenNbVisibility = childrenNbVisibility;
+        this.cityVisibility = cityVisibility;
+    }
 
     public User(String pseudo)
     {
@@ -107,7 +142,7 @@ public class User
         return this.height;
     }
 
-    public String getDescripttion()
+    public String getDescription()
     {
         return this.description;
     }
@@ -122,7 +157,7 @@ public class User
         return this.interestedIn;
     }
 
-    public byte[] getProfilPicture()
+    public byte[] getProfilePicture()
     {
         return this.profilPicture;
     }

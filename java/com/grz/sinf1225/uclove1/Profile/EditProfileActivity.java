@@ -18,6 +18,10 @@ import android.widget.Toast;
 import com.grz.sinf1225.uclove1.Database;
 import com.grz.sinf1225.uclove1.MainActivity;
 import com.grz.sinf1225.uclove1.R;
+import com.grz.sinf1225.uclove1.User;
+
+import java.util.Calendar;
+import java.util.Locale;
 
 public class EditProfileActivity extends AppCompatActivity
 {
@@ -168,6 +172,15 @@ public class EditProfileActivity extends AppCompatActivity
             validEntries = false;
         }
 
+        EditText passwordEditText = (EditText) findViewById(R.id.edit_text_password);
+        String password = passwordEditText.getText().toString();
+        if (m_isRegistration && validEntries && password.equals(""))
+        {
+            Toast pseudoTaken = Toast.makeText(this, R.string.no_password, Toast.LENGTH_LONG);
+            pseudoTaken.show();
+            validEntries = false;
+        }
+
         EditText firstNameEditText = (EditText) findViewById(R.id.edit_text_first_name);
         String firstName = firstNameEditText.getText().toString();
         if (firstName.equals("") && validEntries) {
@@ -235,9 +248,14 @@ public class EditProfileActivity extends AppCompatActivity
         Log.d("DEBUG", String.valueOf(validEntries));
         if (validEntries)
         {
-            /*
-            currentUser.set...
-             */
+            if (m_isRegistration)
+            {
+                User newUser = new User(pseudo, firstName, familyName, birthDate, gender, loveStatus,
+                        String.format("%1$td/%1$tm/%1$tY", Calendar.getInstance()), height, description, smoker, interestedIn, null, null, nbChildren, country, city, null,
+                        User.DEFAULT_VISIBILITY, User.DEFAULT_VISIBILITY,User.DEFAULT_VISIBILITY,User.DEFAULT_VISIBILITY,
+                        User.DEFAULT_VISIBILITY,User.DEFAULT_VISIBILITY,User.DEFAULT_VISIBILITY,User.DEFAULT_VISIBILITY,User.DEFAULT_VISIBILITY);
+                Database.addNewUser(newUser, password);
+            }
         }
         return validEntries;
     }
