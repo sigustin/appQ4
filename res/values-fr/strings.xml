@@ -124,7 +124,6 @@
     <string name="save_filters">Enregistrer les filtres</string>
     <string name="set_date_activity_title_new">Nouveau rendez-vous</string>
     <string name="set_date_activity_title_part">Rendez-vous avec</string>
-    <string name="set_filter">Régler le filtre</string>
     <string name="set_filters_activity_title">Régler les filtres</string>
     <string name="star_birth_date">Date de naissance*</string>
     <string name="star_city">Ville*</string>
@@ -138,5 +137,18 @@
     <string name="thursday">Jeudi</string>
     <string name="tuesday">Mardi</string>
     <string name="wednesday">Mercredi</string>
+    <string name="No">Non</string>
+    <string name="Yes">Oui</string>
+    <string name="both">Les deux</string>
+    <string name="complicated">C\'est compliqué</string>
+    <string name="couple">En couple</string>
+    <string name="married">Marié</string>
+    <string name="men">Hommes</string>
+    <string name="none">Aucun</string>
+    <string name="other">Autre</string>
+    <string name="single">Célibataire</string>
+    <string name="widower">Veuf</string>
+    <string name="women">Femmes</string>
+    <string name="set_filters">Régler les filtres</string>
 
 </resources>

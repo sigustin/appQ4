@@ -9,45 +9,45 @@
     <string-array name="array_genders">
         <item>M</item>
         <item>F</item>
-        <item>Other</item>
+        <item>@string/other</item>
     </string-array>
 
     <string-array name="array_genders_filter">
-        <item>No filter</item>
+        <item>@string/no_filter</item>
         <item>M</item>
         <item>F</item>
-        <item>Other</item>
+        <item>@string/other</item>
     </string-array>
     
     <string-array name="array_love_statuses">
-        <item>Single</item>
-        <item>Couple</item>
-        <item>Married</item>
-        <item>Widower</item>
-        <item>It\'s complicated</item>
+        <item>@string/single</item>
+        <item>@string/couple</item>
+        <item>@string/married</item>
+        <item>@string/widower</item>
+        <item>@string/complicated</item>
     </string-array>
 
     <string-array name="array_love_statuses_filter">
-        <item>No filter</item>
-        <item>Single</item>
-        <item>Couple</item>
-        <item>Married</item>
-        <item>Widower</item>
+        <item>@string/no_filter</item>
+        <item>@string/single</item>
+        <item>@string/couple</item>
+        <item>@string/married</item>
+        <item>@string/widower</item>
     </string-array>
     
     <string-array name="array_interested_in_values">
-        <item>Women</item>
-        <item>Men</item>
-        <item>Both</item>
-        <item>None</item>
+        <item>@string/women</item>
+        <item>@string/men</item>
+        <item>@string/both</item>
+        <item>@string/none</item>
     </string-array>
 
     <string-array name="array_interested_in_values_filter">
-        <item>No filter</item>
-        <item>Women</item>
-        <item>Men</item>
-        <item>Both</item>
-        <item>None</item>
+        <item>@string/no_filter</item>
+        <item>@string/women</item>
+        <item>@string/men</item>
+        <item>@string/both</item>
+        <item>@string/none</item>
     </string-array>
 
     <string-array name="array_countries">
@@ -295,7 +295,7 @@
     </string-array>
 
     <string-array name="array_countries_filter">
-        <item>No filter</item>
+        <item>@string/no_filter</item>
         <item>Afghanistan</item>
         <item>Albania</item>
         <item>Algeria</item>
@@ -540,9 +540,9 @@
     </string-array>
 
     <string-array name="array_smoker_filter">
-        <item>No filter</item>
-        <item>No</item>
-        <item>Yes</item>
+        <item>@string/no_filter</item>
+        <item>@string/No</item>
+        <item>@string/Yes</item>
     </string-array>
 
 </resources>

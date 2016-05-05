@@ -154,12 +154,26 @@
 
     <!-- find matches activity -->
     <string name="find_matches_activity_title">Find matches</string>
-    <string name="set_filter">Set filter</string>
+    <string name="set_filters">Set filters</string>
 
     <!-- set filter activity -->
     <string name="set_filters_activity_title">Set filters</string>
     <string name="height_fork">Height (~10cm)</string>
     <string name="no_filter">No filter</string>
     <string name="save_filters">Save filters</string>
+
+    <!-- arrays -->
+    <string name="Yes">Yes</string>
+    <string name="No">No</string>
+    <string name="other">Other</string>
+    <string name="women">Women</string>
+    <string name="men">Men</string>
+    <string name="both">Both</string>
+    <string name="none">None</string>
+    <string name="single">Single</string>
+    <string name="married">Married</string>
+    <string name="couple">Couple</string>
+    <string name="widower">Widower</string>
+    <string name="complicated">It\'s complicated</string>
 
 </resources>
