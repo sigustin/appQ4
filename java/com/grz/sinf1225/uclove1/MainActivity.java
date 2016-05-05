@@ -1,6 +1,7 @@
 package com.grz.sinf1225.uclove1;
 
 import android.content.Intent;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +21,9 @@ public class MainActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Database.init(this);
+        Database.tmpWrite(123456);
     }
 
     public void login(View view)
@@ -33,6 +37,15 @@ public class MainActivity extends AppCompatActivity
         String inputPassword = passwordEditText.getText().toString();
 
         Log.d("ENTRIES", "Entered pseudo : " +inputPseudo+ " password : " +inputPassword);
+
+        Database.tmpRead();
+        Database.tmpUpdate(42);
+        Database.tmpRead();
+
+        Database.tmpUpdate(1024);
+        Database.tmpRead();
+        Database.tmpDelete("Testpseudo");
+        Database.tmpRead();
 
         if(/*Database.isRightPassword(inputPseudo, inputPassword)*/true)
         {
