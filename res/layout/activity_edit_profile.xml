@@ -42,7 +42,9 @@ android:layout_height="match_parent">
             android:paddingLeft="@dimen/list_item_padding_horizontal"
             android:paddingRight="@dimen/list_item_padding_horizontal"
 
-            android:text="@string/star_pseudo"/>
+            android:text="@string/star_pseudo"
+
+            android:onClick="onPseudoEditTextClicked"/>
 
         <EditText
             android:id="@+id/edit_text_pseudo"
@@ -107,7 +109,9 @@ android:layout_height="match_parent">
             android:paddingLeft="@dimen/list_item_padding_horizontal"
             android:paddingRight="@dimen/list_item_padding_horizontal"
 
-            android:inputType="textPassword"/>
+            android:inputType="textPassword"
+
+            android:onClick="onPasswordEditTextClicked"/>
 
         <!-- separator -->
         <View

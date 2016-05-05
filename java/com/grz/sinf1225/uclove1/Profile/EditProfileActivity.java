@@ -45,8 +45,6 @@ public class EditProfileActivity extends AppCompatActivity
             String currentPseudo = getIntent().getStringExtra(User.EXTRA_PSEUDO);
             currentUser = new User(currentPseudo);
         }
-
-        displayInformations();
     }
 
     @Override
@@ -96,7 +94,10 @@ public class EditProfileActivity extends AppCompatActivity
             pseudo.setKeyListener(null);
 
             EditText password = (EditText) findViewById(R.id.edit_text_password);
-            password.setText(getResources().getString(R.string.cant_change_password));
+            String passwordToDisplay = new String();
+            for (int i=0; i<Database.getPasswordLength(currentUser.getPseudo()); i++)
+                passwordToDisplay += 'a';
+            password.setText(passwordToDisplay);
             password.setKeyListener(null);
 
             EditText firstName = (EditText) findViewById(R.id.edit_text_first_name);
@@ -339,5 +340,17 @@ public class EditProfileActivity extends AppCompatActivity
          */
         intent.putExtra(User.EXTRA_PSEUDO, currentUser.getPseudo());
         startActivity(intent);
+    }
+
+    public void onPasswordEditTextClicked(View view)
+    {
+        Toast cantChangePassword = Toast.makeText(this, R.string.cant_change_password, Toast.LENGTH_LONG);
+        cantChangePassword.show();
+    }
+
+    public void onPseudoEditTextClicked(View view)
+    {
+        Toast cantChangePseudo = Toast.makeText(this, R.string.cant_change_pseudo, Toast.LENGTH_LONG);
+        cantChangePseudo.show();
     }
 }

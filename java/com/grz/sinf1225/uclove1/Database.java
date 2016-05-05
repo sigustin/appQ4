@@ -739,6 +739,21 @@ public final class Database
         return -1;
     }
 
+    public static int getPasswordLength(String pseudo)
+    {
+        readDB = helper.getReadableDatabase();
+        Cursor cursor = readDB.query(UserEntries.TABLE_NAME,
+                new String[] {UserEntries.COL_PASSWORD},
+                UserEntries.COL_PSEUDO + "=?",
+                new String[] {pseudo},
+                null, null, null, null);
+
+        if (cursor.moveToFirst())
+            return (cursor.getString(cursor.getColumnIndexOrThrow(UserEntries.COL_PASSWORD)).length());
+        Log.e("DB", "Cursor empty");
+        return 0;
+    }
+
 
     public static void updateUser(String pseudo, String columnName, String newEntry)
     {
