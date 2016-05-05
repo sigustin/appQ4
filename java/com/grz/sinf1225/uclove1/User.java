@@ -1,16 +1,19 @@
 package com.grz.sinf1225.uclove1;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
 import java.sql.*;
 
-public class User
+public class User implements Serializable
 {
     public static final int PRIVATE = 0;
     public static final int FRIENDS = 1;
     public static final int PUBLIC = 2;
 
-    public static final  int DEFAULT_VISIBILITY = PUBLIC;
+    public static final int DEFAULT_VISIBILITY = PUBLIC;
+
+    public static final String EXTRA_USER = "UCLove.USER";
 
     private String pseudo;
     private String familyName;

@@ -36,7 +36,7 @@ public class ProfileActivity extends AppCompatActivity
 
         /*
         currentUser = (CurrentUser) getIntent().getSerializableExtra(CurrentUser.EXTRA_CURRENT_USER);
-        userDisplayed = (User) getIntent().getSerializableExtra(User.EXTRA_PSEUDO);
+        userDisplayed = (User) getIntent().getSerializableExtra(User.EXTRA_USER);
          */
 
         setViews();

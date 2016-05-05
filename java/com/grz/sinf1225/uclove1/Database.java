@@ -184,6 +184,7 @@ public final class Database
             cursor.close();
             return true;
         }
+        Log.e("DB", "Cursor empty");
         return false;
     }
 
@@ -241,8 +242,8 @@ public final class Database
             cursor.close();
             return answer;
         }
-        else
-            return null;
+        Log.e("DB", "Cursor empty");
+        return null;
     }
 
     public static String getFirstName(String pseudo)
@@ -260,8 +261,8 @@ public final class Database
             cursor.close();
             return answer;
         }
-        else
-            return null;
+        Log.e("DB", "Cursor empty");
+        return null;
     }
 
     public static String getBirthDate(String pseudo)
@@ -279,8 +280,8 @@ public final class Database
             cursor.close();
             return answer;
         }
-        else
-            return null;
+        Log.e("DB", "Cursor empty");
+        return null;
     }
 
     public static String getGender(String pseudo)
@@ -298,8 +299,8 @@ public final class Database
             cursor.close();
             return answer;
         }
-        else
-            return null;
+        Log.e("DB", "Cursor empty");
+        return null;
     }
 
     public static String getLoveStatus(String pseudo)
@@ -317,8 +318,8 @@ public final class Database
             cursor.close();
             return answer;
         }
-        else
-            return null;
+        Log.e("DB", "Cursor empty");
+        return null;
     }
 
     public static String getRegistrationDate(String pseudo)
@@ -336,8 +337,8 @@ public final class Database
             cursor.close();
             return answer;
         }
-        else
-            return null;
+        Log.e("DB", "Cursor empty");
+        return null;
     }
 
     public static double getHeight(String pseudo)
@@ -355,8 +356,8 @@ public final class Database
             cursor.close();
             return answer;
         }
-        else
-            return 0.0;
+        Log.e("DB", "Cursor empty");
+        return 0.0;
     }
 
     public static String getDescription(String pseudo)
@@ -374,8 +375,8 @@ public final class Database
             cursor.close();
             return answer;
         }
-        else
-            return null;
+        Log.e("DB", "Cursor empty");
+        return null;
     }
 
     public static boolean getSmoker(String pseudo)
@@ -393,8 +394,8 @@ public final class Database
                 return true;
             return false;
         }
-        else
-            return false;
+        Log.e("DB", "Cursor empty");
+        return false;
     }
 
     public static String getInterestedIn(String pseudo)
@@ -412,8 +413,8 @@ public final class Database
             cursor.close();
             return answer;
         }
-        else
-            return null;
+        Log.e("DB", "Cursor empty");
+        return null;
     }
 
     public static byte[] getProfilePicture(String pseudo)
@@ -431,8 +432,8 @@ public final class Database
             cursor.close();
             return answer;
         }
-        else
-            return null;
+        Log.e("DB", "Cursor empty");
+        return null;
     }
 
     public static int getChildrenNb(String pseudo)
@@ -450,8 +451,8 @@ public final class Database
             cursor.close();
             return answer;
         }
-        else
-            return 0;
+        Log.e("DB", "Cursor empty");
+        return 0;
     }
 
     public static String getCountry(String pseudo)
@@ -469,8 +470,8 @@ public final class Database
             cursor.close();
             return answer;
         }
-        else
-            return null;
+        Log.e("DB", "Cursor empty");
+        return null;
     }
 
     public static String getCity(String pseudo)
@@ -488,8 +489,8 @@ public final class Database
             cursor.close();
             return answer;
         }
-        else
-            return null;
+        Log.e("DB", "Cursor empty");
+        return null;
     }
 
     public static int getFamilyNameVisibility(String pseudo)
@@ -514,8 +515,8 @@ public final class Database
             else
                 return -1;
         }
-        else
-            return -1;
+        Log.e("DB", "Cursor empty");
+        return -1;
     }
 
     public static int getFirstNameVisibility(String pseudo)
@@ -540,8 +541,8 @@ public final class Database
             else
                 return -1;
         }
-        else
-            return -1;
+        Log.e("DB", "Cursor empty");
+        return -1;
     }
 
     public static int getBirthDateVisibility(String pseudo)
@@ -566,8 +567,8 @@ public final class Database
             else
                 return -1;
         }
-        else
-            return -1;
+        Log.e("DB", "Cursor empty");
+        return -1;
     }
 
     public static int getGenderVisibility(String pseudo)
@@ -592,8 +593,8 @@ public final class Database
             else
                 return -1;
         }
-        else
-            return -1;
+        Log.e("DB", "Cursor empty");
+        return -1;
     }
 
     public static int getLoveStatusVisibility(String pseudo)
@@ -618,8 +619,8 @@ public final class Database
             else
                 return -1;
         }
-        else
-            return -1;
+        Log.e("DB", "Cursor empty");
+        return -1;
     }
 
     public static int getHeightVisibility(String pseudo)
@@ -644,8 +645,8 @@ public final class Database
             else
                 return -1;
         }
-        else
-            return -1;
+        Log.e("DB", "Cursor empty");
+        return -1;
     }
 
     public static int getSmokerVisibility(String pseudo)
@@ -670,8 +671,8 @@ public final class Database
             else
                 return -1;
         }
-        else
-            return -1;
+        Log.e("DB", "Cursor empty");
+        return -1;
     }
 
     public static int getChildrenNbVisibility(String pseudo)
@@ -696,8 +697,8 @@ public final class Database
             else
                 return -1;
         }
-        else
-            return -1;
+        Log.e("DB", "Cursor empty");
+        return -1;
     }
 
     public static int getCityVisibility(String pseudo)
@@ -722,8 +723,8 @@ public final class Database
             else
                 return -1;
         }
-        else
-            return -1;
+        Log.e("DB", "Cursor empty");
+        return -1;
     }
 
 
@@ -890,6 +891,147 @@ public final class Database
     public static void updateCityVisibility(User user, int newValue)
     {
         updateUser(user.getPseudo(), UserEntries.COL_CITY_VISIBILITY, newValue);
+    }
+
+    public static void updateFamilyName(String pseudo, String newValue)
+    {
+        updateUser(pseudo, UserEntries.COL_LAST_NAME, newValue);
+    }
+
+    public static void updateFirstName(String pseudo, String newValue)
+    {
+        updateUser(pseudo, UserEntries.COL_FIRST_NAME, newValue);
+    }
+
+    public static void updateBirthDate(String pseudo, String newValue)
+    {
+        updateUser(pseudo, UserEntries.COL_BIRTH_DATE, newValue);
+    }
+
+    public static void updateGender(String pseudo, String newValue)
+    {
+        updateUser(pseudo, UserEntries.COL_GENDER, newValue);
+    }
+
+    public static void updateLoveStatus(String pseudo, String newValue)
+    {
+        updateUser(pseudo, UserEntries.COL_LOVE_STATUS, newValue);
+    }
+
+    public static void updateHeight(String pseudo, double newValue)
+    {
+        updateUser(pseudo, UserEntries.COL_HEIGHT, newValue);
+    }
+
+    public static void updateDescription(String pseudo, String newValue)
+    {
+        updateUser(pseudo, UserEntries.COL_DESCRIPTION, newValue);
+    }
+
+    public static void updateSmoker(String pseudo, boolean newValue)
+    {
+        updateUser(pseudo, UserEntries.COL_SMOKER, newValue);
+    }
+
+    public static void updateInterestedIn(String pseudo, String newValue)
+    {
+        updateUser(pseudo, UserEntries.COL_INTERESTED_IN, newValue);
+    }
+
+    public static void updateProfilePicture(String pseudo, byte[] newValue)
+    {
+        updateUser(pseudo, UserEntries.COL_FIRST_NAME, newValue);
+    }
+
+    public static void updateChildrenNb(String pseudo, int newValue)
+    {
+        updateUser(pseudo, UserEntries.COL_CHILDREN_NB, newValue);
+    }
+
+    public static void updateCountry(String pseudo, String newValue)
+    {
+        updateUser(pseudo, UserEntries.COL_COUNTRY, newValue);
+    }
+
+    public static void updateCity(String pseudo, String newValue)
+    {
+        updateUser(pseudo, UserEntries.COL_CITY, newValue);
+    }
+
+    public static void updatePassword(String pseudo, String newValue)
+    {
+        updateUser(pseudo, UserEntries.COL_PASSWORD, newValue);
+    }
+
+    public static void updateFamilyNameVisibility(String pseudo, int newValue)
+    {
+        updateUser(pseudo, UserEntries.COL_LAST_NAME_VISIBILITY, newValue);
+    }
+
+    public static void updateFirstNameVisibility(String pseudo, int newValue)
+    {
+        updateUser(pseudo, UserEntries.COL_FIRST_NAME_VISIBILITY, newValue);
+    }
+
+    public static void updateBirthDateVisibility(String pseudo, int newValue)
+    {
+        updateUser(pseudo, UserEntries.COL_BIRTH_DATE_VISIBILITY, newValue);
+    }
+
+    public static void updateGenderVisibility(String pseudo, int newValue)
+    {
+        updateUser(pseudo, UserEntries.COL_GENDER_VISIBILITY, newValue);
+    }
+
+    public static void updateLoveStatusVisibility(String pseudo, int newValue)
+    {
+        updateUser(pseudo, UserEntries.COL_LOVE_STATUS_VISIBILITY, newValue);
+    }
+
+    public static void updateHeightVisibility(String pseudo, int newValue)
+    {
+        updateUser(pseudo, UserEntries.COL_HEIGHT_VISIBILITY, newValue);
+    }
+
+    public static void updateSmokerVisibility(String pseudo, int newValue)
+    {
+        updateUser(pseudo, UserEntries.COL_SMOKER_VISIBILITY, newValue);
+    }
+
+    public static void updateChildrenNbVisibility(String pseudo, int newValue)
+    {
+        updateUser(pseudo, UserEntries.COL_CHILDREN_NB_VISIBILITY, newValue);
+    }
+
+    public static void updateCityVisibility(String pseudo, int newValue)
+    {
+        updateUser(pseudo, UserEntries.COL_CITY_VISIBILITY, newValue);
+    }
+
+
+    public static boolean isRightPassword(String pseudo, String inputPassword)
+    {
+        readDB = helper.getReadableDatabase();
+        Cursor cursor = readDB.query(UserEntries.TABLE_NAME,
+                new String[] {UserEntries.COL_PASSWORD},
+                UserEntries.COL_PSEUDO + "=?",
+                new String[] {pseudo},
+                null, null, null, null);
+
+        if (cursor.moveToFirst())
+        {
+            boolean answer = false;
+            if (inputPassword.equals(cursor.getString(cursor.getColumnIndexOrThrow(UserEntries.COL_PASSWORD))))
+            {
+                answer = true;
+                Log.d("DB", "Password entered ok");
+            }
+
+            cursor.close();
+            return answer;
+        }
+        Log.e("DB", "Cursor empty");
+        return false;
     }
 
 

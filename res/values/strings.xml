@@ -153,6 +153,8 @@
     <string name="pseudo_taken">This pseudo is already taken</string>
     <string name="star_password">Password*</string>
     <string name="no_password">You must specify a password</string>
+    <string name="cant_change_password">You can\'t change your password</string>
+    <string name="cant_change_pseudo">You can\'t change your pseudo</string>
 
     <!-- find matches activity -->
     <string name="find_matches_activity_title">Find matches</string>

@@ -55,6 +55,11 @@ public class EditProfileActivity extends AppCompatActivity
 
             EditText pseudo = (EditText) findViewById(R.id.edit_text_pseudo);
             pseudo.setText(tmpPseudo);
+            pseudo.setKeyListener(null);
+
+            EditText password = (EditText) findViewById(R.id.edit_text_password);
+            password.setText(getResources().getString(R.string.cant_change_password));
+            password.setKeyListener(null);
 
             EditText firstName = (EditText) findViewById(R.id.edit_text_first_name);
             firstName.setText(tmpFirstName);
@@ -108,6 +113,10 @@ public class EditProfileActivity extends AppCompatActivity
         {
             ImageView profilePicture = (ImageView) findViewById(R.id.profile_picture);
             profilePicture.setImageResource(R.drawable.ic_person_black_48dp);
+
+            EditText pseudo = (EditText) findViewById(R.id.edit_text_pseudo);
+
+            EditText password = (EditText) findViewById(R.id.edit_text_password);
 
             Spinner gender = (Spinner) findViewById(R.id.spinner_gender);
             ArrayAdapter<CharSequence> genderAdapter = ArrayAdapter.createFromResource(this, R.array.array_genders, android.R.layout.simple_spinner_item);
@@ -255,6 +264,28 @@ public class EditProfileActivity extends AppCompatActivity
                         User.DEFAULT_VISIBILITY, User.DEFAULT_VISIBILITY,User.DEFAULT_VISIBILITY,User.DEFAULT_VISIBILITY,
                         User.DEFAULT_VISIBILITY,User.DEFAULT_VISIBILITY,User.DEFAULT_VISIBILITY,User.DEFAULT_VISIBILITY,User.DEFAULT_VISIBILITY);
                 Database.addNewUser(newUser, password);
+            }
+            else
+            {
+                if (!Database.isPseudoTaken(pseudo))
+                {
+                    Toast noInput = Toast.makeText(this, R.string.cant_change_pseudo, Toast.LENGTH_LONG);
+                    noInput.show();
+                    return false;
+                }
+
+                Database.updateFirstName(pseudo, firstName);
+                Database.updateFamilyName(pseudo, familyName);
+                Database.updateBirthDate(pseudo, birthDate);
+                Database.updateGender(pseudo, gender);
+                Database.updateLoveStatus(pseudo, loveStatus);
+                Database.updateInterestedIn(pseudo, interestedIn);
+                Database.updateHeight(pseudo, height);
+                Database.updateDescription(pseudo, description);
+                Database.updateSmoker(pseudo, smoker);
+                Database.updateChildrenNb(pseudo, nbChildren);
+                Database.updateCountry(pseudo, country);
+                Database.updateCity(pseudo, city);
             }
         }
         return validEntries;
