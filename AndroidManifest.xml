@@ -55,6 +55,7 @@
         <activity
             android:name=".Profile.EditVisibilityActivity"
             android:label="@string/edit_visibility_activity_title" />
+        <activity android:name=".Profile.ChooseProfilePictureActivity"></activity>
     </application>
 
 </manifest>

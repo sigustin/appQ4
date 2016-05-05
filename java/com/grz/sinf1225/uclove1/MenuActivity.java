@@ -52,7 +52,7 @@ public class MenuActivity extends AppCompatActivity
         Log.d("DEBUG", "User : " +m_currentUser.getCity());
 
         m_overviewCurrentPseudoList = new ArrayList<OverviewData>();
-        m_overviewCurrentPseudoList.add(new OverviewData(0, m_currentUser.getPseudo(),
+        m_overviewCurrentPseudoList.add(new OverviewData(m_currentUser.getProfilePicture(), m_currentUser.getPseudo(),
                 Integer.toString(m_currentUser.getAge()) +" "+ getResources().getString(R.string.years_old),
                 m_currentUser.getCity(), User.RelationshipType.ONESELF));
 

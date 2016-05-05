@@ -34,6 +34,7 @@ public class EditProfileActivity extends AppCompatActivity
     /*
     CurrentUser currentUser;
      */
+    User currentUser;
     private boolean m_isRegistration;
 
 
@@ -43,7 +44,10 @@ public class EditProfileActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
 
-        m_isRegistration = (boolean) getIntent().getBooleanExtra(MainActivity.EXTRA_IS_REGISTRATION, true);
+        m_isRegistration = (boolean) getIntent().getBooleanExtra(Database.EXTRA_IS_REGISTRATION, true);
+
+        currentUser = (User) getIntent().getSerializableExtra(User.EXTRA_TMP);
+
         if (!m_isRegistration)
         {
             /*
@@ -51,10 +55,13 @@ public class EditProfileActivity extends AppCompatActivity
              */
 
             ImageView profilePicture = (ImageView) findViewById(R.id.profile_picture);
-            profilePicture.setImageResource(profilePictureRes);
+            if (currentUser.getProfilePicture() == 0)
+                profilePicture.setImageResource(R.drawable.ic_person_black_48dp);
+            else
+                profilePicture.setImageResource(currentUser.getProfilePicture());
 
             EditText pseudo = (EditText) findViewById(R.id.edit_text_pseudo);
-            pseudo.setText(tmpPseudo);
+            pseudo.setText(currentUser.getPseudo());
             pseudo.setKeyListener(null);
 
             EditText password = (EditText) findViewById(R.id.edit_text_password);
@@ -62,52 +69,52 @@ public class EditProfileActivity extends AppCompatActivity
             password.setKeyListener(null);
 
             EditText firstName = (EditText) findViewById(R.id.edit_text_first_name);
-            firstName.setText(tmpFirstName);
+            firstName.setText(currentUser.getFirstName());
 
             EditText familyName = (EditText) findViewById(R.id.edit_text_family_name);
-            familyName.setText(tmpFamilyName);
+            familyName.setText(currentUser.getFamilyName());
 
             EditText birthDate = (EditText) findViewById(R.id.edit_text_birth_date);
-            birthDate.setText(tmpBirthDate);
+            birthDate.setText(currentUser.getBirthDate());
 
             Spinner gender = (Spinner) findViewById(R.id.spinner_gender);
             ArrayAdapter<CharSequence> genderAdapter = ArrayAdapter.createFromResource(this, R.array.array_genders, android.R.layout.simple_spinner_item);
             genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             gender.setAdapter(genderAdapter);
-            gender.setSelection(tmpGender);
+            gender.setSelection(genderAdapter.getPosition(currentUser.getGender()));
 
             Spinner loveStatus = (Spinner) findViewById(R.id.spinner_love_status);
             ArrayAdapter<CharSequence> loveStatusAdapter = ArrayAdapter.createFromResource(this, R.array.array_love_statuses, android.R.layout.simple_spinner_item);
             loveStatusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             loveStatus.setAdapter(loveStatusAdapter);
-            loveStatus.setSelection(tmpLoveStatus);
+            loveStatus.setSelection(loveStatusAdapter.getPosition(currentUser.getLoveStatus()));
 
             Spinner interestedIn = (Spinner) findViewById(R.id.spinner_interested_in);
             ArrayAdapter<CharSequence> interestedInAdapter = ArrayAdapter.createFromResource(this, R.array.array_interested_in_values, android.R.layout.simple_spinner_item);
             interestedInAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             interestedIn.setAdapter(interestedInAdapter);
-            interestedIn.setSelection(tmpInterestedIn);
+            interestedIn.setSelection(interestedInAdapter.getPosition(currentUser.getInterestedIn()));
 
             EditText height = (EditText) findViewById(R.id.edit_text_height);
-            height.setText(Double.toString(tmpHeight));
+            height.setText(Double.toString(currentUser.getHeight()));
 
             EditText description = (EditText) findViewById(R.id.description);
-            description.setText(tmpDescription);
+            description.setText(currentUser.getDescription());
 
             CheckBox smoker = (CheckBox) findViewById(R.id.checkbox_smoker);
-            smoker.setChecked(tmpSmoker);
+            smoker.setChecked(currentUser.getSmoker());
 
             EditText childrenNb = (EditText) findViewById(R.id.edit_text_children_nb);
-            childrenNb.setText(tmpChildrenNb);
+            childrenNb.setText(Integer.toString(currentUser.getChildrenNb()));
 
             Spinner country = (Spinner) findViewById(R.id.spinner_country);
             ArrayAdapter<CharSequence> countriesAdapter = ArrayAdapter.createFromResource(this, R.array.array_countries, android.R.layout.simple_spinner_item);
             countriesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             country.setAdapter(countriesAdapter);
-            country.setSelection(tmpCountry);
+            country.setSelection(countriesAdapter.getPosition(currentUser.getCountry()));
 
             EditText city = (EditText) findViewById(R.id.edit_text_city);
-            city.setText(tmpCity);
+            city.setText(currentUser.getCity());
         }
         else
         {
@@ -260,7 +267,7 @@ public class EditProfileActivity extends AppCompatActivity
             if (m_isRegistration)
             {
                 User newUser = new User(pseudo, firstName, familyName, birthDate, gender, loveStatus,
-                        String.format("%1$td/%1$tm/%1$tY", Calendar.getInstance()), height, description, smoker, interestedIn, null, null, nbChildren, country, city, null,
+                        String.format("%1$td/%1$tm/%1$tY", Calendar.getInstance()), height, description, smoker, interestedIn, 0, null, nbChildren, country, city, null,
                         User.DEFAULT_VISIBILITY, User.DEFAULT_VISIBILITY,User.DEFAULT_VISIBILITY,User.DEFAULT_VISIBILITY,
                         User.DEFAULT_VISIBILITY,User.DEFAULT_VISIBILITY,User.DEFAULT_VISIBILITY,User.DEFAULT_VISIBILITY,User.DEFAULT_VISIBILITY);
                 Database.addNewUser(newUser, password);

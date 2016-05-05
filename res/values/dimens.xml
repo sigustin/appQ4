@@ -80,4 +80,8 @@
     <dimen name="title_margins">10dp</dimen>
     <dimen name="location_edit_text_margin_top">10dp</dimen>
 
+    <!-- choose profile picture activity -->
+    <dimen name="medium_profile_picture_edge_size">180dp</dimen>
+    <dimen name="medium_profile_picture_padding">20dp</dimen>
+
 </resources>

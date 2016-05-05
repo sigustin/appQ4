@@ -33,7 +33,7 @@ public class User implements Serializable
     private String description;
     private boolean smoker;
     private String interestedIn;
-    private byte[] profilPicture;
+    private int profilPicture;
     private List<byte[]> picture = new ArrayList<byte[]>();
     private int childrenNb;
     private String country;
@@ -50,7 +50,7 @@ public class User implements Serializable
     private int cityVisibility;
 
     public User(String pseudo, String firstName, String familyName, String birthDate, String gender, String loveStatus, String registrationDate,
-                double height, String description, boolean smoker, String interestedIn, byte[] profilePicture, List<byte[]> pictures, int childrenNb,
+                double height, String description, boolean smoker, String interestedIn, int profilePicture, List<byte[]> pictures, int childrenNb,
                 String country, String city, boolean[] disponibility, int familyNameVisibility, int firstNameVisibility, int birthDateVisibility,
                 int genderVisibility, int loveStatusVisibility, int heightVisibility, int smokerVisibility, int childrenNbVisibility, int cityVisibility)
     {
@@ -179,7 +179,7 @@ public class User implements Serializable
         return this.interestedIn;
     }
 
-    public byte[] getProfilePicture()
+    public int getProfilePicture()
     {
         return this.profilPicture;
     }
@@ -311,7 +311,7 @@ public class User implements Serializable
         Database.updateInterestedIn(this, interestedIn);
     }
 
-    public void setProfilPicture(byte[] profilPicture)
+    public void setProfilPicture(int profilPicture)
     {
         this.profilPicture = profilPicture;
         Database.updateProfilePicture(this, profilPicture);

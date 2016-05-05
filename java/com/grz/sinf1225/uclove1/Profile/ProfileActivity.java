@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.grz.sinf1225.uclove1.Database;
 import com.grz.sinf1225.uclove1.R;
@@ -51,7 +52,7 @@ public class ProfileActivity extends AppCompatActivity
     private void setViews()
     {
         ImageView profilePicture = (ImageView) findViewById(R.id.profile_picture);
-        if (userDisplayed.getProfilePicture() != null)
+        if (userDisplayed.getProfilePicture() != 0)
             profilePicture.setImageResource(profilePictureRes);
         else
             profilePicture.setImageResource(R.drawable.ic_person_black_48dp);
@@ -63,14 +64,8 @@ public class ProfileActivity extends AppCompatActivity
         if (Database.isVisible(userDisplayed.getPseudo(), Database.UserInformation.FIRST_NAME, currentUser.getPseudo())
                 && Database.isVisible(userDisplayed.getPseudo(), Database.UserInformation.LAST_NAME, currentUser.getPseudo()))
             name.setText(userDisplayed.getFirstName() +" "+ userDisplayed.getFamilyName());
-        else {
-            Log.d("DEBUG", "Name of : " +currentUser.getPseudo()+ " not visible to : " +userDisplayed.getPseudo());
-            if (!currentUser.isSameUser(userDisplayed.getPseudo()))
-                Log.d("DEBUG", "Not same user " +currentUser.getPseudo()+ " and " +userDisplayed.getPseudo());
-            if (false && true)
-                Log.d("TEST", "test");
+        else
             name.setText(R.string.invisible);
-        }
 
         TextView birthDate = (TextView) findViewById(R.id.birth_date);
         if (Database.isVisible(userDisplayed.getPseudo(), Database.UserInformation.BIRTH_DATE, currentUser.getPseudo()))
@@ -196,5 +191,44 @@ public class ProfileActivity extends AppCompatActivity
     public void onActionButtonClick(View view)
     {
         Log.d("BUTTON", "Action button pressed");
+        if (currentUser.isSameUser(userDisplayed.getPseudo()))
+        {
+            Intent intent = new Intent(this, EditProfileActivity.class);
+        /*
+        intent.putExtra(CurrentUser.EXTRA_CURRENT_USER, currentUser);
+         */
+            intent.putExtra(User.EXTRA_TMP, currentUser);
+            intent.putExtra(Database.EXTRA_IS_REGISTRATION, false);
+            startActivity(intent);
+        }
+        else if (Database.getRelationshipType(currentUser.getPseudo(), userDisplayed.getPseudo()) == User.RelationshipType.NONE)
+        {
+            //Ask friend
+            Database.sendRequest(currentUser.getPseudo(), userDisplayed.getPseudo());
+        }
+        else if ((Database.getRelationshipType(currentUser.getPseudo(), userDisplayed.getPseudo()) == User.RelationshipType.REQUEST)
+                && !Database.hasSentRequest(currentUser.getPseudo(), userDisplayed.getPseudo()))
+        {
+            //Accept request
+            Database.acceptRequest(currentUser.getPseudo(), userDisplayed.getPseudo());
+        }
+        else if ( (Database.getRelationshipType(currentUser.getPseudo(), userDisplayed.getPseudo()) == User.RelationshipType.REQUEST)
+                && Database.hasSentRequest(currentUser.getPseudo(), userDisplayed.getPseudo()))
+        {
+            //Request sent (nothing to do)
+            Toast badInput = Toast.makeText(this, R.string.already_sent, Toast.LENGTH_LONG);
+            badInput.show();
+        }
+        else if (Database.getRelationshipType(currentUser.getPseudo(), userDisplayed.getPseudo()) == User.RelationshipType.REJECTION)
+        {
+            //Rejection (nothing to do)
+            Toast badInput = Toast.makeText(this, R.string.cant_send_request, Toast.LENGTH_LONG);
+            badInput.show();
+        }
+        else if (Database.getRelationshipType(currentUser.getPseudo(), userDisplayed.getPseudo()) == User.RelationshipType.FRIENDS)
+        {
+            //Unfriend
+            Database.unfriend(currentUser.getPseudo(), userDisplayed.getPseudo());
+        }
     }
 }

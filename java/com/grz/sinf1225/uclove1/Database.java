@@ -11,6 +11,7 @@ import android.util.Log;
 
 import java.security.PublicKey;
 import java.sql.Blob;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -72,6 +73,10 @@ public final class Database
     public static final String SQL_CREATE_MESSAGE = "CREATE TABLE Message(Sender TEXT NOT NULL, SendingDate DATE NOT NULL, Receiver TEXT NOT NULL, ReceptionDate DATE, Msg TEXT NOT NULL, PRIMARY KEY (Sender, SendingDate, Receiver), FOREIGN KEY (Sender) REFERENCES User, FOREIGN KEY (Receiver) REFERENCES User);";
     public static final String SQL_CREATE_DISPONIBILITY = "CREATE TABLE Disponibility(Pseudo TEXT NOT NULL, DisponibilityDate DATE NOT NULL, PRIMARY KEY (Pseudo, DisponibilityDate), FOREIGN KEY (Pseudo) REFERENCES User);";
     public static final String SQL_CREATE_APPOINTMENT = "CREATE TABLE Appointment(User1 TEXT NOT NULL, User2 TEXT NOT NULL, Date DATE NOT NULL, Location TEXT, PRIMARY KEY (User1, User2, Date), FOREIGN KEY (User1) REFERENCES User, FOREIGN KEY (User2) REFERENCES User);";
+
+    public static final String REQUEST = "Request", FRIENDS = "Friends", REJECTION = "Rejection";
+
+    public static final String EXTRA_IS_REGISTRATION = "UCLove.REGISTRATION";
 
     public enum UserInformation
     {
@@ -423,7 +428,7 @@ public final class Database
         return null;
     }
 
-    public static byte[] getProfilePicture(String pseudo)
+    public static int getProfilePicture(String pseudo)
     {
         readDB = helper.getReadableDatabase();
         Cursor cursor = readDB.query(UserEntries.TABLE_NAME,
@@ -434,12 +439,12 @@ public final class Database
 
         if (cursor.moveToFirst())
         {
-            byte[] answer = cursor.getBlob(cursor.getColumnIndexOrThrow(UserEntries.COL_PROFILE_PICTURE));
+            int answer = cursor.getInt(cursor.getColumnIndexOrThrow(UserEntries.COL_PROFILE_PICTURE));
             cursor.close();
             return answer;
         }
         Log.e("DB", "Cursor empty");
-        return null;
+        return 0;
     }
 
     public static int getChildrenNb(String pseudo)
@@ -831,7 +836,7 @@ public final class Database
         updateUser(user.getPseudo(), UserEntries.COL_INTERESTED_IN, newValue);
     }
 
-    public static void updateProfilePicture(User user, byte[] newValue)
+    public static void updateProfilePicture(User user, int newValue)
     {
         updateUser(user.getPseudo(), UserEntries.COL_FIRST_NAME, newValue);
     }
@@ -946,7 +951,7 @@ public final class Database
         updateUser(pseudo, UserEntries.COL_INTERESTED_IN, newValue);
     }
 
-    public static void updateProfilePicture(String pseudo, byte[] newValue)
+    public static void updateProfilePicture(String pseudo, int newValue)
     {
         updateUser(pseudo, UserEntries.COL_FIRST_NAME, newValue);
     }
@@ -1149,6 +1154,47 @@ public final class Database
             return true;
         else
             return false;
+    }
+
+    public static void sendRequest(String pseudoSrc, String pseudoDestination)
+    {
+        Log.d("DB", pseudoSrc+ " sends " +pseudoDestination+ "a request.");
+
+        ContentValues values = new ContentValues();
+        values.put(RelationshipEntries.COL_USER1, pseudoSrc);
+        values.put(RelationshipEntries.COL_USER1, pseudoDestination);
+        values.put(RelationshipEntries.COL_RELATIONSHIP_TYPE, REQUEST);
+        values.put(RelationshipEntries.COL_REQUEST_DATE, String.format("%1$td/%1$tm/%1$tY", Calendar.getInstance()));
+
+        writeDB = helper.getWritableDatabase();
+        writeDB.insert(RelationshipEntries.TABLE_NAME, null, values);
+        writeDB.close();
+    }
+
+    public static void acceptRequest(String pseudoAsked, String pseudoSrc)
+    {
+        Log.d("DB", pseudoAsked+ " accepts " +pseudoSrc+ "'s request.");
+
+        ContentValues values = new ContentValues();
+        values.put(RelationshipEntries.COL_RELATIONSHIP_TYPE, FRIENDS);
+
+        writeDB = helper.getWritableDatabase();
+        writeDB.update(RelationshipEntries.TABLE_NAME,
+                values,
+                RelationshipEntries.COL_USER1 +"=? AND "+ RelationshipEntries.COL_USER2 +"=?",
+                new String[] {pseudoSrc, pseudoAsked});
+        writeDB.close();
+    }
+
+    public static void unfriend(String pseudo1, String pseudo2)
+    {
+        Log.d("DB", pseudo1+ " unfriends " +pseudo2+ "'s request.");
+
+        writeDB = helper.getWritableDatabase();
+        writeDB.delete(RelationshipEntries.TABLE_NAME,
+                "("+ RelationshipEntries.COL_USER1 +"=? AND "+ RelationshipEntries.COL_USER2 +"=?) OR ("+ RelationshipEntries.COL_USER1 +"=? AND "+ RelationshipEntries.COL_USER2 +"=?)",
+                new String[] {pseudo1, pseudo2, pseudo2, pseudo1});
+        writeDB.close();
     }
 
     public static void updateDisponibility(User user, boolean[] tmp) {}

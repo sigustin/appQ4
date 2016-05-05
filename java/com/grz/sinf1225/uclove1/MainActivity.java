@@ -14,7 +14,6 @@ import com.grz.sinf1225.uclove1.Profile.EditProfileActivity;
 public class MainActivity extends AppCompatActivity
 {
     //public static final String EXTRA_CURRENT_USER = "UCLove.CurrentUser";write this in CurrentUser
-    public static final String EXTRA_IS_REGISTRATION = "UCLove.REGISTRATION";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -66,7 +65,7 @@ public class MainActivity extends AppCompatActivity
     {
         Log.d("BUTTON", "Pressed register button");
         Intent intent = new Intent(this, EditProfileActivity.class);
-        intent.putExtra(EXTRA_IS_REGISTRATION, true);
+        intent.putExtra(Database.EXTRA_IS_REGISTRATION, true);
         startActivity(intent);
     }
 
