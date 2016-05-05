@@ -1,1 +1,8 @@
 Class CurrentUser must implement Serializable (import java.io.Serializable)
+
+Database méthodes
+	User getUser(String pseudo)
+	boolean isRightPassword(String pseudo, String password)
+	? getRelationshipStatus(String pseudo1 String pseudo2)
+	boolean isVisible(String pseudo, int resource, String currentUserPseudo);
+	

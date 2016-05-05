@@ -84,6 +84,11 @@ public class FriendsActivity extends AppCompatActivity
     public boolean onAddFriendsButtonClicked(View view)
     {
         Log.d("FLOATINGBUTTON", "Add friends button clicked");
+        Intent intent = new Intent(this, FindMatchsActivity.class);
+        /*
+        intent.putExtra(CurrentUser.EXTRA_CURRENT_USER, currentUser);
+         */
+        startActivity(intent);
         return true;
     }
 

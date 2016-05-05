@@ -95,7 +95,7 @@ public class ProfileActivity extends AppCompatActivity
         city.setText(tmpCity);
 
         Button actionButton = (Button) findViewById(R.id.action_button);
-        if (/*pseudoUserDisplayed == currentUser.getPseudo()*/false)
+        if (/*pseudoUserDisplayed.equals(currentUser.getPseudo())*/false)
         {
             actionButton.setText(getResources().getString(R.string.button_change_informations));
             actionButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_mode_edit_black_24dp, 0, 0, 0);
