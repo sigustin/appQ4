@@ -52,7 +52,7 @@ public class ProfileActivity extends AppCompatActivity
     {
         ImageView profilePicture = (ImageView) findViewById(R.id.profile_picture);
         if (userDisplayed.getProfilePicture() != null)
-            profilePicture.setImageResource(userDisplayed.getProfilePicture());
+            profilePicture.setImageResource(profilePictureRes);
         else
             profilePicture.setImageResource(R.drawable.ic_person_black_48dp);
 
