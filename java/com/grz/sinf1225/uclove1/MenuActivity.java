@@ -46,7 +46,8 @@ public class MenuActivity extends AppCompatActivity
         /*
         currentUser = (CurrentUser) getIntent().getSerializableExtra(CurrentUser.EXTRA_CURRENT_USER);
          */
-        m_currentUser = (User) getIntent().getSerializableExtra(User.EXTRA_TMP);
+        String currentPseudo = getIntent().getStringExtra(User.EXTRA_PSEUDO);
+        m_currentUser = new User(currentPseudo);
         Log.d("DEBUG", "User : " +m_currentUser.toString());
         Log.d("DEBUG", "User : " +m_currentUser.getPseudo());
         Log.d("DEBUG", "User : " +m_currentUser.getCity());
@@ -138,7 +139,7 @@ public class MenuActivity extends AppCompatActivity
         /*
         intent.putExtra(CurrentUser.EXTRA_CURRENT_USER, currentUser);
          */
-        intent.putExtra(User.EXTRA_TMP, m_currentUser);
+        intent.putExtra(User.EXTRA_PSEUDO, m_currentUser.getPseudo());
         intent.putExtra(User.EXTRA_USER, m_currentUser);
         startActivity(intent);
     }

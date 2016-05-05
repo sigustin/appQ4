@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity
             /*
             CurrentUser currentUser = new CurrentUser(inputPseudo);
             */
-            intent.putExtra(User.EXTRA_TMP, currentUser);
+            intent.putExtra(User.EXTRA_PSEUDO, inputPseudo);
             startActivity(intent);
         }
         else

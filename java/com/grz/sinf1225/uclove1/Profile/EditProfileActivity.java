@@ -25,12 +25,6 @@ import java.util.Locale;
 
 public class EditProfileActivity extends AppCompatActivity
 {
-    final String tmpPseudo = "++Jesus++", tmpFirstName = "Vincent", tmpFamilyName = "Wertz", tmpBirthDate = "01/01/1901", tmpDescription = "Math teacher", tmpChildrenNb = "2", tmpCity = "Louvain-La-Neuve";
-    final int tmpGender = 0, tmpLoveStatus = 2, tmpInterestedIn = 0, tmpCountry = 19;
-    final int profilePictureRes = R.drawable.hollande_profile_picture;
-    final double tmpHeight = 1.75;
-    final boolean tmpSmoker = false;
-
     /*
     CurrentUser currentUser;
      */
@@ -46,14 +40,47 @@ public class EditProfileActivity extends AppCompatActivity
 
         m_isRegistration = (boolean) getIntent().getBooleanExtra(Database.EXTRA_IS_REGISTRATION, true);
 
-        currentUser = (User) getIntent().getSerializableExtra(User.EXTRA_TMP);
+        String currentPseudo = getIntent().getStringExtra(User.EXTRA_PSEUDO);
+        currentUser = new User(currentPseudo);
 
+        displayInformations();
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+
+        currentUser = new User(currentUser.getPseudo());
+        displayInformations();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.top_menu_edit_profile_activity, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            case R.id.top_menu_item_save:
+                Log.d("TOPMENU", "Save");
+                if(saveInformations())
+                    finish();
+                return true;
+        }
+        return false;
+    }
+
+    public void displayInformations()
+    {
         if (!m_isRegistration)
         {
-            /*
-            currentUser = (CurrentUser) getIntent().getSerializableExtra(CurrentUser.EXTRA_CURRENT_USER);
-             */
-
             ImageView profilePicture = (ImageView) findViewById(R.id.profile_picture);
             if (currentUser.getProfilePicture() == 0)
                 profilePicture.setImageResource(R.drawable.ic_person_black_48dp);
@@ -145,28 +172,6 @@ public class EditProfileActivity extends AppCompatActivity
             countriesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             country.setAdapter(countriesAdapter);
         }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        super.onCreateOptionsMenu(menu);
-        getMenuInflater().inflate(R.menu.top_menu_edit_profile_activity, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        switch (item.getItemId())
-        {
-            case R.id.top_menu_item_save:
-                Log.d("TOPMENU", "Save");
-                if(saveInformations())
-                    finish();
-                return true;
-        }
-        return false;
     }
 
     public boolean saveInformations()
@@ -281,6 +286,19 @@ public class EditProfileActivity extends AppCompatActivity
                     return false;
                 }
 
+                currentUser.setFirstName(firstName);
+                currentUser.setFamilyName(familyName);
+                currentUser.setBirthDate(birthDate);
+                currentUser.setGender(gender);
+                currentUser.setLoveStatus(loveStatus);
+                currentUser.setInterestedIn(interestedIn);
+                currentUser.setHeight(height);
+                currentUser.setDescription(description);
+                currentUser.setSmoker(smoker);
+                currentUser.setChildrenNb(nbChildren);
+                currentUser.setCountry(country);
+                currentUser.setCity(city);
+
                 Database.updateFirstName(pseudo, firstName);
                 Database.updateFamilyName(pseudo, familyName);
                 Database.updateBirthDate(pseudo, birthDate);
@@ -311,7 +329,7 @@ public class EditProfileActivity extends AppCompatActivity
         /*
         intent.putExtra(CurrentUser.EXTRA_CURRENT_USER, currentUser);
          */
-        intent.putExtra(User.EXTRA_TMP, currentUser);
+        intent.putExtra(User.EXTRA_PSEUDO, currentUser.getPseudo());
         startActivity(intent);
     }
 }

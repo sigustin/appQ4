@@ -24,7 +24,8 @@ public class EditVisibilityActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_visibility);
 
-        currentUser = (User) getIntent().getSerializableExtra(User.EXTRA_TMP);
+        String currentPseudo = getIntent().getStringExtra(User.EXTRA_PSEUDO);
+        currentUser = new User(currentPseudo);
 
         Spinner firstNameSpinner = (Spinner) findViewById(R.id.spinner_first_name);
         ArrayAdapter<CharSequence> firstNameAdapter = ArrayAdapter.createFromResource(this, R.array.array_visibilities, android.R.layout.simple_spinner_item);
@@ -82,6 +83,14 @@ public class EditVisibilityActivity extends AppCompatActivity
     }
 
     @Override
+    public void onResume()
+    {
+        super.onResume();
+
+        currentUser = new User(currentUser.getPseudo());
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
         super.onCreateOptionsMenu(menu);
@@ -108,38 +117,47 @@ public class EditVisibilityActivity extends AppCompatActivity
         Spinner firstNameSpinner = (Spinner) findViewById(R.id.spinner_first_name);
         int firstName = firstNameSpinner.getSelectedItemPosition();
         Database.updateFirstNameVisibility(currentUser, firstName);
+        currentUser.setFirstNameVisibility(firstName);
 
         Spinner familyNameSpinner = (Spinner) findViewById(R.id.spinner_family_name);
         int familyName = familyNameSpinner.getSelectedItemPosition();
-        Database.updateFirstNameVisibility(currentUser, familyName);
+        Database.updateFamilyNameVisibility(currentUser, familyName);
+        currentUser.setFamilyNameVisibility(familyName);
 
         Spinner birthDateSpinner = (Spinner) findViewById(R.id.spinner_birth_date);
         int birthDate = birthDateSpinner.getSelectedItemPosition();
-        Database.updateFirstNameVisibility(currentUser, birthDate);
+        Database.updateBirthDateVisibility(currentUser, birthDate);
+        currentUser.setBirthDateVisibility(birthDate);
 
         Spinner genderSpinner = (Spinner) findViewById(R.id.spinner_gender);
         int gender = genderSpinner.getSelectedItemPosition();
-        Database.updateFirstNameVisibility(currentUser, gender);
+        Database.updateGenderVisibility(currentUser, gender);
+        currentUser.setGenderVisibility(gender);
 
         Spinner loveStatusSpinner = (Spinner) findViewById(R.id.spinner_love_status);
         int loveStatus = loveStatusSpinner.getSelectedItemPosition();
-        Database.updateFirstNameVisibility(currentUser, loveStatus);
+        Database.updateLoveStatusVisibility(currentUser, loveStatus);
+        currentUser.setLoveStatusVisibility(loveStatus);
 
         Spinner heightSpinner = (Spinner) findViewById(R.id.spinner_height);
         int height = heightSpinner.getSelectedItemPosition();
-        Database.updateFirstNameVisibility(currentUser, height);
+        Database.updateHeightVisibility(currentUser, height);
+        currentUser.setHeightVisibility(height);
 
         Spinner smokerSpinner = (Spinner) findViewById(R.id.spinner_smoker);
         int smoker = smokerSpinner.getSelectedItemPosition();
-        Database.updateFirstNameVisibility(currentUser, smoker);
+        Database.updateSmokerVisibility(currentUser, smoker);
+        currentUser.setSmokerVisibility(smoker);
 
         Spinner childrenNbSpinner = (Spinner) findViewById(R.id.spinner_children_nb);
         int childrenNb = childrenNbSpinner.getSelectedItemPosition();
-        Database.updateFirstNameVisibility(currentUser, childrenNb);
+        Database.updateChildrenNbVisibility(currentUser, childrenNb);
+        currentUser.setChildrenNbVisibility(childrenNb);
 
         Spinner citySpinner = (Spinner) findViewById(R.id.spinner_city);
         int city = citySpinner.getSelectedItemPosition();
-        Database.updateFirstNameVisibility(currentUser, city);
+        Database.updateCityVisibility(currentUser, city);
+        currentUser.setCityVisibility(city);
 
         return true;
     }

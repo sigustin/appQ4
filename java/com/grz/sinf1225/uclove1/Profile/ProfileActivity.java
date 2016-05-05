@@ -43,10 +43,46 @@ public class ProfileActivity extends AppCompatActivity
         /*
         currentUser = (CurrentUser) getIntent().getSerializableExtra(CurrentUser.EXTRA_CURRENT_USER);
         */
-        currentUser = (User) getIntent().getSerializableExtra(User.EXTRA_TMP);
+        String currentPseudo = getIntent().getStringExtra(User.EXTRA_PSEUDO);
+        currentUser = new User(currentPseudo);
         userDisplayed = (User) getIntent().getSerializableExtra(User.EXTRA_USER);
 
         setViews();
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+
+        currentUser = new User(currentUser.getPseudo());
+        userDisplayed = new User(userDisplayed.getPseudo());
+        setViews();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.top_menu_menu_activity, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            case R.id.top_menu_item_settings:
+                Log.d("TOPMENU", "Settings selected");
+                Intent intent = new Intent(this, SettingsActivity.class);
+                /*
+                intent.putExtra(CurrentUser.EXTRA_CURRENT_USER, currentUser);
+                 */
+                startActivity(intent);
+                return true;
+        }
+        return false;
     }
 
     private void setViews()
@@ -162,32 +198,6 @@ public class ProfileActivity extends AppCompatActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        super.onCreateOptionsMenu(menu);
-        getMenuInflater().inflate(R.menu.top_menu_menu_activity, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        switch (item.getItemId())
-        {
-            case R.id.top_menu_item_settings:
-                Log.d("TOPMENU", "Settings selected");
-                Intent intent = new Intent(this, SettingsActivity.class);
-                /*
-                intent.putExtra(CurrentUser.EXTRA_CURRENT_USER, currentUser);
-                 */
-                startActivity(intent);
-                return true;
-        }
-        return false;
-    }
-
-
     public void onActionButtonClick(View view)
     {
         Log.d("BUTTON", "Action button pressed");
@@ -197,7 +207,7 @@ public class ProfileActivity extends AppCompatActivity
         /*
         intent.putExtra(CurrentUser.EXTRA_CURRENT_USER, currentUser);
          */
-            intent.putExtra(User.EXTRA_TMP, currentUser);
+            intent.putExtra(User.EXTRA_PSEUDO, currentUser.getPseudo());
             intent.putExtra(Database.EXTRA_IS_REGISTRATION, false);
             startActivity(intent);
         }

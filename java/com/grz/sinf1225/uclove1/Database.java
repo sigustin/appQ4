@@ -11,6 +11,7 @@ import android.util.Log;
 
 import java.security.PublicKey;
 import java.sql.Blob;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -1195,6 +1196,32 @@ public final class Database
                 "("+ RelationshipEntries.COL_USER1 +"=? AND "+ RelationshipEntries.COL_USER2 +"=?) OR ("+ RelationshipEntries.COL_USER1 +"=? AND "+ RelationshipEntries.COL_USER2 +"=?)",
                 new String[] {pseudo1, pseudo2, pseudo2, pseudo1});
         writeDB.close();
+    }
+
+    public static List<User> getFriendsAndRequests(String pseudo)
+    {
+        readDB = helper.getReadableDatabase();
+        Cursor cursor = readDB.query(RelationshipEntries.TABLE_NAME,
+                new String[] {RelationshipEntries.COL_USER1, RelationshipEntries.COL_USER2},
+                RelationshipEntries.COL_USER1+ "=? Or " +RelationshipEntries.COL_USER2+ "=?",
+                new String[] {pseudo, pseudo},
+                null, null, null, null);
+
+        List<User> userList = new ArrayList<User>();
+
+        if (cursor.moveToFirst())
+        {
+            do
+            {
+                User current;
+                if (cursor.getString(cursor.getColumnIndexOrThrow(RelationshipEntries.COL_USER1)) != pseudo)
+                    current = new User(cursor.getString(cursor.getColumnIndexOrThrow(RelationshipEntries.COL_USER1)));
+                else
+                    current = new User(cursor.getString(cursor.getColumnIndexOrThrow(RelationshipEntries.COL_USER2)));
+                userList.add(current);
+            } while(cursor.moveToNext())
+        }
+        return userList;
     }
 
     public static void updateDisponibility(User user, boolean[] tmp) {}

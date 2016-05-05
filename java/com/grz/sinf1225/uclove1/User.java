@@ -15,6 +15,7 @@ public class User implements Serializable
     public static final int DEFAULT_VISIBILITY = PUBLIC;
 
     public static final String EXTRA_USER = "UCLove.USER";
+    public static final String EXTRA_PSEUDO = "UCLove.PSEUDO";
     public static final String EXTRA_TMP = "UCLove.TMP";
 
     public enum RelationshipType
