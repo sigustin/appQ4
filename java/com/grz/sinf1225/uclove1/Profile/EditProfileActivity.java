@@ -311,6 +311,7 @@ public class EditProfileActivity extends AppCompatActivity
         /*
         intent.putExtra(CurrentUser.EXTRA_CURRENT_USER, currentUser);
          */
+        intent.putExtra(User.EXTRA_TMP, currentUser);
         startActivity(intent);
     }
 }
