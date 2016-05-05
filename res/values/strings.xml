@@ -153,9 +153,11 @@
     <string name="pseudo_taken">This pseudo is already taken</string>
 
     <!-- find matches activity -->
+    <string name="find_matches_activity_title">Find matches</string>
     <string name="set_filter">Set filter</string>
 
     <!-- set filter activity -->
+    <string name="set_filters_activity_title">Set filters</string>
     <string name="height_fork">Height (~10cm)</string>
     <string name="no_filter">No filter</string>
     <string name="save_filters">Save filters</string>

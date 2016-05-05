@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.grz.sinf1225.uclove1.R;
@@ -62,7 +63,8 @@ public class SetFilterActivity extends AppCompatActivity
         {
             case R.id.top_menu_save_filters:
                 Log.d("TOPMENU", "Save filters selected");
-                saveFilter();
+                if(saveFilter())
+                    finish();
                 return true;
             case R.id.top_menu_item_settings:
                 Log.d("TOPMENU", "Settings selected");
@@ -73,8 +75,54 @@ public class SetFilterActivity extends AppCompatActivity
         return false;
     }
 
-    public void saveFilter()
+    public boolean saveFilter()
     {
         Log.d("TOPMENU", "Save filters");
+
+        EditText pseudoEditText = (EditText) findViewById(R.id.edit_text_pseudo);
+        String pseudoFilter = pseudoEditText.getText().toString();
+
+        EditText firstNameEditText = (EditText) findViewById(R.id.edit_text_first_name);
+        String firstNameFilter = firstNameEditText.getText().toString();
+
+        EditText familyNameEditText = (EditText) findViewById(R.id.edit_text_family_name);
+        String familyNameFilter = familyNameEditText.getText().toString();
+
+        EditText birthDateEditText = (EditText) findViewById(R.id.edit_text_birth_date);
+        String birthDateFilter = birthDateEditText.getText().toString();
+
+        Spinner genderSpinner = (Spinner) findViewById(R.id.spinner_gender);
+        String genderFilter = genderSpinner.getSelectedItem().toString();
+
+        Spinner loveStatusSpinner = (Spinner) findViewById(R.id.spinner_love_status);
+        String loveStatusFilter = loveStatusSpinner.getSelectedItem().toString();
+
+        Spinner interestedInSpinner = (Spinner) findViewById(R.id.spinner_interested_in);
+        String interestedInFilter = interestedInSpinner.getSelectedItem().toString();
+
+        EditText heightEditText = (EditText) findViewById(R.id.edit_text_height);
+        double height;
+        if (heightEditText.getText().toString().equals(""))
+            height = 0.0;
+        else
+            height = Double.parseDouble(heightEditText.getText().toString());
+
+        Spinner smokerSpinner = (Spinner) findViewById(R.id.spinner_smoker);
+        String smokerFilter = smokerSpinner.getSelectedItem().toString();
+
+        EditText nbChildrenEditText = (EditText) findViewById(R.id.edit_text_children_nb);
+        int nbChildren;
+        if (nbChildrenEditText.getText().toString().equals(""))
+            nbChildren = 0;
+        else
+            nbChildren = Integer.parseInt(nbChildrenEditText.getText().toString());
+
+        Spinner countrySpinner = (Spinner) findViewById(R.id.spinner_country);
+        String countryFilter = countrySpinner.getSelectedItem().toString();
+
+        EditText cityEditText = (EditText) findViewById(R.id.edit_text_city);
+        String cityFilter = cityEditText.getText().toString();
+
+        return true;
     }
 }
