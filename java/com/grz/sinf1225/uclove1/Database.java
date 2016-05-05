@@ -24,7 +24,7 @@ public final class Database
         public static final String COL_PSEUDO = "Pseudo", COL_LAST_NAME = "LastName", COL_FIRST_NAME = "FirstName",
                 COL_BIRTH_DATE = "BirthDate", COL_GENDER = "Gender", COL_LOVE_STATUS = "LoveStatus",
                 COL_REGISTRATION_DATE = "RegistrationDate", COL_HEIGHT = "Height", COL_DESCRIPTION = "Description",
-                COL_SMOKER = "Smoker", COL_INTERESTED_IN = "IneterstedIn", COL_PROFILE_PICTURE = "ProfilePicture",
+                COL_SMOKER = "Smoker", COL_INTERESTED_IN = "InterestedIn", COL_PROFILE_PICTURE = "ProfilePicture",
                 COL_CHILDREN_NB = "ChildrenNb", COL_COUNTRY = "Country", COL_CITY = "City", COL_PASSWORD = "Password";
         public static final String COL_LAST_NAME_VISIBILITY = "LastNameVisibility", COL_FIRST_NAME_VISIBILITY = "FirstNameVisibility",
                 COL_BIRTH_DATE_VISIBILITY = "BirthDateVisibility", COL_GENDER_VISIBILITY = "GenderVisibility",
@@ -196,6 +196,7 @@ public final class Database
             ContentValues values = new ContentValues();
             values.put(UserEntries.COL_PSEUDO, newUser.getPseudo());
             values.put(UserEntries.COL_LAST_NAME, newUser.getFamilyName());
+            values.put(UserEntries.COL_FIRST_NAME, newUser.getFirstName());
             values.put(UserEntries.COL_BIRTH_DATE, newUser.getBirthDate());
             values.put(UserEntries.COL_GENDER, newUser.getGender());
             values.put(UserEntries.COL_LOVE_STATUS, newUser.getLoveStatus());
