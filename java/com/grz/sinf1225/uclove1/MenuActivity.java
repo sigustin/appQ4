@@ -46,11 +46,15 @@ public class MenuActivity extends AppCompatActivity
         /*
         currentUser = (CurrentUser) getIntent().getSerializableExtra(CurrentUser.EXTRA_CURRENT_USER);
          */
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+
         String currentPseudo = getIntent().getStringExtra(User.EXTRA_PSEUDO);
         m_currentUser = new User(currentPseudo);
-        Log.d("DEBUG", "User : " +m_currentUser.toString());
-        Log.d("DEBUG", "User : " +m_currentUser.getPseudo());
-        Log.d("DEBUG", "User : " +m_currentUser.getCity());
 
         m_overviewCurrentPseudoList = new ArrayList<OverviewData>();
         m_overviewCurrentPseudoList.add(new OverviewData(m_currentUser.getProfilePicture(), m_currentUser.getPseudo(),

@@ -188,10 +188,14 @@
 
     <!-- edit visibility activity -->
     <string name="edit_visibility_activity_title">Edit the visibility of my informations</string>
-    <string name="profil_picture">Profile picture</string>
+    <string name="profile_picture">Profile picture</string>
 
     <string name="visibility_public">Public</string>
     <string name="visibility_private">Private</string>
     <string name="visibility_friends">Friends</string>
+
+    <!-- choose profile picture activity -->
+    <string name="choose_profile_picture_title">Choose a profile picture</string>
+    <string name="choose_profile_picture">Click a profile picture to select it</string>
 
 </resources>

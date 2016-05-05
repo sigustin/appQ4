@@ -323,6 +323,10 @@ public class EditProfileActivity extends AppCompatActivity
     public boolean changeProfilePicture(View view)
     {
         Log.d("IMAGE", "Change profile picture");
+        Intent intent = new Intent(this, ChooseProfilePictureActivity.class
+        );
+        intent.putExtra(User.EXTRA_PSEUDO, currentUser.getPseudo());
+        startActivity(intent);
         return false;
     }
 

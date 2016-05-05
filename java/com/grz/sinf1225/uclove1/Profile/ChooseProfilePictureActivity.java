@@ -24,7 +24,8 @@ public class ChooseProfilePictureActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_profile_picture);
 
-        currentUser = (User) getIntent().getSerializableExtra(User.EXTRA_TMP);
+        String currentPseudo = getIntent().getStringExtra(User.EXTRA_PSEUDO);
+        currentUser = new User(currentPseudo);
     }
 
     @Override
@@ -58,20 +59,24 @@ public class ChooseProfilePictureActivity extends AppCompatActivity
     public void onChoose1(View view)
     {
         Database.updateProfilePicture(currentUser, R.drawable.profile_pic1);
+        finish();
     }
 
     public void onChoose2(View view)
     {
         Database.updateProfilePicture(currentUser, R.drawable.profile_pic2);
+        finish();
     }
 
     public void onChoose3(View view)
     {
         Database.updateProfilePicture(currentUser, R.drawable.profile_pic3);
+        finish();
     }
 
     public void onChoose4(View view)
     {
         Database.updateProfilePicture(currentUser, R.drawable.profile_pic4);
+        finish();
     }
 }

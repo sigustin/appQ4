@@ -839,7 +839,8 @@ public final class Database
 
     public static void updateProfilePicture(User user, int newValue)
     {
-        updateUser(user.getPseudo(), UserEntries.COL_FIRST_NAME, newValue);
+        Log.d("DEBUG", "Updating profile picture to " +Integer.toString(newValue));
+        updateUser(user.getPseudo(), UserEntries.COL_PROFILE_PICTURE, newValue);
     }
 
     public static void updateChildrenNb(User user, int newValue)
