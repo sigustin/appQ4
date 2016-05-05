@@ -33,8 +33,8 @@
     <!-- settings activity -->
     <string name="settings_activity_title">Pamamètres</string>
 
-    <string name="enable_sounds">Son</string>
-    <string name="enable_notifications">Notifications</string>
+    <string name="enable_sounds">Autoriser l\'application à jouer des sons</string>
+    <string name="enable_notifications">Activer les notifications</string>
     <string name="choose_theme">Thème</string>
     <string name="about">A propos de l\'application</string>
 
@@ -97,5 +97,46 @@
     <string name="not_read_yet">Pas encore lu</string>
     <string name="read_on">Lu le :</string>
     <string name="sent_on">Envoyé le :</string>
+    <string name="at">À :</string>
+    <string name="date_details">Détails du rendez-vous</string>
+    <string name="date_time_or_asked"></string>
+    <string name="date_with">Rendez-vous avec</string>
+    <string name="enter_a_location">Entrez l\'endroit de rendez-vous</string>
+    <string name="enter_friends_pseudo">Entrez le pseudo de votre ami</string>
+    <string name="enter_your_disponibilities">Entrez vos disponibilités pour la semaine à venir</string>
+    <string name="find_matches_activity_title">Trouver des matchs</string>
+    <string name="friday">Vendredi</string>
+    <string name="have_to_be_filled">*Obligatoire</string>
+    <string name="height_fork">Taille (~10cm)</string>
+    <string name="monday">Lundi</string>
+    <string name="must_enter_birth_date">Vous devez spécifier votre date de naissance</string>
+    <string name="must_enter_city">Vous devez spécifier une ville près de laquelle vous vivez</string>
+    <string name="must_enter_country">Vous devez spécifier le pays dans lequel vous vivez</string>
+    <string name="must_enter_family_name">Vous devez spécifier un nom de famille</string>
+    <string name="must_enter_first_name">Vous devez spécifier un prénom</string>
+    <string name="must_enter_pseudo">Vous devez spécifier un pseudo</string>
+    <string name="new_date_to_set">Encore à régler</string>
+    <string name="no_filter">Pas de filtre</string>
+    <string name="on">Le</string>
+    <string name="pseudo_taken">Ce pseudo est déjà pris</string>
+    <string name="saturday">Samedi</string>
+    <string name="save_date">Terminé</string>
+    <string name="save_filters">Enregistrer les filtres</string>
+    <string name="set_date_activity_title_new">Nouveau rendez-vous</string>
+    <string name="set_date_activity_title_part">Rendez-vous avec</string>
+    <string name="set_filter">Régler le filtre</string>
+    <string name="set_filters_activity_title">Régler les filtres</string>
+    <string name="star_birth_date">Date de naissance*</string>
+    <string name="star_city">Ville*</string>
+    <string name="star_country">Pays*</string>
+    <string name="star_family_name">Nom de famille*</string>
+    <string name="star_first_name">Prénom*</string>
+    <string name="star_gender">Genre*</string>
+    <string name="star_love_status">Situation amoureuse*</string>
+    <string name="star_pseudo">Pseudo*</string>
+    <string name="sunday">Dimanche</string>
+    <string name="thursday">Jeudi</string>
+    <string name="tuesday">Mardi</string>
+    <string name="wednesday">Mercredi</string>
 
 </resources>
