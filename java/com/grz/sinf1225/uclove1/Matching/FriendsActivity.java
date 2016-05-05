@@ -53,6 +53,42 @@ public class FriendsActivity extends AppCompatActivity
         /*
         currentUser = (CurrentUser) getIntent().getSerializableExtra(CurrentUser.EXTRA_CURRENT_USER);
          */
+        /*String currentPseudo = getIntent().getStringExtra(User.EXTRA_PSEUDO);
+        currentUser = new User(currentPseudo);
+
+        friendsAndRequestList = Database.getFriendsAndRequests(currentPseudo);
+        Log.d("DEBUG", "Number of friends : " +Integer.toString(friendsAndRequestList.size()));
+
+        friendsOverviewDataList = new ArrayList<OverviewData>();
+        for (int i=0; i<friendsAndRequestList.size(); i++)
+        {
+            User currentFriend = friendsAndRequestList.get(i);
+            friendsOverviewDataList.add(new OverviewData(currentFriend.getProfilePicture(),
+                    currentFriend.getPseudo(),
+                    Integer.toString(currentUser.getAge()) +" "+ getResources().getString(R.string.years_old),
+                    currentFriend.getCity(),
+                    Database.getRelationshipType(currentPseudo, currentFriend.getPseudo())));
+        }
+
+
+        m_recyclerView = (RecyclerView) findViewById(R.id.profile_overviews_recycler_view);
+        m_recyclerViewLayoutManager = new LinearLayoutManager(this);
+        m_recyclerView.setLayoutManager(m_recyclerViewLayoutManager);
+        m_recyclerViewAdapter = new ProfileOverviewAdapter(friendsOverviewDataList, new ProfileOverviewAdapter.OnOverviewClickedListener() {
+            public void onOverviewClicked(String pseudo)
+            {
+                Log.d("OVERVIEWLISTENER", "RelativeLayoutClicked " + pseudo);
+                onFriendOverviewClicked(pseudo);
+            }
+        }, this);
+        m_recyclerView.setAdapter(m_recyclerViewAdapter);*/
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+
         String currentPseudo = getIntent().getStringExtra(User.EXTRA_PSEUDO);
         currentUser = new User(currentPseudo);
 
