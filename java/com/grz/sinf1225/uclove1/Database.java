@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
 import android.util.Log;
 
+import com.grz.sinf1225.uclove1.Chat.ConversationOverviewData;
 import com.grz.sinf1225.uclove1.Dating.Meeting;
 import com.grz.sinf1225.uclove1.Matching.Filter;
 
@@ -1686,5 +1687,55 @@ public final class Database
         return pictures;
     }
 
-    /*public static void updateDisponibility(User user, boolean[] tmp) {}*/
+
+    //Messages
+    public static List<String> getAllInterlocutors(String pseudo)
+    {
+        readDB = helper.getReadableDatabase();
+        Cursor cursor = readDB.query(MessageEntries.TABLE_NAME,
+                new String[] {MessageEntries.COL_SENDER, MessageEntries.COL_RECEIVER},
+                MessageEntries.COL_SENDER+ "=? Or " +MessageEntries.COL_RECEIVER+ "=?",
+                new String[] {pseudo, pseudo},
+                null, null, null, null);
+
+        List<String> pseudoList = new ArrayList<String>();
+
+        if (cursor.moveToFirst())
+        {
+            do
+            {
+                String current;
+                if ( !(cursor.getString(cursor.getColumnIndexOrThrow(MessageEntries.COL_SENDER)).equals(pseudo)) ) {
+                    Log.d("DEBUG", "Current : " +pseudo+ " Returning user 1 " +cursor.getString(cursor.getColumnIndexOrThrow(MessageEntries.COL_SENDER)));
+                    current = cursor.getString(cursor.getColumnIndexOrThrow(MessageEntries.COL_SENDER));
+                }
+                else {
+                    Log.d("DEBUG", "Returning user 2");
+                    current = cursor.getString(cursor.getColumnIndexOrThrow(MessageEntries.COL_RECEIVER));
+                }
+                pseudoList.add(current);
+            } while(cursor.moveToNext());
+        }
+        return pseudoList;
+    }
+
+    public static ConversationOverviewData getConversationOverviewInformation(String currentUserPseudo, String interlocutorPseudo)
+    {
+        readDB = helper.getReadableDatabase();
+        Cursor cursor = readDB.query(MessageEntries.TABLE_NAME,
+                new String[] {MessageEntries.COL_MSG, MessageEntries.COL_RECEPTION_DATE},
+                "("+ MessageEntries.COL_SENDER+ "=? AND " +MessageEntries.COL_RECEIVER+ "=?) OR ("+ MessageEntries.COL_SENDER +"=? AND "+ MessageEntries.COL_RECEIVER +"=?)",
+                new String[] {currentUserPseudo, interlocutorPseudo, interlocutorPseudo, currentUserPseudo},
+                null, null, null, null);
+
+        if (cursor.moveToFirst())
+        {
+            cursor.moveToLast();
+            int profilePictureRes = Database.getProfilePicture(interlocutorPseudo);
+            boolean isLastMessageRead = (cursor.getString(cursor.getColumnIndexOrThrow(MessageEntries.COL_RECEPTION_DATE)) != null);
+            return new ConversationOverviewData(profilePictureRes, interlocutorPseudo, cursor.getString(cursor.getColumnIndexOrThrow(MessageEntries.COL_RECEPTION_DATE)), isLastMessageRead);
+        }
+        return null;
+    }
+
 }

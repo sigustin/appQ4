@@ -2,6 +2,7 @@ package com.grz.sinf1225.uclove1.Chat;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.grz.sinf1225.uclove1.Database;
 import com.grz.sinf1225.uclove1.R;
 import com.grz.sinf1225.uclove1.SettingsActivity;
 import com.grz.sinf1225.uclove1.User;
@@ -33,7 +35,9 @@ public class ConversationsActivity extends AppCompatActivity
     /*
     CurrentUser currentUser;
      */
-    User currentUser;
+    private User currentUser;
+    private List<String> listInterlocutors;
+    private List<ConversationOverviewData> conversationOverviewDatas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -57,16 +61,23 @@ public class ConversationsActivity extends AppCompatActivity
         String currentPseudo = getIntent().getStringExtra(User.EXTRA_PSEUDO);
         currentUser = new User(currentPseudo);
 
-        m_recyclerView = (RecyclerView) findViewById(R.id.conversation_overviews_recycler_view);
-        m_recyclerViewLayoutManager = new LinearLayoutManager(this);
-        m_recyclerView.setLayoutManager(m_recyclerViewLayoutManager);
-        m_recyclerViewAdapter = new ConversationOverviewAdapter(tmpConversationsData, new ConversationOverviewAdapter.onConversationOverviewClickedListener() {
-            public  void onOverviewClicked(String pseudo)
-            {
-                onConversationOverviewClicked(pseudo);
-            }
-        }, this);
-        m_recyclerView.setAdapter(m_recyclerViewAdapter);
+        listInterlocutors = Database.getAllInterlocutors(currentPseudo);
+        if (listInterlocutors.size() > 0)
+        {
+            conversationOverviewDatas = new ArrayList<ConversationOverviewData>();
+            for (int i=0; i<listInterlocutors.size(); i++)
+                conversationOverviewDatas.add(Database.getConversationOverviewInformation(currentPseudo, listInterlocutors.get(i)));
+
+            m_recyclerView = (RecyclerView) findViewById(R.id.conversation_overviews_recycler_view);
+            m_recyclerViewLayoutManager = new LinearLayoutManager(this);
+            m_recyclerView.setLayoutManager(m_recyclerViewLayoutManager);
+            m_recyclerViewAdapter = new ConversationOverviewAdapter(conversationOverviewDatas, new ConversationOverviewAdapter.onConversationOverviewClickedListener() {
+                public void onOverviewClicked(String pseudo) {
+                    onConversationOverviewClicked(pseudo);
+                }
+            }, this);
+            m_recyclerView.setAdapter(m_recyclerViewAdapter);
+        }
     }
 
     @Override
