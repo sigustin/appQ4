@@ -76,12 +76,12 @@ public class MessageViewAdapter extends RecyclerView.Adapter<MessageViewAdapter.
         {
             holder.messageBox.setBackgroundResource(R.color.colorPrimaryLight);
             holder.messageBox.setGravity(Gravity.START);
-            if (m_data.get(position).m_readingDate != null)
-                holder.readEmblem.setText(m_context.getResources().getString(R.string.message_read));
         }
         else
         {
             holder.messageBox.setBackgroundResource(R.color.white);
+            if (m_data.get(position).m_readingDate != null)
+                holder.readEmblem.setText(m_context.getResources().getString(R.string.message_read));
         }
     }
 
