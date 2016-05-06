@@ -1786,7 +1786,8 @@ public final class Database
             do
             {
                 String receptionDate;
-                if (cursor.getString(cursor.getColumnIndexOrThrow(MessageEntries.COL_RECEPTION_DATE)) == null)
+                if (cursor.getString(cursor.getColumnIndexOrThrow(MessageEntries.COL_RECEPTION_DATE)) == null
+                        && cursor.getString(cursor.getColumnIndexOrThrow(MessageEntries.COL_RECEIVER)).equals(currentPseudo))
                     receptionDate = String.format("%1$tY/%1$tm/%1$td %1$tI:%1$tM:%1$tS", Calendar.getInstance());
                 else
                     receptionDate = cursor.getString(cursor.getColumnIndexOrThrow(MessageEntries.COL_RECEPTION_DATE));
