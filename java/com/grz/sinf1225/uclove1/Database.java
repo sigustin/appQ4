@@ -1715,6 +1715,7 @@ public final class Database
                     Log.d("DEBUG", "Returning user 2");
                     current = cursor.getString(cursor.getColumnIndexOrThrow(MessageEntries.COL_RECEIVER));
                 }
+                if (!pseudoList.contains(current))
                 pseudoList.add(current);
             } while(cursor.moveToNext());
         }
@@ -1760,7 +1761,7 @@ public final class Database
         values.put(MessageEntries.COL_SENDER, senderPseudo);
         values.put(MessageEntries.COL_RECEIVER, receiverPseudo);
         values.put(MessageEntries.COL_MSG, message);
-        values.put(MessageEntries.COL_SENDING_DATE, String.format("%1$td/%1$tm/%1$tY %1$tI:%1$tM:%1$tS", Calendar.getInstance()));
+        values.put(MessageEntries.COL_SENDING_DATE, String.format("%1$tY/%1$tm/%1$td %1$tI:%1$tM:%1$tS", Calendar.getInstance()));
 
         Log.d("DB", "Adding message from " +senderPseudo+ " to " +receiverPseudo+ " : " +message);
 
@@ -1776,7 +1777,7 @@ public final class Database
                 new String[] {MessageEntries.COL_SENDER, MessageEntries.COL_RECEIVER, MessageEntries.COL_SENDING_DATE, MessageEntries.COL_RECEPTION_DATE, MessageEntries.COL_MSG},
                 "("+ MessageEntries.COL_SENDER+ "=? AND " +MessageEntries.COL_RECEIVER+ "=?) OR ("+ MessageEntries.COL_SENDER +"=? AND "+ MessageEntries.COL_RECEIVER +"=?)",
                 new String[] {currentPseudo, interlocutorPseudo, interlocutorPseudo, currentPseudo},
-                null, null, null, null);
+                null, null, MessageEntries.COL_SENDING_DATE +" DESC", null);
 
         List<MessageData> msgList = new ArrayList<MessageData>();
 
@@ -1784,10 +1785,15 @@ public final class Database
         {
             do
             {
+                String receptionDate;
+                if (cursor.getString(cursor.getColumnIndexOrThrow(MessageEntries.COL_RECEPTION_DATE)) == null)
+                    receptionDate = String.format("%1$tY/%1$tm/%1$td %1$tI:%1$tM:%1$tS", Calendar.getInstance());
+                else
+                    receptionDate = cursor.getString(cursor.getColumnIndexOrThrow(MessageEntries.COL_RECEPTION_DATE));
                 MessageData current = new MessageData(cursor.getString(cursor.getColumnIndexOrThrow(MessageEntries.COL_SENDER)),
                         cursor.getString(cursor.getColumnIndexOrThrow(MessageEntries.COL_MSG)),
-                        String.format("%1$td/%1$tm/%1$tY", Calendar.getInstance()),
-                        null);
+                        cursor.getString(cursor.getColumnIndexOrThrow(MessageEntries.COL_SENDING_DATE)),
+                        receptionDate);
                 msgList.add(current);
             } while(cursor.moveToNext());
         }

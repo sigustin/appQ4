@@ -39,7 +39,7 @@ public class ChatActivity extends AppCompatActivity
     private CurrentUser currentUser;
      */
     private User currentUser;
-    private String m_interlocutorPseudo;
+    private User m_interlocutorUser;
     private List<MessageData> messageList;
 
     @Override
@@ -62,10 +62,10 @@ public class ChatActivity extends AppCompatActivity
         String currentPseudo = getIntent().getStringExtra(User.EXTRA_PSEUDO);
         currentUser = new User(currentPseudo);
 
-        m_interlocutorPseudo = (String) getIntent().getStringExtra(User.EXTRA_PSEUDO);
-        setTitle(m_interlocutorPseudo);
+        m_interlocutorUser = (User) getIntent().getSerializableExtra(User.EXTRA_USER);
+        setTitle(m_interlocutorUser.getPseudo());
 
-        messageList = Database.getAllMessages(currentPseudo, m_interlocutorPseudo);
+        messageList = Database.getAllMessages(currentPseudo, m_interlocutorUser.getPseudo());
 
         tmpMessages = new ArrayList<MessageData>();
         tmpMessages.add(new MessageData(tmpPseudo1, tmpMsg1, tmpSent1, tmpRead1));
@@ -81,7 +81,7 @@ public class ChatActivity extends AppCompatActivity
             public void onMessageClicked(MessageData data) {
                 showDetailsMessage(data);
             }
-        }, this, m_interlocutorPseudo);
+        }, this, m_interlocutorUser.getPseudo());
         m_recyclerView.setAdapter(m_recyclerViewAdapter);
     }
 
@@ -129,6 +129,6 @@ public class ChatActivity extends AppCompatActivity
         msgEditText.getText().clear();
         Log.d("BUTTON", "Send button pressed : " + msgToSend);
 
-        Database.sendMessage(currentUser.getPseudo(), m_interlocutorPseudo, msgToSend);
+        Database.sendMessage(currentUser.getPseudo(), m_interlocutorUser.getPseudo(), msgToSend);
     }
 }
