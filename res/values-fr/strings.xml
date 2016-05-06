@@ -168,5 +168,6 @@
     <string name="visibility_public">Public</string>
     <string name="years_old">ans</string>
     <string name="yes">Oui</string>
+    <string name="choose_as_other_picture">Choisir en tant que photo de profil</string>
 
 </resources>
