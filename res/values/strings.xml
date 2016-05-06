@@ -84,6 +84,7 @@
 
     <!-- dates activity -->
     <string name="dates_activity_title">My dates</string>
+    <string name="no_date_with_no_friends">You can\'t set a date with someone that\'s not your friend</string>
 
     <!-- profile activity -->
     <string name="profile_activity_title">Profile</string>

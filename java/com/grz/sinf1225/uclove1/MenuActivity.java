@@ -144,7 +144,7 @@ public class MenuActivity extends AppCompatActivity
         intent.putExtra(CurrentUser.EXTRA_CURRENT_USER, currentUser);
          */
         intent.putExtra(User.EXTRA_PSEUDO, m_currentUser.getPseudo());
-        intent.putExtra(User.EXTRA_USER, m_currentUser);
+        intent.putExtra(User.EXTRA_USER, m_currentUser);//For profile activity
         startActivity(intent);
     }
 }

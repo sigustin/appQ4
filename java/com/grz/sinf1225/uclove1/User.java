@@ -1,5 +1,7 @@
 package com.grz.sinf1225.uclove1;
 
+import android.content.Intent;
+
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.List;
@@ -35,11 +37,10 @@ public class User implements Serializable
     private boolean smoker;
     private String interestedIn;
     private int profilPicture;
-    private List<byte[]> picture = new ArrayList<byte[]>();
+    private List<Integer> picture;
     private int childrenNb;
     private String country;
     private String city;
-    private boolean[] disponibility = new boolean[7];
     private int familyNameVisibility;
     private int firstNameVisibility;
     private int birthDateVisibility;
@@ -51,8 +52,8 @@ public class User implements Serializable
     private int cityVisibility;
 
     public User(String pseudo, String firstName, String familyName, String birthDate, String gender, String loveStatus, String registrationDate,
-                double height, String description, boolean smoker, String interestedIn, int profilePicture, List<byte[]> pictures, int childrenNb,
-                String country, String city, boolean[] disponibility, int familyNameVisibility, int firstNameVisibility, int birthDateVisibility,
+                double height, String description, boolean smoker, String interestedIn, int profilePicture, List<Integer> pictures, int childrenNb,
+                String country, String city, int familyNameVisibility, int firstNameVisibility, int birthDateVisibility,
                 int genderVisibility, int loveStatusVisibility, int heightVisibility, int smokerVisibility, int childrenNbVisibility, int cityVisibility)
     {
         this.pseudo = pseudo;
@@ -71,7 +72,6 @@ public class User implements Serializable
         this.childrenNb = childrenNb;
         this.country = country;
         this.city = city;
-        this.disponibility = disponibility;
         this.familyNameVisibility = familyNameVisibility;
         this.firstNameVisibility = firstNameVisibility;
         this.birthDateVisibility = birthDateVisibility;
@@ -97,11 +97,10 @@ public class User implements Serializable
         this.smoker = Database.getSmoker(pseudo);
         this.interestedIn = Database.getInterestedIn(pseudo);
         this.profilPicture = Database.getProfilePicture(pseudo);
-        this.picture = Database.getPictures(pseudo);
+        this.picture = Database.getPicturesRes(pseudo);
         this.childrenNb = Database.getChildrenNb(pseudo);
         this.country = Database.getCountry(pseudo);
         this.city = Database.getCity(pseudo);
-        this.disponibility = Database.getDisponibilityDates(pseudo, MainActivity.getContext());
         this.familyNameVisibility = Database.getFamilyNameVisibility(pseudo);
         this.firstNameVisibility = Database.getFirstNameVisibility(pseudo);
         this.birthDateVisibility = Database.getBirthDateVisibility(pseudo);
@@ -185,7 +184,7 @@ public class User implements Serializable
         return this.profilPicture;
     }
 
-    public List<byte[]> getPicture()
+    public List<Integer> getPicture()
     {
         return this.picture;
     }
@@ -203,11 +202,6 @@ public class User implements Serializable
     public String getCity()
     {
         return this.city;
-    }
-
-    public boolean[] getDisponibility()
-    {
-        return this.disponibility;
     }
 
     public int getFamilyNameVisibility()
@@ -339,12 +333,6 @@ public class User implements Serializable
     public void setPassword(String password)
     {
         Database.updatePassword(this, password);
-    }
-
-    public void setDisponibility(boolean[] disponibility)
-    {
-        this.disponibility = disponibility;
-        Database.updateDisponibility(this, disponibility);
     }
 
     public void setFamilyNameVisibility(int familyNameVisibility)

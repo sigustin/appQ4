@@ -17,6 +17,7 @@ import com.grz.sinf1225.uclove1.Chat.MessageData;
 import com.grz.sinf1225.uclove1.Chat.MessageViewAdapter;
 import com.grz.sinf1225.uclove1.R;
 import com.grz.sinf1225.uclove1.SettingsActivity;
+import com.grz.sinf1225.uclove1.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +50,7 @@ public class ChatActivity extends AppCompatActivity
         m_interlocutorPseudo = (String) getIntent().getStringExtra(User.EXTRA_PSEUDO);
          */
 
-        m_interlocutorPseudo = (String) getIntent().getStringExtra(ConversationsActivity.EXTRA_PSEUDO);
+        m_interlocutorPseudo = (String) getIntent().getStringExtra(User.EXTRA_PSEUDO);
         setTitle(m_interlocutorPseudo);
 
         tmpMessages = new ArrayList<MessageData>();

@@ -1686,6 +1686,5 @@ public final class Database
         return pictures;
     }
 
-    public static void updateDisponibility(User user, boolean[] tmp) {}
-    public static List<byte[]> getPictures(String pseudo) {return null;}
+    /*public static void updateDisponibility(User user, boolean[] tmp) {}*/
 }

@@ -277,7 +277,7 @@ public class EditProfileActivity extends AppCompatActivity
             if (m_isRegistration)
             {
                 User newUser = new User(pseudo, firstName, familyName, birthDate, gender, loveStatus,
-                        String.format("%1$td/%1$tm/%1$tY", Calendar.getInstance()), height, description, smoker, interestedIn, 0, null, nbChildren, country, city, null,
+                        String.format("%1$td/%1$tm/%1$tY", Calendar.getInstance()), height, description, smoker, interestedIn, 0, null, nbChildren, country, city,
                         User.DEFAULT_VISIBILITY, User.DEFAULT_VISIBILITY,User.DEFAULT_VISIBILITY,User.DEFAULT_VISIBILITY,
                         User.DEFAULT_VISIBILITY,User.DEFAULT_VISIBILITY,User.DEFAULT_VISIBILITY,User.DEFAULT_VISIBILITY,User.DEFAULT_VISIBILITY);
                 Database.addNewUser(newUser, password);

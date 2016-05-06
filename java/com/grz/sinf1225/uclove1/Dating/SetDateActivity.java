@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.grz.sinf1225.uclove1.Database;
 import com.grz.sinf1225.uclove1.Matching.OverviewData;
@@ -176,71 +177,78 @@ public class SetDateActivity extends AppCompatActivity
         if (m_newDate)
         {
             String enteredPseudo = m_enterPseudo.getText().toString();
-
-            boolean[] disponibilities = new boolean[7];
-            CheckBox currentCheckBox;
-            currentCheckBox = (CheckBox) findViewById(R.id.monday_checkbox);
-            disponibilities[0] = currentCheckBox.isChecked();
-            currentCheckBox = (CheckBox) findViewById(R.id.tuesday_checkbox);
-            disponibilities[1] = currentCheckBox.isChecked();
-            currentCheckBox = (CheckBox) findViewById(R.id.wednesday_checkbox);
-            disponibilities[2] = currentCheckBox.isChecked();
-            currentCheckBox = (CheckBox) findViewById(R.id.thursday_checkbox);
-            disponibilities[3] = currentCheckBox.isChecked();
-            currentCheckBox = (CheckBox) findViewById(R.id.friday_checkbox);
-            disponibilities[4] = currentCheckBox.isChecked();
-            currentCheckBox = (CheckBox) findViewById(R.id.saturday_checkbox);
-            disponibilities[5] = currentCheckBox.isChecked();
-            currentCheckBox = (CheckBox) findViewById(R.id.sunday_checkbox);
-            disponibilities[6] = currentCheckBox.isChecked();
-
-            EditText msgEditText = (EditText) findViewById(R.id.edit_text_location);
-            String location = msgEditText.getText().toString();
-
-            Database.removeDisponibilities(currentUser.getPseudo());
-
-            for (int i=0; i<7; i++)
+            boolean notFriend = false;
+            if (Database.getRelationshipType(currentUser.getPseudo(), enteredPseudo) != User.RelationshipType.FRIENDS)
             {
-                if (disponibilities[i])
-                {
-                    switch (i)
-                    {
-                        case 0:
-                            Database.addDisponibilityDate(currentUser.getPseudo(), getResources().getString(R.string.monday));
-                            break;
-                        case 1:
-                            Database.addDisponibilityDate(currentUser.getPseudo(), getResources().getString(R.string.tuesday));
-                            break;
-                        case 2:
-                            Database.addDisponibilityDate(currentUser.getPseudo(), getResources().getString(R.string.wednesday));
-                            break;
-                        case 3:
-                            Database.addDisponibilityDate(currentUser.getPseudo(), getResources().getString(R.string.thursday));
-                            break;
-                        case 4:
-                            Database.addDisponibilityDate(currentUser.getPseudo(), getResources().getString(R.string.friday));
-                            break;
-                        case 5:
-                            Database.addDisponibilityDate(currentUser.getPseudo(), getResources().getString(R.string.saturday));
-                            break;
-                        case 6:
-                            Database.addDisponibilityDate(currentUser.getPseudo(), getResources().getString(R.string.sunday));
-                            break;
-                    }
-                }
+                Toast badInput = Toast.makeText(this, R.string.no_date_with_no_friends, Toast.LENGTH_LONG);
+                badInput.show();
+                notFriend = true;
             }
 
-            Meeting meeting = new Meeting(currentUser.getPseudo(), enteredPseudo, location);
-            meeting.save();
+            if (!notFriend)
+            {
+                boolean[] disponibilities = new boolean[7];
+                CheckBox currentCheckBox;
+                currentCheckBox = (CheckBox) findViewById(R.id.monday_checkbox);
+                disponibilities[0] = currentCheckBox.isChecked();
+                currentCheckBox = (CheckBox) findViewById(R.id.tuesday_checkbox);
+                disponibilities[1] = currentCheckBox.isChecked();
+                currentCheckBox = (CheckBox) findViewById(R.id.wednesday_checkbox);
+                disponibilities[2] = currentCheckBox.isChecked();
+                currentCheckBox = (CheckBox) findViewById(R.id.thursday_checkbox);
+                disponibilities[3] = currentCheckBox.isChecked();
+                currentCheckBox = (CheckBox) findViewById(R.id.friday_checkbox);
+                disponibilities[4] = currentCheckBox.isChecked();
+                currentCheckBox = (CheckBox) findViewById(R.id.saturday_checkbox);
+                disponibilities[5] = currentCheckBox.isChecked();
+                currentCheckBox = (CheckBox) findViewById(R.id.sunday_checkbox);
+                disponibilities[6] = currentCheckBox.isChecked();
 
-            String tmp = "";
-            for (int i = 0; i < 7; i++)
-                tmp += disponibilities[i] + " ";
-            if (m_newDate)
-                Log.d("BUTTON", "Save date button clicked " + enteredPseudo + " " + location + " " + tmp);
-            else
-                Log.d("BUTTON", "Save date button clicked " + location + " " + tmp);
-            finish();
+                EditText msgEditText = (EditText) findViewById(R.id.edit_text_location);
+                String location = msgEditText.getText().toString();
+
+                Database.removeDisponibilities(currentUser.getPseudo());
+
+                for (int i = 0; i < 7; i++) {
+                    if (disponibilities[i]) {
+                        switch (i) {
+                            case 0:
+                                Database.addDisponibilityDate(currentUser.getPseudo(), getResources().getString(R.string.monday));
+                                break;
+                            case 1:
+                                Database.addDisponibilityDate(currentUser.getPseudo(), getResources().getString(R.string.tuesday));
+                                break;
+                            case 2:
+                                Database.addDisponibilityDate(currentUser.getPseudo(), getResources().getString(R.string.wednesday));
+                                break;
+                            case 3:
+                                Database.addDisponibilityDate(currentUser.getPseudo(), getResources().getString(R.string.thursday));
+                                break;
+                            case 4:
+                                Database.addDisponibilityDate(currentUser.getPseudo(), getResources().getString(R.string.friday));
+                                break;
+                            case 5:
+                                Database.addDisponibilityDate(currentUser.getPseudo(), getResources().getString(R.string.saturday));
+                                break;
+                            case 6:
+                                Database.addDisponibilityDate(currentUser.getPseudo(), getResources().getString(R.string.sunday));
+                                break;
+                        }
+                    }
+                }
+
+                Meeting meeting = new Meeting(currentUser.getPseudo(), enteredPseudo, location);
+                meeting.save();
+
+                String tmp = "";
+                for (int i = 0; i < 7; i++)
+                    tmp += disponibilities[i] + " ";
+                if (m_newDate)
+                    Log.d("BUTTON", "Save date button clicked " + enteredPseudo + " " + location + " " + tmp);
+                else
+                    Log.d("BUTTON", "Save date button clicked " + location + " " + tmp);
+                finish();
+            }
         }
         else
         {

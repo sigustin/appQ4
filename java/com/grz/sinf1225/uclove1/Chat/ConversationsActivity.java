@@ -12,6 +12,7 @@ import android.view.View;
 
 import com.grz.sinf1225.uclove1.R;
 import com.grz.sinf1225.uclove1.SettingsActivity;
+import com.grz.sinf1225.uclove1.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,21 +27,25 @@ public class ConversationsActivity extends AppCompatActivity
     private final String tmpPseudo2 = "ADEL.E", tmpLastMessage2 = "Hey! I luv u";
     private final boolean tmpLastMessageRead2 = true;
 
-    public final static String EXTRA_PSEUDO = "UCLove.PSEUDO";
-
-
     private RecyclerView m_recyclerView;
     private RecyclerView.Adapter m_recyclerViewAdapter;
     private RecyclerView.LayoutManager m_recyclerViewLayoutManager;
     /*
     CurrentUser currentUser;
      */
+    User currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_conversations);
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
 
         tmpConversationsData = new ArrayList<ConversationOverviewData>();
         tmpConversationsData.add(new ConversationOverviewData(tmpProfilePictureRes1, tmpPseudo1, tmpLastMessage1, tmpLastMessageRead1));
@@ -49,6 +54,8 @@ public class ConversationsActivity extends AppCompatActivity
         /*
         currentUser = (CurrentUser) getIntent().getSerializableExtra(CurrentUser.EXTRA_CURRENT_USER);
          */
+        String currentPseudo = getIntent().getStringExtra(User.EXTRA_PSEUDO);
+        currentUser = new User(currentPseudo);
 
         m_recyclerView = (RecyclerView) findViewById(R.id.conversation_overviews_recycler_view);
         m_recyclerViewLayoutManager = new LinearLayoutManager(this);
@@ -97,7 +104,8 @@ public class ConversationsActivity extends AppCompatActivity
         intent.putExtra(CurrentUser.EXTRA_CURRENT_USER, currentUser);
         intent.putExtra(User.EXTRA_PSEUDO, pseudo);
          */
-        intent.putExtra(EXTRA_PSEUDO, pseudo);//tmp
+        intent.putExtra(User.EXTRA_PSEUDO, currentUser.getPseudo());
+        intent.putExtra(User.EXTRA_USER, new User(pseudo));
         startActivity(intent);
     }
 }
