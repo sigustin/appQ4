@@ -2,6 +2,7 @@ package com.grz.sinf1225.uclove1.Chat;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,6 +16,7 @@ import android.widget.EditText;
 import com.grz.sinf1225.uclove1.Chat.ConversationsActivity;
 import com.grz.sinf1225.uclove1.Chat.MessageData;
 import com.grz.sinf1225.uclove1.Chat.MessageViewAdapter;
+import com.grz.sinf1225.uclove1.Database;
 import com.grz.sinf1225.uclove1.R;
 import com.grz.sinf1225.uclove1.SettingsActivity;
 import com.grz.sinf1225.uclove1.User;
@@ -32,12 +34,13 @@ public class ChatActivity extends AppCompatActivity
 
     private RecyclerView m_recyclerView;
     private RecyclerView.Adapter m_recyclerViewAdapter;
-    private RecyclerView.LayoutManager m_recyclerViewLayoutManager;
 
     /*
     private CurrentUser currentUser;
      */
+    private User currentUser;
     private String m_interlocutorPseudo;
+    private List<MessageData> messageList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -49,9 +52,20 @@ public class ChatActivity extends AppCompatActivity
         currentUser = (CurrentUser) getIntent().getSerializableExtra(CurrentUser.EXTRA_CURRENT_USER);
         m_interlocutorPseudo = (String) getIntent().getStringExtra(User.EXTRA_PSEUDO);
          */
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+
+        String currentPseudo = getIntent().getStringExtra(User.EXTRA_PSEUDO);
+        currentUser = new User(currentPseudo);
 
         m_interlocutorPseudo = (String) getIntent().getStringExtra(User.EXTRA_PSEUDO);
         setTitle(m_interlocutorPseudo);
+
+        messageList = Database.getAllMessages(currentPseudo, m_interlocutorPseudo);
 
         tmpMessages = new ArrayList<MessageData>();
         tmpMessages.add(new MessageData(tmpPseudo1, tmpMsg1, tmpSent1, tmpRead1));
@@ -59,9 +73,10 @@ public class ChatActivity extends AppCompatActivity
         tmpMessages.add(new MessageData(tmpPseudo2, tmpMsg3, tmpSent3, null));
 
         m_recyclerView = (RecyclerView) findViewById(R.id.messages_recycler_view);
-        m_recyclerViewLayoutManager = new LinearLayoutManager(this);
-        m_recyclerView.setLayoutManager(m_recyclerViewLayoutManager);
-        m_recyclerViewAdapter = new MessageViewAdapter(tmpMessages, new MessageViewAdapter.onMessageClickedListener() {
+        LinearLayoutManager recyclerViewLayoutManager = new LinearLayoutManager(this);
+        recyclerViewLayoutManager.setReverseLayout(true);
+        m_recyclerView.setLayoutManager(recyclerViewLayoutManager);
+        m_recyclerViewAdapter = new MessageViewAdapter(messageList, new MessageViewAdapter.onMessageClickedListener() {
             @Override
             public void onMessageClicked(MessageData data) {
                 showDetailsMessage(data);
@@ -113,5 +128,7 @@ public class ChatActivity extends AppCompatActivity
         String msgToSend = msgEditText.getText().toString();
         msgEditText.getText().clear();
         Log.d("BUTTON", "Send button pressed : " + msgToSend);
+
+        Database.sendMessage(currentUser.getPseudo(), m_interlocutorPseudo, msgToSend);
     }
 }

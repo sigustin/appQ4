@@ -58,6 +58,9 @@
         <activity
             android:name=".Profile.ChooseProfilePictureActivity"
             android:label="@string/choose_profile_picture_title" />
+        <activity
+            android:name=".Chat.NewMessageActivity"
+            android:label="@string/new_message_activity_title" />
     </application>
 
 </manifest>

@@ -105,6 +105,9 @@ public class ConversationsActivity extends AppCompatActivity
     public void onNewConversationOrMessageButtonClicked(View view)
     {
         Log.d("FAB", "New message button clicked");
+        Intent intent = new Intent(this, NewMessageActivity.class);
+        intent.putExtra(User.EXTRA_PSEUDO, currentUser.getPseudo());
+        startActivity(intent);
     }
 
     public void onConversationOverviewClicked(String pseudo)

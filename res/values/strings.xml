@@ -202,4 +202,11 @@
     <string name="choose_profile_picture">Touch a picture to add or remove it from your pictures</string>
     <string name="choose_as_other_picture">Choose as profile picture</string>
 
+    <!-- new message activity -->
+    <string name="who_start_conversation_with">Who do you want to start a conversation with?</string>
+    <string name="type_friend_pseudo">Type your friend\'s pseudo</string>
+    <string name="done">Done</string>
+    <string name="no_message_to_no_friend">You can\'t send a message to </string>
+    <string name="new_message_activity_title">Start a new conversation</string>
+
 </resources>

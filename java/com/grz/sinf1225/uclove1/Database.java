@@ -11,6 +11,7 @@ import android.provider.BaseColumns;
 import android.util.Log;
 
 import com.grz.sinf1225.uclove1.Chat.ConversationOverviewData;
+import com.grz.sinf1225.uclove1.Chat.MessageData;
 import com.grz.sinf1225.uclove1.Dating.Meeting;
 import com.grz.sinf1225.uclove1.Matching.Filter;
 
@@ -1702,6 +1703,7 @@ public final class Database
 
         if (cursor.moveToFirst())
         {
+            Log.d("DB", "Found interlocutors");
             do
             {
                 String current;
@@ -1736,6 +1738,60 @@ public final class Database
             return new ConversationOverviewData(profilePictureRes, interlocutorPseudo, cursor.getString(cursor.getColumnIndexOrThrow(MessageEntries.COL_RECEPTION_DATE)), isLastMessageRead);
         }
         return null;
+    }
+
+    public static boolean haveAConversation(String pseudo1, String pseudo2)
+    {
+        readDB = helper.getReadableDatabase();
+        Cursor cursor = readDB.query(MessageEntries.TABLE_NAME,
+                new String[] {MessageEntries.COL_SENDER},
+                "("+ MessageEntries.COL_SENDER+ "=? AND " +MessageEntries.COL_RECEIVER+ "=?) OR ("+ MessageEntries.COL_SENDER +"=? AND "+ MessageEntries.COL_RECEIVER +"=?)",
+                new String[] {pseudo1, pseudo2, pseudo2, pseudo1},
+                null, null, null, null);
+
+        if (cursor.moveToFirst())
+            return true;
+        return  false;
+    }
+
+    public static void sendMessage(String senderPseudo, String receiverPseudo, String message)
+    {
+        ContentValues values = new ContentValues();
+        values.put(MessageEntries.COL_SENDER, senderPseudo);
+        values.put(MessageEntries.COL_RECEIVER, receiverPseudo);
+        values.put(MessageEntries.COL_MSG, message);
+        values.put(MessageEntries.COL_SENDING_DATE, String.format("%1$td/%1$tm/%1$tY %1$tI:%1$tM:%1$tS", Calendar.getInstance()));
+
+        Log.d("DB", "Adding message from " +senderPseudo+ " to " +receiverPseudo+ " : " +message);
+
+        writeDB = helper.getWritableDatabase();
+        writeDB.insert(MessageEntries.TABLE_NAME, null, values);
+        writeDB.close();
+    }
+
+    public static List<MessageData> getAllMessages(String currentPseudo, String interlocutorPseudo)
+    {
+        readDB = helper.getReadableDatabase();
+        Cursor cursor = readDB.query(MessageEntries.TABLE_NAME,
+                new String[] {MessageEntries.COL_SENDER, MessageEntries.COL_RECEIVER, MessageEntries.COL_SENDING_DATE, MessageEntries.COL_RECEPTION_DATE, MessageEntries.COL_MSG},
+                "("+ MessageEntries.COL_SENDER+ "=? AND " +MessageEntries.COL_RECEIVER+ "=?) OR ("+ MessageEntries.COL_SENDER +"=? AND "+ MessageEntries.COL_RECEIVER +"=?)",
+                new String[] {currentPseudo, interlocutorPseudo, interlocutorPseudo, currentPseudo},
+                null, null, null, null);
+
+        List<MessageData> msgList = new ArrayList<MessageData>();
+
+        if (cursor.moveToFirst())
+        {
+            do
+            {
+                MessageData current = new MessageData(cursor.getString(cursor.getColumnIndexOrThrow(MessageEntries.COL_SENDER)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(MessageEntries.COL_MSG)),
+                        String.format("%1$td/%1$tm/%1$tY", Calendar.getInstance()),
+                        null);
+                msgList.add(current);
+            } while(cursor.moveToNext());
+        }
+        return msgList;
     }
 
 }
