@@ -168,5 +168,10 @@
     <string name="yes">Oui</string>
     <string name="choose_as_other_picture">Choisir en tant que photo de profil</string>
     <string name="about_the_app">Cette application a été faite dans le cadre du cours de conception orientée objet à l\'UCL par le groupe n°Z</string>
+    <string name="new_message_activity_title">Commencer une nouvelle conversation</string>
+    <string name="no_date_with_no_friends">Vous ne pouvez pas avoir rendez-vous avec quelqu\'un qui n\'est pas votre ami</string>
+    <string name="no_message_to_no_friend">Vous ne pouvez pas envoyer de message à quelqu\'un qui n\'est pas votre ami</string>
+    <string name="type_friend_pseudo">Entrez le pseudo de votre ami</string>
+    <string name="who_start_conversation_with">Avec qui voulez-vous commencer une conversation?</string>
 
 </resources>
