@@ -150,5 +150,22 @@
     <string name="widower">Veuf</string>
     <string name="women">Femmes</string>
     <string name="set_filters">Régler les filtres</string>
+    <string name="already_sent">Vous avez déjà envoyé une demande à cet utilisateur</string>
+    <string name="cant_change_password">Vous ne pouvez pas changer de mot de passe</string>
+    <string name="cant_change_pseudo">Vous ne pouvez pas changer votre pseudo</string>
+    <string name="cant_send_request">Vous ne pouvez pas envoyer de demande à cet utilisateur</string>
+    <string name="choose_profile_picture">Touchez une photo pour la sélectionner comme photo de profil</string>
+    <string name="choose_profile_picture_title">Choisir une photo de profil</string>
+    <string name="edit_visibility_activity_title">Régler la visibilité de mes informations</string>
+    <string name="no">Non</string>
+    <string name="no_password">Vous devez spécifier un mot de passe</string>
+    <string name="profile_picture">Photo de p rofil</string>
+    <string name="request_accepted">Demande acceptée</string>
+    <string name="star_password">Mot de passe*</string>
+    <string name="unfriended">Retiré des amis</string>
+    <string name="visibility_friends">Amis</string>
+    <string name="visibility_private">Privé</string>
+    <string name="visibility_public">Public</string>
+    <string name="years_old">ans</string>
 
 </resources>
