@@ -131,6 +131,13 @@ public final class Database
         writeDB.close();
     }
 
+    public static void tmpCreate()
+    {
+        readDB = helper.getReadableDatabase();
+        readDB.execSQL(SQL_CREATE_APPOINTMENT);
+        readDB.close();
+    }
+
     public static void init(Context context)
     {
         if (helper == null)
@@ -1266,6 +1273,8 @@ public final class Database
         values.put(AppointmentEntries.COL_DATE, meeting.getDate());
         values.put(AppointmentEntries.COL_LOCATION, meeting.getLocation());
 
+        Log.d("DB", "Adding new meeting : " +pseudos[0]+ " - " +pseudos[1]);
+
         writeDB = helper.getWritableDatabase();
         writeDB.insert(AppointmentEntries.TABLE_NAME, null, values);
         writeDB.close();
@@ -1317,6 +1326,32 @@ public final class Database
                 "("+ AppointmentEntries.COL_USER1 +"=? AND "+ AppointmentEntries.COL_USER2 +"=?) OR ("+ AppointmentEntries.COL_USER1 +"=? AND "+ AppointmentEntries.COL_USER2 +"=?)",
                 new String[] {pseudos[0], pseudos[1], pseudos[1], pseudos[0]});
         writeDB.close();
+    }
+
+    public static List<Meeting> getAllMeetings(String pseudo)
+    {
+        readDB = helper.getReadableDatabase();
+        Cursor cursor = readDB.query(AppointmentEntries.TABLE_NAME,
+                new String[] {AppointmentEntries.COL_USER1, AppointmentEntries.COL_USER2, AppointmentEntries.COL_LOCATION},
+                AppointmentEntries.COL_USER1+ "=? OR " +AppointmentEntries.COL_USER2+ "=?",
+                new String[] {pseudo, pseudo},
+                null, null, null, null);
+
+        List<Meeting> meetingList = new ArrayList<Meeting>();
+
+        if (cursor.moveToFirst())
+        {
+            Log.d("DB", "Found meetings");
+            do
+            {
+                Log.d("DB", "Found new meeting");
+                Meeting current = new Meeting(cursor.getString(cursor.getColumnIndexOrThrow(AppointmentEntries.COL_USER1)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(AppointmentEntries.COL_USER2)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(AppointmentEntries.COL_LOCATION)));
+                meetingList.add(current);
+            } while(cursor.moveToNext());
+        }
+        return meetingList;
     }
 
     //Disponibilities

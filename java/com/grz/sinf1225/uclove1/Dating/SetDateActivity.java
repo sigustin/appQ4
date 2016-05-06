@@ -171,29 +171,32 @@ public class SetDateActivity extends AppCompatActivity
 
             for (int i = 0; i < 7; i++)
             {
-                switch (i)
+                if (disponibilities[i])
                 {
-                    case 0:
-                        Database.addDisponibilityDate(currentUser.getPseudo(), getResources().getString(R.string.monday));
-                        break;
-                    case 1:
-                        Database.addDisponibilityDate(currentUser.getPseudo(), getResources().getString(R.string.tuesday));
-                        break;
-                    case 2:
-                        Database.addDisponibilityDate(currentUser.getPseudo(), getResources().getString(R.string.wednesday));
-                        break;
-                    case 3:
-                        Database.addDisponibilityDate(currentUser.getPseudo(), getResources().getString(R.string.thursday));
-                        break;
-                    case 4:
-                        Database.addDisponibilityDate(currentUser.getPseudo(), getResources().getString(R.string.friday));
-                        break;
-                    case 5:
-                        Database.addDisponibilityDate(currentUser.getPseudo(), getResources().getString(R.string.saturday));
-                        break;
-                    case 6:
-                        Database.addDisponibilityDate(currentUser.getPseudo(), getResources().getString(R.string.sunday));
-                        break;
+                    switch (i)
+                    {
+                        case 0:
+                            Database.addDisponibilityDate(currentUser.getPseudo(), getResources().getString(R.string.monday));
+                            break;
+                        case 1:
+                            Database.addDisponibilityDate(currentUser.getPseudo(), getResources().getString(R.string.tuesday));
+                            break;
+                        case 2:
+                            Database.addDisponibilityDate(currentUser.getPseudo(), getResources().getString(R.string.wednesday));
+                            break;
+                        case 3:
+                            Database.addDisponibilityDate(currentUser.getPseudo(), getResources().getString(R.string.thursday));
+                            break;
+                        case 4:
+                            Database.addDisponibilityDate(currentUser.getPseudo(), getResources().getString(R.string.friday));
+                            break;
+                        case 5:
+                            Database.addDisponibilityDate(currentUser.getPseudo(), getResources().getString(R.string.saturday));
+                            break;
+                        case 6:
+                            Database.addDisponibilityDate(currentUser.getPseudo(), getResources().getString(R.string.sunday));
+                            break;
+                    }
                 }
             }
 

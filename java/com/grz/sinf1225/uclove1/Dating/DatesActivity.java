@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.grz.sinf1225.uclove1.Database;
 import com.grz.sinf1225.uclove1.Matching.OverviewData;
 import com.grz.sinf1225.uclove1.Profile.ProfileActivity;
 import com.grz.sinf1225.uclove1.Profile.ProfileOverviewAdapter;
@@ -33,6 +34,8 @@ public class DatesActivity extends AppCompatActivity
     CurrentUser currentUser;
      */
     User currentUser;
+    private List<Meeting> meetingList;
+    private List<DateData> datesOverviews;
 
     private List<DateData> tmpDateOverviews;
     private String tmpPseudo1 = "angelina426", tmpPseudo2 = "AD.EL.E";
@@ -61,10 +64,25 @@ public class DatesActivity extends AppCompatActivity
         String currentPseudo = getIntent().getStringExtra(User.EXTRA_PSEUDO);
         currentUser = new User(currentPseudo);
 
+        meetingList = Database.getAllMeetings(currentPseudo);
+        Log.d("DEBUG", "Number of meetings : " +Integer.toString(meetingList.size()));
+
+        datesOverviews = new ArrayList<DateData>();
+        for (int i=0; i<meetingList.size(); i++)
+        {
+            String[] pseudos = meetingList.get(i).getUserPseudos();
+            User otherUser;
+            if (pseudos[0].equals(currentPseudo))
+                otherUser = new User(pseudos[1]);
+            else
+                otherUser = new User(pseudos[0]);
+            datesOverviews.add(new DateData(otherUser.getPseudo(), otherUser.getProfilePicture(), meetingList.get(i).getDate(), meetingList.get(i).getLocation()));
+        }
+
         m_recyclerView = (RecyclerView) findViewById(R.id.date_overviews_recycler_view);
         m_recyclerViewLayoutManager = new LinearLayoutManager(this);
         m_recyclerView.setLayoutManager(m_recyclerViewLayoutManager);
-        m_recyclerViewAdapter = new DateOverviewAdapter(tmpDateOverviews, new DateOverviewAdapter.OnDateOverviewClickedListener() {
+        m_recyclerViewAdapter = new DateOverviewAdapter(datesOverviews, new DateOverviewAdapter.OnDateOverviewClickedListener() {
             @Override
             public void onOverviewClicked(DateData dateData) {
                 onDateOverviewClicked(dateData);
@@ -99,6 +117,7 @@ public class DatesActivity extends AppCompatActivity
     {
         Log.d("FLOATINGBUTTON", "Add date");
         Intent intent = new Intent(this, SetDateActivity.class);
+        intent.putExtra(User.EXTRA_PSEUDO, currentUser.getPseudo());
         startActivity(intent);
         return true;
     }
@@ -125,6 +144,7 @@ public class DatesActivity extends AppCompatActivity
             intent.putExtra(CurrentUser.EXTRA_CURRENT_USER, currentUser);
             intent.putExtra(User.EXTRA_PSEUDO, dateData.m_friendPseudo);
              */
+            intent.putExtra(User.EXTRA_PSEUDO, currentUser.getPseudo());
             intent.putExtra(EXTRA_DATE_PSEUDO, dateData.m_friendPseudo);
             startActivity(intent);
         }

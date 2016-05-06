@@ -103,7 +103,6 @@ public class Meeting
 
     public void save()
     {
-        if (meetingDay != null)
-            Database.addMeeting(this);
+        Database.addMeeting(this);
     }
 }
