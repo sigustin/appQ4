@@ -137,8 +137,6 @@
     <string name="thursday">Jeudi</string>
     <string name="tuesday">Mardi</string>
     <string name="wednesday">Mercredi</string>
-    <string name="No">Non</string>
-    <string name="Yes">Oui</string>
     <string name="both">Les deux</string>
     <string name="complicated">C\'est compliqué</string>
     <string name="couple">En couple</string>
@@ -169,5 +167,6 @@
     <string name="years_old">ans</string>
     <string name="yes">Oui</string>
     <string name="choose_as_other_picture">Choisir en tant que photo de profil</string>
+    <string name="about_the_app">Cette application a été faite dans le cadre du cours de conception orientée objet à l\'UCL par le groupe n°Z</string>
 
 </resources>
