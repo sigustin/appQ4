@@ -1,5 +1,6 @@
 package com.grz.sinf1225.uclove1;
 
+import android.content.Context;
 import android.content.Intent;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
@@ -14,12 +15,15 @@ import com.grz.sinf1225.uclove1.Profile.EditProfileActivity;
 public class MainActivity extends AppCompatActivity
 {
     //public static final String EXTRA_CURRENT_USER = "UCLove.CurrentUser";write this in CurrentUser
+    private static Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        MainActivity.context = getApplicationContext();
 
         Database.init(this);
     }
@@ -69,6 +73,11 @@ public class MainActivity extends AppCompatActivity
         Intent intent = new Intent(this, EditProfileActivity.class);
         intent.putExtra(Database.EXTRA_IS_REGISTRATION, true);
         startActivity(intent);
+    }
+
+    public static Context getContext()
+    {
+        return MainActivity.context;
     }
 
 }

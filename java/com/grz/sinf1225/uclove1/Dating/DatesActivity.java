@@ -76,6 +76,7 @@ public class DatesActivity extends AppCompatActivity
                 otherUser = new User(pseudos[1]);
             else
                 otherUser = new User(pseudos[0]);
+            Log.d("DEBUG", "Meeting on " +meetingList.get(i).getDate());
             datesOverviews.add(new DateData(otherUser.getPseudo(), otherUser.getProfilePicture(), meetingList.get(i).getDate(), meetingList.get(i).getLocation()));
         }
 

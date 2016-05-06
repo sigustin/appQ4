@@ -34,54 +34,14 @@ public class FriendsActivity extends AppCompatActivity
     private List<User> friendsAndRequestList;
     private List<OverviewData> friendsOverviewDataList;
 
-    private List<OverviewData> tmpFriendsOverview;
-    private final int tmpProfilePictureRes1 = R.drawable.angelina_jolie_profile_picture;
-    private final User.RelationshipType tmpRequest1 = User.RelationshipType.REQUEST, tmpRequest2 = User.RelationshipType.FRIENDS;;
-    private final String tmpPseudo1 = "angelina24", tmpAge1 = "42 years old", tmpCity1 = "New York";
-    private final int tmpProfilePictureRes2 = R.drawable.adele_profile_picture;
-    private final String tmpPseudo2 = "A.D.E.LE", tmpAge2 = "27 years old", tmpCity2 = "London";
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends);
-
-        tmpFriendsOverview = new ArrayList<>();
-        tmpFriendsOverview.add(new OverviewData(tmpProfilePictureRes1, tmpPseudo1, tmpAge1, tmpCity1, tmpRequest1));
-        tmpFriendsOverview.add(new OverviewData(tmpProfilePictureRes2, tmpPseudo2, tmpAge2, tmpCity2, tmpRequest2));
         /*
         currentUser = (CurrentUser) getIntent().getSerializableExtra(CurrentUser.EXTRA_CURRENT_USER);
          */
-        /*String currentPseudo = getIntent().getStringExtra(User.EXTRA_PSEUDO);
-        currentUser = new User(currentPseudo);
-
-        friendsAndRequestList = Database.getFriendsAndRequests(currentPseudo);
-        Log.d("DEBUG", "Number of friends : " +Integer.toString(friendsAndRequestList.size()));
-
-        friendsOverviewDataList = new ArrayList<OverviewData>();
-        for (int i=0; i<friendsAndRequestList.size(); i++)
-        {
-            User currentFriend = friendsAndRequestList.get(i);
-            friendsOverviewDataList.add(new OverviewData(currentFriend.getProfilePicture(),
-                    currentFriend.getPseudo(),
-                    Integer.toString(currentUser.getAge()) +" "+ getResources().getString(R.string.years_old),
-                    currentFriend.getCity(),
-                    Database.getRelationshipType(currentPseudo, currentFriend.getPseudo())));
-        }
-
-
-        m_recyclerView = (RecyclerView) findViewById(R.id.profile_overviews_recycler_view);
-        m_recyclerViewLayoutManager = new LinearLayoutManager(this);
-        m_recyclerView.setLayoutManager(m_recyclerViewLayoutManager);
-        m_recyclerViewAdapter = new ProfileOverviewAdapter(friendsOverviewDataList, new ProfileOverviewAdapter.OnOverviewClickedListener() {
-            public void onOverviewClicked(String pseudo)
-            {
-                Log.d("OVERVIEWLISTENER", "RelativeLayoutClicked " + pseudo);
-                onFriendOverviewClicked(pseudo);
-            }
-        }, this);
-        m_recyclerView.setAdapter(m_recyclerViewAdapter);*/
     }
 
     @Override

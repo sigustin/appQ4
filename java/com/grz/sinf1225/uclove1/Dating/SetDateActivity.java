@@ -37,6 +37,8 @@ public class SetDateActivity extends AppCompatActivity
      */
     private User currentUser;
 
+    private List<OverviewData> friendOverview;
+
     private RecyclerView m_recyclerView;
     private RecyclerView.Adapter m_recyclerViewAdapter;
     private RecyclerView.LayoutManager m_recyclerViewLayoutManager;
@@ -72,13 +74,16 @@ public class SetDateActivity extends AppCompatActivity
 
             setTitle(getResources().getString(R.string.set_date_activity_title_part) + " " + m_friendPseudo);
 
-            tmpFriendOverview = new ArrayList<>();
-            tmpFriendOverview.add(new OverviewData(tmpFriendProfilePictureRes, tmpFriendPseudo, tmpFriendAge, tmpFriendCity, User.RelationshipType.FRIENDS));
+            friendOverview = new ArrayList<OverviewData>();
+            User friend = new User(m_friendPseudo);
+            friendOverview.add(new OverviewData(friend.getProfilePicture(), m_friendPseudo,
+                    Integer.toString(friend.getAge()) +" "+ getResources().getString(R.string.years_old),
+                    friend.getCity(), User.RelationshipType.FRIENDS));
 
             m_recyclerView = (RecyclerView) findViewById(R.id.profile_overview_recycler_view);
             m_recyclerViewLayoutManager = new LinearLayoutManager(this);
             m_recyclerView.setLayoutManager(m_recyclerViewLayoutManager);
-            m_recyclerViewAdapter = new ProfileOverviewAdapter(tmpFriendOverview, new ProfileOverviewAdapter.OnOverviewClickedListener() {
+            m_recyclerViewAdapter = new ProfileOverviewAdapter(friendOverview, new ProfileOverviewAdapter.OnOverviewClickedListener() {
                 public void onOverviewClicked(String pseudo)
                 {
                     Log.d("OVERVIEWLISTENER", "RelativeLayoutClicked " + pseudo);
@@ -90,6 +95,29 @@ public class SetDateActivity extends AppCompatActivity
             EditText msgEditText = (EditText) findViewById(R.id.edit_text_location);
             String friendLocation = Database.getLocationMeeting(currentPseudo, m_friendPseudo);
             msgEditText.setText(friendLocation);
+
+            boolean[] disponibilities = Database.getDisponibilityDates(currentPseudo, this);
+            if (disponibilities != null)
+            {
+                String tmp = "";
+                for (int i = 0; i < 7; i++)
+                    tmp += disponibilities[i] + " ";
+                Log.d("DEBUG", "Disponibilities " + tmp);
+                CheckBox monday = (CheckBox) findViewById(R.id.monday_checkbox);
+                monday.setChecked(disponibilities[0]);
+                CheckBox tuesday = (CheckBox) findViewById(R.id.tuesday_checkbox);
+                tuesday.setChecked(disponibilities[1]);
+                CheckBox wednesday = (CheckBox) findViewById(R.id.wednesday_checkbox);
+                wednesday.setChecked(disponibilities[2]);
+                CheckBox thursday = (CheckBox) findViewById(R.id.thursday_checkbox);
+                thursday.setChecked(disponibilities[3]);
+                CheckBox friday = (CheckBox) findViewById(R.id.friday_checkbox);
+                friday.setChecked(disponibilities[4]);
+                CheckBox saturday = (CheckBox) findViewById(R.id.saturday_checkbox);
+                saturday.setChecked(disponibilities[5]);
+                CheckBox sunday = (CheckBox) findViewById(R.id.sunday_checkbox);
+                sunday.setChecked(disponibilities[6]);
+            }
         }
         else
         {
@@ -169,7 +197,9 @@ public class SetDateActivity extends AppCompatActivity
             EditText msgEditText = (EditText) findViewById(R.id.edit_text_location);
             String location = msgEditText.getText().toString();
 
-            for (int i = 0; i < 7; i++)
+            Database.removeDisponibilities(currentUser.getPseudo());
+
+            for (int i=0; i<7; i++)
             {
                 if (disponibilities[i])
                 {
@@ -231,12 +261,56 @@ public class SetDateActivity extends AppCompatActivity
             currentCheckBox = (CheckBox) findViewById(R.id.sunday_checkbox);
             disponibilities[6] = currentCheckBox.isChecked();
 
+            Database.removeDisponibilities(currentUser.getPseudo());
+
+            for (int i=0; i<7; i++)
+            {
+                if (disponibilities[i])
+                {
+                    switch (i)
+                    {
+                        case 0:
+                            Database.addDisponibilityDate(currentUser.getPseudo(), getResources().getString(R.string.monday));
+                            break;
+                        case 1:
+                            Database.addDisponibilityDate(currentUser.getPseudo(), getResources().getString(R.string.tuesday));
+                            break;
+                        case 2:
+                            Database.addDisponibilityDate(currentUser.getPseudo(), getResources().getString(R.string.wednesday));
+                            break;
+                        case 3:
+                            Database.addDisponibilityDate(currentUser.getPseudo(), getResources().getString(R.string.thursday));
+                            break;
+                        case 4:
+                            Database.addDisponibilityDate(currentUser.getPseudo(), getResources().getString(R.string.friday));
+                            break;
+                        case 5:
+                            Database.addDisponibilityDate(currentUser.getPseudo(), getResources().getString(R.string.saturday));
+                            break;
+                        case 6:
+                            Database.addDisponibilityDate(currentUser.getPseudo(), getResources().getString(R.string.sunday));
+                            break;
+                    }
+                }
+            }
+
+            disponibilities = Database.getDisponibilityDates(currentUser.getPseudo(), this);
+            String tmp = "";
+            for (int i = 0; i < 7; i++)
+                tmp += disponibilities[i] + " ";
+            Log.d("DEBUG", "Disponibilities " + tmp);
+
             EditText msgEditText = (EditText) findViewById(R.id.edit_text_location);
             String location = msgEditText.getText().toString();
 
             Meeting meeting = new Meeting(currentUser.getPseudo(), m_friendPseudo, location);
-            meeting.arrangeDay(this);
-            Database.updateMeetingDay(meeting, meeting.getDate());
+            if(meeting.arrangeDay(this))
+            {
+                Database.updateMeetingDay(meeting, meeting.getDate());
+                Log.d("DEBUG", "Meeting day : " +meeting.getDate());
+                Database.removeDisponibilities(currentUser.getPseudo());
+                Database.removeDisponibilities(m_friendPseudo);
+            }
 
             finish();
         }

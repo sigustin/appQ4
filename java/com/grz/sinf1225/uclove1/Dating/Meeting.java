@@ -1,8 +1,10 @@
 package com.grz.sinf1225.uclove1.Dating;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.grz.sinf1225.uclove1.Database;
+import com.grz.sinf1225.uclove1.MainActivity;
 import com.grz.sinf1225.uclove1.R;
 import com.grz.sinf1225.uclove1.User;
 
@@ -39,7 +41,6 @@ public class Meeting
     public void setMeetingDay(String meetingDay)
     {
         this.meetingDay = meetingDay;
-        Database.updateMeetingDay(this, meetingDay);
     }
 
     public void setLocation(String location)
@@ -50,8 +51,8 @@ public class Meeting
 
     public boolean[] findSameDisponibilities()
     {
-        boolean[] disponibilityUser1 = Database.getDisponibilityDates(this.pseudos[0]);
-        boolean[] disponibilityUser2 = Database.getDisponibilityDates(this.pseudos[1]);
+        boolean[] disponibilityUser1 = Database.getDisponibilityDates(this.pseudos[0], MainActivity.getContext());
+        boolean[] disponibilityUser2 = Database.getDisponibilityDates(this.pseudos[1], MainActivity.getContext());
         boolean[] sameDisponibility = new boolean[7];
 
         for(int i = 0; i < 7; i++)
@@ -64,6 +65,7 @@ public class Meeting
 
     public boolean arrangeDay(Context context)
     {
+        Log.d("MEETING", "Arranging date");
         boolean[] possibleDays = this.findSameDisponibilities();
         boolean foundDate = false;
         for (int i=0; i<7; i++)

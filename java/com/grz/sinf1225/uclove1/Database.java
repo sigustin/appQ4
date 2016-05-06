@@ -1332,7 +1332,7 @@ public final class Database
     {
         readDB = helper.getReadableDatabase();
         Cursor cursor = readDB.query(AppointmentEntries.TABLE_NAME,
-                new String[] {AppointmentEntries.COL_USER1, AppointmentEntries.COL_USER2, AppointmentEntries.COL_LOCATION},
+                new String[] {AppointmentEntries.COL_USER1, AppointmentEntries.COL_USER2, AppointmentEntries.COL_DATE, AppointmentEntries.COL_LOCATION},
                 AppointmentEntries.COL_USER1+ "=? OR " +AppointmentEntries.COL_USER2+ "=?",
                 new String[] {pseudo, pseudo},
                 null, null, null, null);
@@ -1348,6 +1348,7 @@ public final class Database
                 Meeting current = new Meeting(cursor.getString(cursor.getColumnIndexOrThrow(AppointmentEntries.COL_USER1)),
                         cursor.getString(cursor.getColumnIndexOrThrow(AppointmentEntries.COL_USER2)),
                         cursor.getString(cursor.getColumnIndexOrThrow(AppointmentEntries.COL_LOCATION)));
+                current.setMeetingDay(cursor.getString(cursor.getColumnIndexOrThrow(AppointmentEntries.COL_DATE)));
                 meetingList.add(current);
             } while(cursor.moveToNext());
         }
@@ -1357,6 +1358,8 @@ public final class Database
     //Disponibilities
     public static void addDisponibilityDate(String pseudo, String date)
     {
+        Log.d("DB", "Adding disponibility for " +pseudo);
+
         ContentValues values = new ContentValues();
         values.put(DisponibilityEntries.COL_PSEUDO, pseudo);
         values.put(DisponibilityEntries.COL_DISPONIBILITY_DATE, date);
@@ -1376,8 +1379,10 @@ public final class Database
         writeDB.close();
     }
 
-    public static boolean[] getDisponibilityDates(String pseudo)
+    public static boolean[] getDisponibilityDates(String pseudo, Context context)
     {
+        Log.d("DB", "Getting all the disponibility for " +pseudo);
+
         readDB = helper.getReadableDatabase();
         Cursor cursor = readDB.query(DisponibilityEntries.TABLE_NAME,
                 new String[] {DisponibilityEntries.COL_DISPONIBILITY_DATE},
@@ -1392,19 +1397,37 @@ public final class Database
             int count = 0;
             do
             {
-                boolean current;
-                if (cursor.getInt(cursor.getColumnIndexOrThrow(DisponibilityEntries.COL_DISPONIBILITY_DATE)) == 0)
-                    current = false;
-                else
-                    current = true;
-                disponibilities[count] = current;
+                if (cursor.getString(cursor.getColumnIndexOrThrow(DisponibilityEntries.COL_DISPONIBILITY_DATE)).equals(context.getResources().getString(R.string.monday)))
+                    disponibilities[0] = true;
+                else if (cursor.getString(cursor.getColumnIndexOrThrow(DisponibilityEntries.COL_DISPONIBILITY_DATE)).equals(context.getResources().getString(R.string.tuesday)))
+                    disponibilities[1] = true;
+                else if (cursor.getString(cursor.getColumnIndexOrThrow(DisponibilityEntries.COL_DISPONIBILITY_DATE)).equals(context.getResources().getString(R.string.wednesday)))
+                    disponibilities[2] = true;
+                else if (cursor.getString(cursor.getColumnIndexOrThrow(DisponibilityEntries.COL_DISPONIBILITY_DATE)).equals(context.getResources().getString(R.string.thursday)))
+                    disponibilities[3] = true;
+                else if (cursor.getString(cursor.getColumnIndexOrThrow(DisponibilityEntries.COL_DISPONIBILITY_DATE)).equals(context.getResources().getString(R.string.friday)))
+                    disponibilities[4] = true;
+                else if (cursor.getString(cursor.getColumnIndexOrThrow(DisponibilityEntries.COL_DISPONIBILITY_DATE)).equals(context.getResources().getString(R.string.saturday)))
+                    disponibilities[5] = true;
+                else if (cursor.getString(cursor.getColumnIndexOrThrow(DisponibilityEntries.COL_DISPONIBILITY_DATE)).equals(context.getResources().getString(R.string.sunday)))
+                    disponibilities[6] = true;
                 count++;
             } while(cursor.moveToNext());
         }
+        if (disponibilities == null)
+            Log.d("DB", "Not found any");
         return disponibilities;
     }
 
+    public static void removeDisponibilities(String pseudo)
+    {
+        writeDB = helper.getWritableDatabase();
+        writeDB.delete(DisponibilityEntries.TABLE_NAME,
+                DisponibilityEntries.COL_PSEUDO +"=?",
+                new String[] {pseudo});
+        writeDB.close();
+    }
+
     public static void updateDisponibility(User user, boolean[] tmp) {}
-    public static boolean[] getDisponibility(String pseudo) {return null;}
     public static List<byte[]> getPictures(String pseudo) {return null;}
 }

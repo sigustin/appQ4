@@ -101,7 +101,7 @@ public class User implements Serializable
         this.childrenNb = Database.getChildrenNb(pseudo);
         this.country = Database.getCountry(pseudo);
         this.city = Database.getCity(pseudo);
-        this.disponibility = Database.getDisponibility(pseudo);
+        this.disponibility = Database.getDisponibilityDates(pseudo, MainActivity.getContext());
         this.familyNameVisibility = Database.getFamilyNameVisibility(pseudo);
         this.firstNameVisibility = Database.getFirstNameVisibility(pseudo);
         this.birthDateVisibility = Database.getBirthDateVisibility(pseudo);
