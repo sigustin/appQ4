@@ -73,10 +73,16 @@ public class SetFilterActivity extends AppCompatActivity
             birthDateEditText.setText(filter.getBirthDate());
 
             EditText heightEditText = (EditText) findViewById(R.id.edit_text_height);
-            heightEditText.setText(Double.toString(filter.getHeight()));
+            if (filter.getHeight() == 0.0)
+                heightEditText.setHint(getResources().getString(R.string.no_filter));
+            else
+                heightEditText.setText(Double.toString(filter.getHeight()));
 
             EditText nbChildrenEditText = (EditText) findViewById(R.id.edit_text_children_nb);
-            nbChildrenEditText.setText(Integer.toString(filter.getChildrenNb()));
+            if (filter.getChildrenNb() == -1)
+                nbChildrenEditText.setHint(getResources().getString(R.string.no_filter));
+            else
+                nbChildrenEditText.setText(Integer.toString(filter.getChildrenNb()));
 
             EditText cityEditText = (EditText) findViewById(R.id.edit_text_city);
             cityEditText.setText(filter.getCity());
@@ -114,32 +120,16 @@ public class SetFilterActivity extends AppCompatActivity
         Log.d("TOPMENU", "Save filters");
 
         EditText pseudoEditText = (EditText) findViewById(R.id.edit_text_pseudo);
-        String pseudoFilter;
-        if (pseudoEditText.getText() != null)
-            pseudoFilter = pseudoEditText.getText().toString();
-        else
-            pseudoFilter = "No filter";
+        String pseudoFilter = pseudoEditText.getText().toString();
 
         EditText firstNameEditText = (EditText) findViewById(R.id.edit_text_first_name);
-        String firstNameFilter;
-        if (firstNameEditText.getText() != null)
-            firstNameFilter = firstNameEditText.getText().toString();
-        else
-            firstNameFilter = "No filter";
+        String firstNameFilter = firstNameEditText.getText().toString();
 
         EditText familyNameEditText = (EditText) findViewById(R.id.edit_text_family_name);
-        String familyNameFilter;
-        if (familyNameEditText.getText() != null)
-            familyNameFilter = familyNameEditText.getText().toString();
-        else
-            familyNameFilter = "No filter";
+        String familyNameFilter = familyNameEditText.getText().toString();
 
         EditText birthDateEditText = (EditText) findViewById(R.id.edit_text_birth_date);
-        String birthDateFilter;
-        if (birthDateEditText.getText() != null)
-            birthDateFilter = birthDateEditText.getText().toString();
-        else
-            birthDateFilter = "No filter";
+        String birthDateFilter = birthDateEditText.getText().toString();
 
         Spinner genderSpinner = (Spinner) findViewById(R.id.spinner_gender);
         String genderFilter = genderSpinner.getSelectedItem().toString();
@@ -149,36 +139,24 @@ public class SetFilterActivity extends AppCompatActivity
 
         EditText heightEditText = (EditText) findViewById(R.id.edit_text_height);
         double height = 0.0;
-        if (heightEditText.getText() != null)
-        {
-            if (heightEditText.getText().toString().equals(""))
-                height = 0.0;
-            else
-                height = Double.parseDouble(heightEditText.getText().toString());
-        }
+        if (!heightEditText.getText().toString().equals("")
+                && !heightEditText.getText().toString().equals(getResources().getString(R.string.no_filter)))
+            height = Double.parseDouble(heightEditText.getText().toString());
 
         Spinner smokerSpinner = (Spinner) findViewById(R.id.spinner_smoker);
         String smokerFilter = smokerSpinner.getSelectedItem().toString();
 
         EditText nbChildrenEditText = (EditText) findViewById(R.id.edit_text_children_nb);
         int nbChildren = -1;
-        if (nbChildrenEditText.getText() != null)
-        {
-            if (nbChildrenEditText.getText().toString().equals(""))
-                nbChildren = -1;
-            else
-                nbChildren = Integer.parseInt(nbChildrenEditText.getText().toString());
-        }
+        if (!nbChildrenEditText.getText().toString().equals("")
+                && !nbChildrenEditText.getText().toString().equals(getResources().getString(R.string.no_filter)))
+            nbChildren = Integer.parseInt(nbChildrenEditText.getText().toString());
 
         Spinner countrySpinner = (Spinner) findViewById(R.id.spinner_country);
         String countryFilter = countrySpinner.getSelectedItem().toString();
 
         EditText cityEditText = (EditText) findViewById(R.id.edit_text_city);
-        String cityFilter;
-        if (cityEditText.getText() != null)
-            cityFilter = cityEditText.getText().toString();
-        else
-            cityFilter = "No filter";
+        String cityFilter = cityEditText.getText().toString();
 
         filter = new Filter(pseudoFilter, firstNameFilter, familyNameFilter, birthDateFilter, genderFilter, loveStatusFilter, height, smokerFilter, nbChildren, countryFilter, cityFilter);
 

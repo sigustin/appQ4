@@ -66,6 +66,11 @@ public class Filter implements Serializable
         return this.gender;
     }
 
+    public String getLoveStatus()
+    {
+        return this.loveStatus;
+    }
+
     public double getHeight()
     {
         return this.height;

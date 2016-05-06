@@ -11,6 +11,7 @@ import android.provider.BaseColumns;
 import android.util.Log;
 
 import com.grz.sinf1225.uclove1.Dating.Meeting;
+import com.grz.sinf1225.uclove1.Matching.Filter;
 
 import java.security.PublicKey;
 import java.sql.Blob;
@@ -1081,7 +1082,7 @@ public final class Database
         return false;
     }
 
-    public static List<User> getSimpleMatches(User user)
+    public static List<User> findSimpleMatches(User user)
     {
         String interestedIn, interestedIn2;
         if (user.getInterestedIn().equals(MainActivity.getContext().getResources().getString(R.string.women)))
@@ -1121,6 +1122,134 @@ public final class Database
                 column,
                 columnArgs,
                 null, null, null, null);
+
+        List<User> matchesList = new ArrayList<User>();
+
+        if (cursor.moveToFirst())
+        {
+            do
+            {
+                Log.d("DB", "Found new match : " +cursor.getString(cursor.getColumnIndexOrThrow(UserEntries.COL_PSEUDO)));
+                User current;
+                if ( getRelationshipType(user.getPseudo(), cursor.getString(cursor.getColumnIndexOrThrow(UserEntries.COL_PSEUDO))) != User.RelationshipType.FRIENDS
+                        && getRelationshipType(user.getPseudo(), cursor.getString(cursor.getColumnIndexOrThrow(UserEntries.COL_PSEUDO))) != User.RelationshipType.ONESELF
+                        && getRelationshipType(user.getPseudo(), cursor.getString(cursor.getColumnIndexOrThrow(UserEntries.COL_PSEUDO))) != User.RelationshipType.REJECTION )
+                {
+                    current = new User(cursor.getString(cursor.getColumnIndexOrThrow(UserEntries.COL_PSEUDO)));
+                    matchesList.add(current);
+                }
+            } while(cursor.moveToNext());
+        }
+        return matchesList;
+    }
+
+    public static List<User> findMatchesWithFilters(User user, Filter filter)
+    {
+        String interestedIn, interestedIn2;
+        if (user.getInterestedIn().equals(MainActivity.getContext().getResources().getString(R.string.women)))
+        {
+            interestedIn = "F";
+            interestedIn2 = "empty";
+        }
+        else if (user.getInterestedIn().equals(MainActivity.getContext().getResources().getString(R.string.men)))
+        {
+            interestedIn = "M";
+            interestedIn2 = "empty";
+        }
+        else if (user.getInterestedIn().equals(MainActivity.getContext().getResources().getString(R.string.both)))
+        {
+            interestedIn = "F";
+            interestedIn2 = "M";
+        }
+        else
+            return null;
+
+        String column;
+        String[] columnArgs;
+        List<String> columnArgsTmp = new ArrayList<String>();
+        if (interestedIn2.equals("empty"))
+        {
+            column = UserEntries.COL_GENDER+ "=?";
+            columnArgsTmp.add(interestedIn);
+        }
+        else
+        {
+            column = UserEntries.COL_GENDER+ "=? OR " +UserEntries.COL_GENDER +"=?";
+            columnArgsTmp.add(interestedIn);
+            columnArgsTmp.add(interestedIn2);
+        }
+
+        if (filter.getPseudo() != null && !(filter.getPseudo().equals("")))
+        {
+            column += " AND "+ UserEntries.COL_PSEUDO +"=?";
+            columnArgsTmp.add(filter.getPseudo());
+        }
+        if (filter.getFirstName() != null && !(filter.getFirstName().equals("")))
+        {
+            column += " AND "+ UserEntries.COL_FIRST_NAME +"=?";
+            columnArgsTmp.add(filter.getFirstName());
+        }
+        if (filter.getFamilyName() != null && !(filter.getFamilyName().equals("")))
+        {
+            column += " AND "+ UserEntries.COL_LAST_NAME +"=?";
+            columnArgsTmp.add(filter.getFamilyName());
+        }
+        if (filter.getBirthDate() != null && !(filter.getBirthDate().equals("")))
+        {
+            column += " AND "+ UserEntries.COL_BIRTH_DATE +"=?";
+            columnArgsTmp.add(filter.getBirthDate());
+        }
+        if (filter.getGender() != null && !(filter.getGender().equals(MainActivity.getContext().getResources().getString(R.string.no_filter))))
+        {
+            column += " AND "+ UserEntries.COL_GENDER +"=?";
+            columnArgsTmp.add(filter.getGender());
+        }
+        if (filter.getLoveStatus() != null && !(filter.getLoveStatus().equals(MainActivity.getContext().getResources().getString(R.string.no_filter))))
+        {
+            Log.d("DEBUG", filter.getLoveStatus() +" "+ MainActivity.getContext().getResources().getString(R.string.no_filter));
+            if (filter.getLoveStatus().equals(MainActivity.getContext().getResources().getString(R.string.no_filter)))
+                Log.d("DEBUG", "Equality");
+            column += " AND "+ UserEntries.COL_LOVE_STATUS +"=?";
+            columnArgsTmp.add(filter.getLoveStatus());
+        }
+        if (filter.getHeight() != 0.0)
+        {
+            column += " AND "+ UserEntries.COL_HEIGHT +"=?";
+            columnArgsTmp.add(Double.toString(filter.getHeight()));
+        }
+        if (filter.getSmoker() != null && !(filter.getSmoker().equals(MainActivity.getContext().getResources().getString(R.string.no_filter))))
+        {
+            column += " AND "+ UserEntries.COL_SMOKER +"=?";
+            columnArgsTmp.add(filter.getSmoker());
+        }
+        if (filter.getChildrenNb() != -1)
+        {
+            column += " AND "+ UserEntries.COL_CHILDREN_NB +"=?";
+            columnArgsTmp.add(Integer.toString(filter.getChildrenNb()));
+        }
+        if (filter.getCountry() != null && !(filter.getCountry().equals(MainActivity.getContext().getResources().getString(R.string.no_filter))))
+        {
+            column += " AND "+ UserEntries.COL_COUNTRY +"=?";
+            columnArgsTmp.add(filter.getCountry());
+        }
+        if (filter.getCity() != null  && !(filter.getCity().equals("")))
+        {
+            column += " AND "+ UserEntries.COL_CITY +"=?";
+            columnArgsTmp.add(filter.getCity());
+        }
+
+        columnArgs = new String[columnArgsTmp.size()];
+        columnArgsTmp.toArray(columnArgs);
+
+        readDB = helper.getReadableDatabase();
+        Cursor cursor = readDB.query(UserEntries.TABLE_NAME,
+                new String[] {UserEntries.COL_PSEUDO},
+                column,
+                columnArgs,
+                null, null, null, null);
+
+        for (int i=0; i<columnArgs.length; i++)
+            Log.d("DB", "Query : " +column+ " -> " +columnArgs[i]);
 
         List<User> matchesList = new ArrayList<User>();
 

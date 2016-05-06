@@ -58,7 +58,9 @@ public class FindMatchsActivity extends AppCompatActivity
         filter = (Filter) getIntent().getSerializableExtra(Filter.EXTRA_FILTER);
 
         if (filter == null)
-            matchesList = Database.getSimpleMatches(currentUser);
+            matchesList = Database.findSimpleMatches(currentUser);
+        else
+            matchesList = Database.findMatchesWithFilters(currentUser, filter);
 
         matchesOverviewList = new ArrayList<OverviewData>();
 
