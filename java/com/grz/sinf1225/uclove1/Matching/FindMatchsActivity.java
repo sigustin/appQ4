@@ -31,6 +31,7 @@ public class FindMatchsActivity extends AppCompatActivity
     User currentUser;
     private List<OverviewData> matchesOverviewList;
     private List<User> matchesList;
+    private Filter filter;
 
     private List<OverviewData> tmpFriendsOverview;
     private final int tmpProfilePictureRes1 = R.drawable.angelina_jolie_profile_picture;
@@ -54,18 +55,25 @@ public class FindMatchsActivity extends AppCompatActivity
         String currentPseudo = getIntent().getStringExtra(User.EXTRA_PSEUDO);
         currentUser = new User(currentPseudo);
 
-        matchesList = Database.getSimpleMatches(currentUser);
-        Log.d("DEBUG", "Number of matches : " +Integer.toString(matchesList.size()));
+        filter = (Filter) getIntent().getSerializableExtra(Filter.EXTRA_FILTER);
+
+        if (filter == null)
+            matchesList = Database.getSimpleMatches(currentUser);
 
         matchesOverviewList = new ArrayList<OverviewData>();
-        for (int i=0; i<matchesList.size(); i++)
+
+        if (matchesList != null)
         {
-            User currentMatch = matchesList.get(i);
-            matchesOverviewList.add(new OverviewData(currentMatch.getProfilePicture(),
-                    currentMatch.getPseudo(),
-                    Integer.toString(currentMatch.getAge()) +" "+ getResources().getString(R.string.years_old),
-                    currentMatch.getCity(),
-                    Database.getRelationshipType(currentPseudo, currentMatch.getPseudo())));
+            Log.d("DEBUG", "Number of matches : " + Integer.toString(matchesList.size()));
+
+            for (int i = 0; i < matchesList.size(); i++) {
+                User currentMatch = matchesList.get(i);
+                matchesOverviewList.add(new OverviewData(currentMatch.getProfilePicture(),
+                        currentMatch.getPseudo(),
+                        Integer.toString(currentMatch.getAge()) + " " + getResources().getString(R.string.years_old),
+                        currentMatch.getCity(),
+                        Database.getRelationshipType(currentPseudo, currentMatch.getPseudo())));
+            }
         }
 
 
@@ -131,6 +139,9 @@ public class FindMatchsActivity extends AppCompatActivity
         /*
         intent.putExtra(CurrentUser.EXTRA_CURRENT_USER, currentUser);
          */
+        intent.putExtra(User.EXTRA_PSEUDO, currentUser.getPseudo());
+        if (filter != null)
+            intent.putExtra(Filter.EXTRA_FILTER, filter);
         startActivity(intent);
     }
 }

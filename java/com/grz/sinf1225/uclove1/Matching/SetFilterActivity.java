@@ -10,11 +10,16 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.grz.sinf1225.uclove1.Database;
 import com.grz.sinf1225.uclove1.R;
 import com.grz.sinf1225.uclove1.SettingsActivity;
+import com.grz.sinf1225.uclove1.User;
 
 public class SetFilterActivity extends AppCompatActivity
 {
+
+    Filter filter;
+    User currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -32,11 +37,6 @@ public class SetFilterActivity extends AppCompatActivity
         loveStatusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         loveStatus.setAdapter(loveStatusAdapter);
 
-        Spinner interestedIn = (Spinner) findViewById(R.id.spinner_interested_in);
-        ArrayAdapter<CharSequence> interestedInAdapter = ArrayAdapter.createFromResource(this, R.array.array_interested_in_values_filter, android.R.layout.simple_spinner_item);
-        interestedInAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        interestedIn.setAdapter(interestedInAdapter);
-
         Spinner smoker = (Spinner) findViewById(R.id.spinner_smoker);
         ArrayAdapter<CharSequence> smokerAdapter = ArrayAdapter.createFromResource(this, R.array.array_smoker_filter, android.R.layout.simple_spinner_item);
         smokerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -46,6 +46,41 @@ public class SetFilterActivity extends AppCompatActivity
         ArrayAdapter<CharSequence> countriesAdapter = ArrayAdapter.createFromResource(this, R.array.array_countries_filter, android.R.layout.simple_spinner_item);
         countriesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         country.setAdapter(countriesAdapter);
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+
+        String currentPseudo = getIntent().getStringExtra(User.EXTRA_PSEUDO);
+        currentUser = new User(currentPseudo);
+
+        filter = (Filter) getIntent().getSerializableExtra(Filter.EXTRA_FILTER);
+
+        if (filter != null)
+        {
+            EditText pseudoEditText = (EditText) findViewById(R.id.edit_text_pseudo);
+            pseudoEditText.setText(filter.getPseudo());
+
+            EditText firstNameEditText = (EditText) findViewById(R.id.edit_text_first_name);
+            firstNameEditText.setText(filter.getFirstName());
+
+            EditText familyNameEditText = (EditText) findViewById(R.id.edit_text_family_name);
+            familyNameEditText.setText(filter.getFamilyName());
+
+            EditText birthDateEditText = (EditText) findViewById(R.id.edit_text_birth_date);
+            birthDateEditText.setText(filter.getBirthDate());
+
+            EditText heightEditText = (EditText) findViewById(R.id.edit_text_height);
+            heightEditText.setText(Double.toString(filter.getHeight()));
+
+            EditText nbChildrenEditText = (EditText) findViewById(R.id.edit_text_children_nb);
+            nbChildrenEditText.setText(Integer.toString(filter.getChildrenNb()));
+
+            EditText cityEditText = (EditText) findViewById(R.id.edit_text_city);
+            cityEditText.setText(filter.getCity());
+        }
     }
 
     @Override
@@ -63,8 +98,7 @@ public class SetFilterActivity extends AppCompatActivity
         {
             case R.id.top_menu_save_filters:
                 Log.d("TOPMENU", "Save filters selected");
-                if(saveFilter())
-                    finish();
+                saveFilter();
                 return true;
             case R.id.top_menu_item_settings:
                 Log.d("TOPMENU", "Settings selected");
@@ -75,21 +109,37 @@ public class SetFilterActivity extends AppCompatActivity
         return false;
     }
 
-    public boolean saveFilter()
+    public void saveFilter()
     {
         Log.d("TOPMENU", "Save filters");
 
         EditText pseudoEditText = (EditText) findViewById(R.id.edit_text_pseudo);
-        String pseudoFilter = pseudoEditText.getText().toString();
+        String pseudoFilter;
+        if (pseudoEditText.getText() != null)
+            pseudoFilter = pseudoEditText.getText().toString();
+        else
+            pseudoFilter = "No filter";
 
         EditText firstNameEditText = (EditText) findViewById(R.id.edit_text_first_name);
-        String firstNameFilter = firstNameEditText.getText().toString();
+        String firstNameFilter;
+        if (firstNameEditText.getText() != null)
+            firstNameFilter = firstNameEditText.getText().toString();
+        else
+            firstNameFilter = "No filter";
 
         EditText familyNameEditText = (EditText) findViewById(R.id.edit_text_family_name);
-        String familyNameFilter = familyNameEditText.getText().toString();
+        String familyNameFilter;
+        if (familyNameEditText.getText() != null)
+            familyNameFilter = familyNameEditText.getText().toString();
+        else
+            familyNameFilter = "No filter";
 
         EditText birthDateEditText = (EditText) findViewById(R.id.edit_text_birth_date);
-        String birthDateFilter = birthDateEditText.getText().toString();
+        String birthDateFilter;
+        if (birthDateEditText.getText() != null)
+            birthDateFilter = birthDateEditText.getText().toString();
+        else
+            birthDateFilter = "No filter";
 
         Spinner genderSpinner = (Spinner) findViewById(R.id.spinner_gender);
         String genderFilter = genderSpinner.getSelectedItem().toString();
@@ -97,32 +147,44 @@ public class SetFilterActivity extends AppCompatActivity
         Spinner loveStatusSpinner = (Spinner) findViewById(R.id.spinner_love_status);
         String loveStatusFilter = loveStatusSpinner.getSelectedItem().toString();
 
-        Spinner interestedInSpinner = (Spinner) findViewById(R.id.spinner_interested_in);
-        String interestedInFilter = interestedInSpinner.getSelectedItem().toString();
-
         EditText heightEditText = (EditText) findViewById(R.id.edit_text_height);
-        double height;
-        if (heightEditText.getText().toString().equals(""))
-            height = 0.0;
-        else
-            height = Double.parseDouble(heightEditText.getText().toString());
+        double height = 0.0;
+        if (heightEditText.getText() != null)
+        {
+            if (heightEditText.getText().toString().equals(""))
+                height = 0.0;
+            else
+                height = Double.parseDouble(heightEditText.getText().toString());
+        }
 
         Spinner smokerSpinner = (Spinner) findViewById(R.id.spinner_smoker);
         String smokerFilter = smokerSpinner.getSelectedItem().toString();
 
         EditText nbChildrenEditText = (EditText) findViewById(R.id.edit_text_children_nb);
-        int nbChildren;
-        if (nbChildrenEditText.getText().toString().equals(""))
-            nbChildren = 0;
-        else
-            nbChildren = Integer.parseInt(nbChildrenEditText.getText().toString());
+        int nbChildren = -1;
+        if (nbChildrenEditText.getText() != null)
+        {
+            if (nbChildrenEditText.getText().toString().equals(""))
+                nbChildren = -1;
+            else
+                nbChildren = Integer.parseInt(nbChildrenEditText.getText().toString());
+        }
 
         Spinner countrySpinner = (Spinner) findViewById(R.id.spinner_country);
         String countryFilter = countrySpinner.getSelectedItem().toString();
 
         EditText cityEditText = (EditText) findViewById(R.id.edit_text_city);
-        String cityFilter = cityEditText.getText().toString();
+        String cityFilter;
+        if (cityEditText.getText() != null)
+            cityFilter = cityEditText.getText().toString();
+        else
+            cityFilter = "No filter";
 
-        return true;
+        filter = new Filter(pseudoFilter, firstNameFilter, familyNameFilter, birthDateFilter, genderFilter, loveStatusFilter, height, smokerFilter, nbChildren, countryFilter, cityFilter);
+
+        Intent intent = new Intent(this, FindMatchsActivity.class);
+        intent.putExtra(User.EXTRA_PSEUDO, currentUser.getPseudo());
+        intent.putExtra(Filter.EXTRA_FILTER, filter);
+        startActivity(intent);
     }
 }

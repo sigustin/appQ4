@@ -304,55 +304,6 @@
 
         <!-- separator -->
         <View
-            android:id="@+id/separator6"
-
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/list_separator_thickness"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@id/love_status_label"
-
-            android:layout_marginLeft="@dimen/list_separator_margins"
-            android:layout_marginStart="@dimen/list_separator_margins"
-            android:layout_marginRight="@dimen/list_separator_margins"
-            android:layout_marginEnd="@dimen/list_separator_margins"
-
-            android:background="@color/gray" />
-
-        <TextView
-            android:id="@+id/interested_in_label"
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/separator6"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-
-            android:paddingTop="@dimen/list_item_padding_vertical"
-            android:paddingBottom="@dimen/list_item_padding_vertical"
-            android:paddingLeft="@dimen/list_item_padding_horizontal"
-            android:paddingRight="@dimen/list_item_padding_horizontal"
-
-            android:text="@string/interested_in"/>
-
-        <Spinner
-            android:id="@+id/spinner_interested_in"
-
-            android:layout_width="@dimen/spinner_list_width"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/separator6"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-
-            android:paddingTop="@dimen/list_item_padding_vertical"
-            android:paddingBottom="@dimen/list_item_padding_vertical"
-            android:paddingLeft="@dimen/list_item_padding_horizontal"
-            android:paddingRight="@dimen/list_item_padding_horizontal"/>
-
-        <!-- separator -->
-        <View
             android:id="@+id/separator7"
 
             android:layout_width="match_parent"
@@ -361,7 +312,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_below="@id/interested_in_label"
+            android:layout_below="@id/love_status_label"
 
             android:layout_marginLeft="@dimen/list_separator_margins"
             android:layout_marginStart="@dimen/list_separator_margins"
