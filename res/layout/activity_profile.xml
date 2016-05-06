@@ -27,7 +27,9 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
 
-            android:layout_margin="@dimen/profile_picture_margin" />
+            android:layout_margin="@dimen/profile_picture_margin"
+
+            android:onClick="switchPicture"/>
 
         <TextView
             android:id="@+id/pseudo_label"

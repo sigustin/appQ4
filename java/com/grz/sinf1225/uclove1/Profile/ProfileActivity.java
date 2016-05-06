@@ -23,16 +23,17 @@ import com.grz.sinf1225.uclove1.R;
 import com.grz.sinf1225.uclove1.SettingsActivity;
 import com.grz.sinf1225.uclove1.User;
 
+import java.util.List;
+
 public class ProfileActivity extends AppCompatActivity
 {
-    final String tmpPseudo = "angelina24", tmpName = "Angelina Jolie", tmpBirthDate = "01/01/1984", tmpAge = "42 years old", tmpGender = "F", tmpLoveStatus = "Married", tmpInterestedIn = "Both", tmpHeight = "1m70", tmpDescription = "Famous actress", tmpSmoker = "No", tmpChildrenNb = "10", tmpCountry = "Etats-Unis", tmpCity = "Washington D.C.";
-    final int profilePictureRes = R.drawable.angelina_jolie_profile_picture;
-
     /*
     private CurrentUser currentUser;
     */
     private User currentUser;
     private User userDisplayed;
+
+    private int showingPictureIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -46,8 +47,6 @@ public class ProfileActivity extends AppCompatActivity
         String currentPseudo = getIntent().getStringExtra(User.EXTRA_PSEUDO);
         currentUser = new User(currentPseudo);
         userDisplayed = (User) getIntent().getSerializableExtra(User.EXTRA_USER);
-
-        setViews();
     }
 
     @Override
@@ -87,6 +86,8 @@ public class ProfileActivity extends AppCompatActivity
 
     private void setViews()
     {
+        showingPictureIndex = -1;
+
         ImageView profilePicture = (ImageView) findViewById(R.id.profile_picture);
         if (userDisplayed.getProfilePicture() != 0)
             profilePicture.setImageResource(userDisplayed.getProfilePicture());
@@ -252,6 +253,24 @@ public class ProfileActivity extends AppCompatActivity
             Button actionButton = (Button) findViewById(R.id.action_button);
             actionButton.setText(getResources().getString(R.string.ask_as_friend));
             actionButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_add_black_24dp, 0, 0, 0);
+        }
+    }
+
+    public void switchPicture(View view)
+    {
+        List<Integer> pictureRes = Database.getPicturesRes(userDisplayed.getPseudo());
+        if (pictureRes.size() > 0)
+        {
+            Log.d("DEBUG", "Nb pictures : " +Integer.toString(pictureRes.size()));
+            showingPictureIndex++;
+            if (showingPictureIndex == pictureRes.size())
+                showingPictureIndex = -1;
+
+            ImageView profilePicture = (ImageView) findViewById(R.id.profile_picture);
+            if (showingPictureIndex == -1)
+                profilePicture.setImageResource(userDisplayed.getProfilePicture());
+            else
+                profilePicture.setImageResource(pictureRes.get(showingPictureIndex));
         }
     }
 }
