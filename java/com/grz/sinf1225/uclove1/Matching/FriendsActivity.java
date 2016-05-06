@@ -61,7 +61,7 @@ public class FriendsActivity extends AppCompatActivity
             User currentFriend = friendsAndRequestList.get(i);
             friendsOverviewDataList.add(new OverviewData(currentFriend.getProfilePicture(),
                     currentFriend.getPseudo(),
-                    Integer.toString(currentUser.getAge()) +" "+ getResources().getString(R.string.years_old),
+                    Integer.toString(currentFriend.getAge()) +" "+ getResources().getString(R.string.years_old),
                     currentFriend.getCity(),
                     Database.getRelationshipType(currentPseudo, currentFriend.getPseudo())));
         }

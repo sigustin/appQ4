@@ -198,6 +198,7 @@ public final class Database
         writeDB.close();
     }
 
+
     //User
     public static boolean isPseudoTaken(String pseudo)
     {
@@ -1055,7 +1056,6 @@ public final class Database
         updateUser(pseudo, UserEntries.COL_CITY_VISIBILITY, newValue);
     }
 
-
     public static boolean isRightPassword(String pseudo, String inputPassword)
     {
         readDB = helper.getReadableDatabase();
@@ -1079,6 +1079,67 @@ public final class Database
         }
         Log.e("DB", "Cursor empty");
         return false;
+    }
+
+    public static List<User> getSimpleMatches(User user)
+    {
+        String interestedIn, interestedIn2;
+        if (user.getInterestedIn().equals(MainActivity.getContext().getResources().getString(R.string.women)))
+        {
+            interestedIn = "F";
+            interestedIn2 = "empty";
+        }
+        else if (user.getInterestedIn().equals(MainActivity.getContext().getResources().getString(R.string.men)))
+        {
+            interestedIn = "M";
+            interestedIn2 = "empty";
+        }
+        else if (user.getInterestedIn().equals(MainActivity.getContext().getResources().getString(R.string.both)))
+        {
+            interestedIn = "F";
+            interestedIn2 = "M";
+        }
+        else
+            return null;
+
+        String column;
+        String[] columnArgs;
+        if (interestedIn2.equals("empty"))
+        {
+            column = UserEntries.COL_GENDER+ "=?";
+            columnArgs = new String[] {interestedIn};
+        }
+        else
+        {
+            column = UserEntries.COL_GENDER+ "=? OR " +UserEntries.COL_GENDER +"=?";
+            columnArgs = new String[] {interestedIn, interestedIn2};
+        }
+
+        readDB = helper.getReadableDatabase();
+        Cursor cursor = readDB.query(UserEntries.TABLE_NAME,
+                new String[] {UserEntries.COL_PSEUDO},
+                column,
+                columnArgs,
+                null, null, null, null);
+
+        List<User> matchesList = new ArrayList<User>();
+
+        if (cursor.moveToFirst())
+        {
+            do
+            {
+                Log.d("DB", "Found new match : " +cursor.getString(cursor.getColumnIndexOrThrow(UserEntries.COL_PSEUDO)));
+                User current;
+                if ( getRelationshipType(user.getPseudo(), cursor.getString(cursor.getColumnIndexOrThrow(UserEntries.COL_PSEUDO))) != User.RelationshipType.FRIENDS
+                        && getRelationshipType(user.getPseudo(), cursor.getString(cursor.getColumnIndexOrThrow(UserEntries.COL_PSEUDO))) != User.RelationshipType.ONESELF
+                        && getRelationshipType(user.getPseudo(), cursor.getString(cursor.getColumnIndexOrThrow(UserEntries.COL_PSEUDO))) != User.RelationshipType.REJECTION )
+                {
+                    current = new User(cursor.getString(cursor.getColumnIndexOrThrow(UserEntries.COL_PSEUDO)));
+                    matchesList.add(current);
+                }
+            } while(cursor.moveToNext());
+        }
+        return matchesList;
     }
 
 
@@ -1430,7 +1491,7 @@ public final class Database
     }
 
 
-    //Picture
+    //Pictures
     public static void addPicture(String pseudo, int pictureRes)
     {
         ContentValues values = new ContentValues();

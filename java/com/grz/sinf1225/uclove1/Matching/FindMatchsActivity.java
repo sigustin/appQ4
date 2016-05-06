@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.grz.sinf1225.uclove1.Database;
 import com.grz.sinf1225.uclove1.Profile.ProfileActivity;
 import com.grz.sinf1225.uclove1.Profile.ProfileOverviewAdapter;
 import com.grz.sinf1225.uclove1.R;
@@ -27,6 +28,9 @@ public class FindMatchsActivity extends AppCompatActivity
     /*
     CurrentUser currentUser;
      */
+    User currentUser;
+    private List<OverviewData> matchesOverviewList;
+    private List<User> matchesList;
 
     private List<OverviewData> tmpFriendsOverview;
     private final int tmpProfilePictureRes1 = R.drawable.angelina_jolie_profile_picture;
@@ -40,18 +44,35 @@ public class FindMatchsActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_matchs);
+    }
 
-        tmpFriendsOverview = new ArrayList<>();
-        tmpFriendsOverview.add(new OverviewData(tmpProfilePictureRes1, tmpPseudo1, tmpAge1, tmpCity1, tmpRequest1));
-        tmpFriendsOverview.add(new OverviewData(tmpProfilePictureRes2, tmpPseudo2, tmpAge2, tmpCity2, tmpRequest2));
-        /*
-        currentUser = (CurrentUser) getIntent().getSerializableExtra(CurrentUser.EXTRA_CURRENT_USER);
-         */
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+
+        String currentPseudo = getIntent().getStringExtra(User.EXTRA_PSEUDO);
+        currentUser = new User(currentPseudo);
+
+        matchesList = Database.getSimpleMatches(currentUser);
+        Log.d("DEBUG", "Number of matches : " +Integer.toString(matchesList.size()));
+
+        matchesOverviewList = new ArrayList<OverviewData>();
+        for (int i=0; i<matchesList.size(); i++)
+        {
+            User currentMatch = matchesList.get(i);
+            matchesOverviewList.add(new OverviewData(currentMatch.getProfilePicture(),
+                    currentMatch.getPseudo(),
+                    Integer.toString(currentMatch.getAge()) +" "+ getResources().getString(R.string.years_old),
+                    currentMatch.getCity(),
+                    Database.getRelationshipType(currentPseudo, currentMatch.getPseudo())));
+        }
+
 
         m_recyclerView = (RecyclerView) findViewById(R.id.profile_overviews_recycler_view);
         m_recyclerViewLayoutManager = new LinearLayoutManager(this);
         m_recyclerView.setLayoutManager(m_recyclerViewLayoutManager);
-        m_recyclerViewAdapter = new ProfileOverviewAdapter(tmpFriendsOverview, new ProfileOverviewAdapter.OnOverviewClickedListener() {
+        m_recyclerViewAdapter = new ProfileOverviewAdapter(matchesOverviewList, new ProfileOverviewAdapter.OnOverviewClickedListener() {
             public void onOverviewClicked(String pseudo)
             {
                 Log.d("OVERVIEWLISTENER", "RelativeLayoutClicked " + pseudo);
@@ -97,6 +118,8 @@ public class FindMatchsActivity extends AppCompatActivity
         intent.putExtra(CurrentUser.EXTRA_CURRENT_USER, currentUser);
         intent.putExtra(User.EXTRA_USER, Database.getUser(pseudo));
          */
+        intent.putExtra(User.EXTRA_PSEUDO, currentUser.getPseudo());
+        intent.putExtra(User.EXTRA_USER, new User(pseudo));
         startActivity(intent);
         return true;
     }
