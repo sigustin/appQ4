@@ -2,6 +2,7 @@ package com.grz.sinf1225.uclove1;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.ContentObservable;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -1426,6 +1427,73 @@ public final class Database
                 DisponibilityEntries.COL_PSEUDO +"=?",
                 new String[] {pseudo});
         writeDB.close();
+    }
+
+
+    //Picture
+    public static void addPicture(String pseudo, int pictureRes)
+    {
+        ContentValues values = new ContentValues();
+        values.put(PicturesEntries.COL_PSEUDO, pseudo);
+        values.put(PicturesEntries.COL_PICTURE, Integer.toString(pictureRes));
+
+        Log.d("DB", "Adding picture : " +pseudo);
+
+        writeDB = helper.getWritableDatabase();
+        writeDB.insert(PicturesEntries.TABLE_NAME, null, values);
+        writeDB.close();
+    }
+
+    public static boolean isPictureBoundToUser(String pseudo, int pictureRes)
+    {
+        readDB = helper.getReadableDatabase();
+        Cursor cursor = readDB.query(PicturesEntries.TABLE_NAME,
+                new String[] {PicturesEntries.COL_PICTURE},
+                PicturesEntries.COL_PSEUDO +"=? AND "+ PicturesEntries.COL_PICTURE +"=?",
+                new String[] {pseudo, Integer.toString(pictureRes)},
+                null, null, null, null);
+
+        Log.d("DB", "Searched for " +pictureRes);
+
+        if (cursor.moveToFirst())
+        {
+            Log.d("DB", "Picture found : " +cursor.getString(cursor.getColumnIndexOrThrow(PicturesEntries.COL_PICTURE))+ "Picture searched : " +Integer.toString(pictureRes));
+            return (cursor.getInt(cursor.getColumnIndexOrThrow(PicturesEntries.COL_PICTURE)) == pictureRes);
+        }
+        return false;
+    }
+
+    public static void removePictureBond(String pseudo, int pictureRes)
+    {
+        Log.d("DB", "Removing picture : " +pseudo);
+
+        writeDB = helper.getWritableDatabase();
+        writeDB.delete(PicturesEntries.TABLE_NAME,
+                PicturesEntries.COL_PSEUDO +"=? AND "+ PicturesEntries.COL_PICTURE +"=?",
+                new String[] {pseudo, Integer.toString(pictureRes)});
+        writeDB.close();
+    }
+
+    public static List<Integer> getPicturesRes(String pseudo)
+    {
+        readDB = helper.getReadableDatabase();
+        Cursor cursor = readDB.query(PicturesEntries.TABLE_NAME,
+                new String[] {PicturesEntries.COL_PICTURE},
+                PicturesEntries.COL_PSEUDO+ "=?",
+                new String[] {pseudo},
+                null, null, null, null);
+
+        List<Integer> pictures = new ArrayList<Integer>();
+
+        if (cursor.moveToFirst())
+        {
+            do
+            {
+                int current = cursor.getInt(cursor.getColumnIndexOrThrow(PicturesEntries.COL_PICTURE));
+                pictures.add(current);
+            } while(cursor.moveToNext());
+        }
+        return pictures;
     }
 
     public static void updateDisponibility(User user, boolean[] tmp) {}

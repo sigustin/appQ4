@@ -81,4 +81,12 @@
 
     </RelativeLayout>
 
+    <CheckBox
+        android:id="@+id/other_picture_checkbox"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="@string/choose_as_other_picture"/>
+
 </LinearLayout>

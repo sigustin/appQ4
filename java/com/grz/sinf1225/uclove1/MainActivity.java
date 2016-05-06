@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import com.grz.sinf1225.uclove1.Profile.EditProfileActivity;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity
 {
     //public static final String EXTRA_CURRENT_USER = "UCLove.CurrentUser";write this in CurrentUser

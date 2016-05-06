@@ -196,6 +196,7 @@
 
     <!-- choose profile picture activity -->
     <string name="choose_profile_picture_title">Choose a profile picture</string>
-    <string name="choose_profile_picture">Click a profile picture to select it</string>
+    <string name="choose_profile_picture">Touch a picture to add or remove it from your pictures</string>
+    <string name="choose_as_other_picture">Choose as profile picture</string>
 
 </resources>

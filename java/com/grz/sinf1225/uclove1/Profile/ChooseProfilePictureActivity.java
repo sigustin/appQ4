@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
 
 import com.grz.sinf1225.uclove1.Database;
 import com.grz.sinf1225.uclove1.R;
@@ -58,25 +59,36 @@ public class ChooseProfilePictureActivity extends AppCompatActivity
 
     public void onChoose1(View view)
     {
-        Database.updateProfilePicture(currentUser, R.drawable.profile_pic1);
-        finish();
+        onChoose(R.drawable.profile_pic1);
     }
 
     public void onChoose2(View view)
     {
-        Database.updateProfilePicture(currentUser, R.drawable.profile_pic2);
-        finish();
+        onChoose(R.drawable.profile_pic2);
     }
 
     public void onChoose3(View view)
     {
-        Database.updateProfilePicture(currentUser, R.drawable.profile_pic3);
-        finish();
+        onChoose(R.drawable.profile_pic3);
     }
 
     public void onChoose4(View view)
     {
-        Database.updateProfilePicture(currentUser, R.drawable.profile_pic4);
+        onChoose(R.drawable.profile_pic4);
+    }
+
+    public void onChoose(int pictureRes)
+    {
+        CheckBox asProfilePicture = (CheckBox) findViewById(R.id.other_picture_checkbox);
+        if (asProfilePicture.isChecked())
+            Database.updateProfilePicture(currentUser.getPseudo(), pictureRes);
+        else
+        {
+            if (Database.isPictureBoundToUser(currentUser.getPseudo(), pictureRes))
+                Database.removePictureBond(currentUser.getPseudo(), pictureRes);
+            else
+                Database.addPicture(currentUser.getPseudo(), pictureRes);
+        }
         finish();
     }
 }
