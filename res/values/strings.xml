@@ -38,6 +38,8 @@
     <string name="choose_theme">App theme</string>
     <string name="about">About the app</string>
 
+    <string name="about_the_app">This application was made for the lesson of oriented object conception at the UCL by the group #Z</string>
+
     <!-- my profile activity -->
     <string name="my_profile_activity_title">My profile</string>
 

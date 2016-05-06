@@ -1,5 +1,7 @@
 package com.grz.sinf1225.uclove1;
 
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,15 +20,15 @@ public class SettingsActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-
-        Spinner themeSpinner = (Spinner) findViewById(R.id.theme_spinner);
-        ArrayAdapter<CharSequence> themeSpinnerAdapter = ArrayAdapter.createFromResource(this, R.array.array_themes, android.R.layout.simple_spinner_item);
-        themeSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        themeSpinner.setAdapter(themeSpinnerAdapter);
     }
 
     public void onAboutTextViewClicked(View view)
     {
         Log.d("TEXTVIEW", "About selected");
+        new AlertDialog.Builder(this)
+                .setTitle(getResources().getString(R.string.about))
+                .setMessage(getResources().getString(R.string.about_the_app))
+                .setNegativeButton(getResources().getString(R.string.close_popup), null)
+                .show();
     }
 }
