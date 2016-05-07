@@ -109,6 +109,7 @@ public class FriendsActivity extends AppCompatActivity
         /*
         intent.putExtra(CurrentUser.EXTRA_CURRENT_USER, currentUser);
          */
+        intent.putExtra(User.EXTRA_PSEUDO, currentUser.getPseudo());
         startActivity(intent);
         return true;
     }

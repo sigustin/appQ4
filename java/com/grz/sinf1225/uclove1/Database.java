@@ -135,6 +135,25 @@ public final class Database
         writeDB.close();
     }
 
+    public static void resetDatabase()
+    {
+        SQLiteDatabase db = helper.getWritableDatabase();
+        db.execSQL("DROP TABLE IF EXISTS " + UserEntries.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + RelationshipEntries.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + PicturesEntries.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + MessageEntries.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + DisponibilityEntries.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + AppointmentEntries.TABLE_NAME);
+
+        db.execSQL(SQL_CREATE_USER);
+        db.execSQL(SQL_CREATE_RELATIONSHIP);
+        db.execSQL(SQL_CREATE_PICTURES);
+        db.execSQL(SQL_CREATE_MESSAGE);
+        db.execSQL(SQL_CREATE_DISPONIBILITY);
+        db.execSQL(SQL_CREATE_APPOINTMENT);
+        db.close();
+    }
+
     public static void tmpCreate()
     {
         readDB = helper.getReadableDatabase();

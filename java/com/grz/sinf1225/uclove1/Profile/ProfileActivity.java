@@ -267,10 +267,19 @@ public class ProfileActivity extends AppCompatActivity
                 showingPictureIndex = -1;
 
             ImageView profilePicture = (ImageView) findViewById(R.id.profile_picture);
-            if (showingPictureIndex == -1)
-                profilePicture.setImageResource(userDisplayed.getProfilePicture());
-            else
-                profilePicture.setImageResource(pictureRes.get(showingPictureIndex));
+            if (showingPictureIndex == -1) {
+                if (userDisplayed.getProfilePicture() == 0)
+                    profilePicture.setImageResource(R.drawable.ic_person_black_48dp);
+                else
+                    profilePicture.setImageResource(userDisplayed.getProfilePicture());
+
+            }
+            else {
+                if (pictureRes.get(showingPictureIndex) == 0)
+                    profilePicture.setImageResource(R.drawable.ic_person_black_48dp);
+                else
+                    profilePicture.setImageResource(pictureRes.get(showingPictureIndex));
+            }
         }
     }
 }

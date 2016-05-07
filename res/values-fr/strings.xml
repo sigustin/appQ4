@@ -173,5 +173,8 @@
     <string name="no_message_to_no_friend">Vous ne pouvez pas envoyer de message à quelqu\'un qui n\'est pas votre ami</string>
     <string name="type_friend_pseudo">Entrez le pseudo de votre ami</string>
     <string name="who_start_conversation_with">Avec qui voulez-vous commencer une conversation?</string>
+    <string name="done">Ok</string>
+    <string name="cant_edit_visibility">Vous pourrez changer les informations de visibilité une fois inscrit</string>
+    <string name="date_format">JJ/MM/AAAA</string>
 
 </resources>

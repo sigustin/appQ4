@@ -71,6 +71,7 @@
     <string name="star_family_name">Last name*</string>
     <string name="star_first_name">First name*</string>
     <string name="star_birth_date">Birth date*</string>
+    <string name="date_format">DD/MM/YYYY</string>
     <string name="star_gender">Gender*</string>
     <string name="star_love_status">Love status*</string>
     <string name="star_country">Country*</string>
@@ -208,5 +209,7 @@
     <string name="done">Done</string>
     <string name="no_message_to_no_friend">You can\'t send a message to someone that\'s not your friend</string>
     <string name="new_message_activity_title">Start a new conversation</string>
+
+    <string name="cant_edit_visibility">You will be able to edit the visibility informations once registered</string>
 
 </resources>

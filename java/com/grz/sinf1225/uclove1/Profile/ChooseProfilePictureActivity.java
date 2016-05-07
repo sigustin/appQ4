@@ -81,7 +81,10 @@ public class ChooseProfilePictureActivity extends AppCompatActivity
     {
         CheckBox asProfilePicture = (CheckBox) findViewById(R.id.other_picture_checkbox);
         if (asProfilePicture.isChecked())
-            Database.updateProfilePicture(currentUser.getPseudo(), pictureRes);
+        {
+            Log.d("DEBUG", "Is checked");
+            Database.updateProfilePicture(currentUser, pictureRes);
+        }
         else
         {
             if (Database.isPictureBoundToUser(currentUser.getPseudo(), pictureRes))

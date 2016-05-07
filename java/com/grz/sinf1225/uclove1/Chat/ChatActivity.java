@@ -65,24 +65,7 @@ public class ChatActivity extends AppCompatActivity
         m_interlocutorUser = (User) getIntent().getSerializableExtra(User.EXTRA_USER);
         setTitle(m_interlocutorUser.getPseudo());
 
-        messageList = Database.getAllMessages(currentPseudo, m_interlocutorUser.getPseudo());
-
-        tmpMessages = new ArrayList<MessageData>();
-        tmpMessages.add(new MessageData(tmpPseudo1, tmpMsg1, tmpSent1, tmpRead1));
-        tmpMessages.add(new MessageData(tmpPseudo2, tmpMsg2, tmpSent2, tmpRead2));
-        tmpMessages.add(new MessageData(tmpPseudo2, tmpMsg3, tmpSent3, null));
-
-        m_recyclerView = (RecyclerView) findViewById(R.id.messages_recycler_view);
-        LinearLayoutManager recyclerViewLayoutManager = new LinearLayoutManager(this);
-        recyclerViewLayoutManager.setReverseLayout(true);
-        m_recyclerView.setLayoutManager(recyclerViewLayoutManager);
-        m_recyclerViewAdapter = new MessageViewAdapter(messageList, new MessageViewAdapter.onMessageClickedListener() {
-            @Override
-            public void onMessageClicked(MessageData data) {
-                showDetailsMessage(data);
-            }
-        }, this, m_interlocutorUser.getPseudo());
-        m_recyclerView.setAdapter(m_recyclerViewAdapter);
+        displayMessages();
     }
 
     @Override
@@ -105,6 +88,28 @@ public class ChatActivity extends AppCompatActivity
                 return true;
         }
         return false;
+    }
+
+    public void displayMessages()
+    {
+        messageList = Database.getAllMessages(currentUser.getPseudo(), m_interlocutorUser.getPseudo());
+
+        tmpMessages = new ArrayList<MessageData>();
+        tmpMessages.add(new MessageData(tmpPseudo1, tmpMsg1, tmpSent1, tmpRead1));
+        tmpMessages.add(new MessageData(tmpPseudo2, tmpMsg2, tmpSent2, tmpRead2));
+        tmpMessages.add(new MessageData(tmpPseudo2, tmpMsg3, tmpSent3, null));
+
+        m_recyclerView = (RecyclerView) findViewById(R.id.messages_recycler_view);
+        LinearLayoutManager recyclerViewLayoutManager = new LinearLayoutManager(this);
+        recyclerViewLayoutManager.setReverseLayout(true);
+        m_recyclerView.setLayoutManager(recyclerViewLayoutManager);
+        m_recyclerViewAdapter = new MessageViewAdapter(messageList, new MessageViewAdapter.onMessageClickedListener() {
+            @Override
+            public void onMessageClicked(MessageData data) {
+                showDetailsMessage(data);
+            }
+        }, this, m_interlocutorUser.getPseudo());
+        m_recyclerView.setAdapter(m_recyclerViewAdapter);
     }
 
     public void showDetailsMessage(MessageData data)
@@ -130,5 +135,7 @@ public class ChatActivity extends AppCompatActivity
         Log.d("BUTTON", "Send button pressed : " + msgToSend);
 
         Database.sendMessage(currentUser.getPseudo(), m_interlocutorUser.getPseudo(), msgToSend);
+
+        displayMessages();
     }
 }

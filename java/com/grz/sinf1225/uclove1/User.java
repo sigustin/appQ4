@@ -139,7 +139,11 @@ public class User implements Serializable
 
     public int getAge()
     {
-        int birthyear = Integer.parseInt( this.birthDate.substring(birthDate.lastIndexOf('/')+1) );
+        int birthyear = 0;
+        if (birthDate.contains("/"))
+            birthyear = Integer.parseInt( this.birthDate.substring(birthDate.lastIndexOf('/')+1) );
+        else
+            birthyear = Integer.parseInt( this.birthDate.substring(birthDate.length()-5));
         int currentYear = Integer.parseInt( String.format("%1$tY", Calendar.getInstance()) );
         return currentYear-birthyear;
     }

@@ -42,15 +42,6 @@ public class MainActivity extends AppCompatActivity
 
         Log.d("ENTRIES", "Entered pseudo : " +inputPseudo+ " password : " +inputPassword);
 
-        //*--------
-        Database.sendRequest("Friend", "attempt1");
-        if (inputPseudo.equals(""))
-        {
-            inputPseudo = "attempt1";
-            inputPassword = "password";
-        }
-        //-------*/
-
         if(Database.isRightPassword(inputPseudo, inputPassword))
         {
 

@@ -157,6 +157,9 @@ public class EditProfileActivity extends AppCompatActivity
 
             EditText password = (EditText) findViewById(R.id.edit_text_password);
 
+            EditText birthDate = (EditText) findViewById(R.id.edit_text_birth_date);
+            birthDate.setHint(getResources().getString(R.string.date_format));
+
             Spinner gender = (Spinner) findViewById(R.id.spinner_gender);
             ArrayAdapter<CharSequence> genderAdapter = ArrayAdapter.createFromResource(this, R.array.array_genders, android.R.layout.simple_spinner_item);
             genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -334,6 +337,11 @@ public class EditProfileActivity extends AppCompatActivity
     public void onEditVisibilityButtonClicked(View view)
     {
         Log.d("BUTTON", "Edit visibility button clicked");
+        if (m_isRegistration)
+        {
+            Toast cantChangePassword = Toast.makeText(this, R.string.cant_edit_visibility, Toast.LENGTH_LONG);
+            cantChangePassword.show();
+        }
         Intent intent = new Intent(this, EditVisibilityActivity.class);
         /*
         intent.putExtra(CurrentUser.EXTRA_CURRENT_USER, currentUser);
