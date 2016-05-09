@@ -112,7 +112,19 @@
         android:paddingTop="@dimen/list_item_padding_vertical"
         android:paddingBottom="@dimen/list_item_padding_vertical"
         android:paddingLeft="@dimen/list_item_padding_horizontal"
-        android:paddingRight="@dimen/list_item_padding_horizontal" />
+        android:paddingRight="@dimen/list_item_padding_horizontal" /> -->
+
+    <TextView
+        android:id="@+id/remove_database_button"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:textColor="@color/black"
+
+        android:text="@string/delete_local_database"
+
+        android:onClick="deleteDatabase"/>
 
     <View
         android:id="@+id/separator3"
@@ -123,25 +135,22 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_below="@id/theme_spinner"
+        android:layout_below="@id/remove_database_button"
 
         android:layout_marginLeft="@dimen/list_separator_margins"
         android:layout_marginStart="@dimen/list_separator_margins"
         android:layout_marginRight="@dimen/list_separator_margins"
         android:layout_marginEnd="@dimen/list_separator_margins"
 
-        android:background="@color/gray" /> -->
+        android:background="@color/gray" />
 
     <TextView
         android:id="@+id/about_textview"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
+        android:layout_below="@id/separator3"
+        android:layout_alignParentLeft="true" android:layout_alignParentStart="true"
 
         android:paddingTop="@dimen/list_item_padding_vertical"
         android:paddingBottom="@dimen/list_item_padding_vertical"

@@ -37,6 +37,7 @@
     <string name="enable_notifications">Enable notifications</string>
     <string name="choose_theme">App theme</string>
     <string name="about">About the app</string>
+    <string name="delete_local_database">Delete the local database</string>
 
     <string name="about_the_app">This application was made for the lesson of oriented object conception at the UCL by the group #Z</string>
 

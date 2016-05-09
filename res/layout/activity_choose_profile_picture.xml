@@ -18,74 +18,154 @@
         android:text="@string/choose_profile_picture"
         android:textStyle="bold"/>
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
+
         android:layout_weight="1">
 
-        <ImageView
-            android:id="@+id/first_img"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
-            android:layout_width="@dimen/medium_profile_picture_edge_size"
-            android:layout_height="@dimen/medium_profile_picture_edge_size"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true" android:layout_alignParentStart="true"
+            <ImageView
+                android:id="@+id/first_img"
 
-            android:padding="@dimen/medium_profile_picture_padding"
+                android:layout_width="@dimen/medium_profile_picture_edge_size"
+                android:layout_height="@dimen/medium_profile_picture_edge_size"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true" android:layout_alignParentStart="true"
 
-            android:src="@drawable/profile_pic1"
+                android:padding="@dimen/medium_profile_picture_padding"
 
-            android:onClick="onChoose1"/>
+                android:src="@drawable/profile_pic1"
 
-        <ImageView
-            android:id="@+id/second_img"
+                android:onClick="onChoose1"/>
 
-            android:layout_width="@dimen/medium_profile_picture_edge_size"
-            android:layout_height="@dimen/medium_profile_picture_edge_size"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true" android:layout_alignParentEnd="true"
+            <ImageView
+                android:id="@+id/second_img"
 
-            android:padding="@dimen/medium_profile_picture_padding"
+                android:layout_width="@dimen/medium_profile_picture_edge_size"
+                android:layout_height="@dimen/medium_profile_picture_edge_size"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true" android:layout_alignParentEnd="true"
 
-            android:src="@drawable/profile_pic2"
+                android:padding="@dimen/medium_profile_picture_padding"
 
-            android:onClick="onChoose2"/>
+                android:src="@drawable/profile_pic2"
 
-        <ImageView
-            android:id="@+id/third_img"
+                android:onClick="onChoose2"/>
 
-            android:layout_width="@dimen/medium_profile_picture_edge_size"
-            android:layout_height="@dimen/medium_profile_picture_edge_size"
-            android:layout_below="@id/first_img"
-            android:layout_alignParentLeft="true" android:layout_alignParentStart="true"
+            <ImageView
+                android:id="@+id/third_img"
 
-            android:padding="@dimen/medium_profile_picture_padding"
+                android:layout_width="@dimen/medium_profile_picture_edge_size"
+                android:layout_height="@dimen/medium_profile_picture_edge_size"
+                android:layout_below="@id/first_img"
+                android:layout_alignParentLeft="true" android:layout_alignParentStart="true"
 
-            android:src="@drawable/profile_pic3"
+                android:padding="@dimen/medium_profile_picture_padding"
 
-            android:onClick="onChoose3"/>
+                android:src="@drawable/profile_pic3"
 
-        <ImageView
-            android:id="@+id/fourth_img"
+                android:onClick="onChoose3"/>
 
-            android:layout_width="@dimen/medium_profile_picture_edge_size"
-            android:layout_height="@dimen/medium_profile_picture_edge_size"
-            android:layout_below="@id/second_img"
-            android:layout_alignParentRight="true" android:layout_alignParentEnd="true"
+            <ImageView
+                android:id="@+id/fourth_img"
 
-            android:padding="@dimen/medium_profile_picture_padding"
+                android:layout_width="@dimen/medium_profile_picture_edge_size"
+                android:layout_height="@dimen/medium_profile_picture_edge_size"
+                android:layout_below="@id/second_img"
+                android:layout_alignParentRight="true" android:layout_alignParentEnd="true"
 
-            android:src="@drawable/profile_pic4"
+                android:padding="@dimen/medium_profile_picture_padding"
 
-            android:onClick="onChoose4"/>
+                android:src="@drawable/profile_pic4"
 
-    </RelativeLayout>
+                android:onClick="onChoose4"/>
+
+            <ImageView
+                android:id="@+id/fourth_img"
+
+                android:layout_width="@dimen/medium_profile_picture_edge_size"
+                android:layout_height="@dimen/medium_profile_picture_edge_size"
+                android:layout_below="@id/second_img"
+                android:layout_alignParentRight="true" android:layout_alignParentEnd="true"
+
+                android:padding="@dimen/medium_profile_picture_padding"
+
+                android:src="@drawable/profile_pic4"
+
+                android:onClick="onChoose4"/>
+
+            <ImageView
+                android:id="@+id/fifth_img"
+
+                android:layout_width="@dimen/medium_profile_picture_edge_size"
+                android:layout_height="@dimen/medium_profile_picture_edge_size"
+                android:layout_below="@id/third_img"
+                android:layout_alignParentStart="true" android:layout_alignParentLeft="true"
+
+                android:padding="@dimen/medium_profile_picture_padding"
+
+                android:src="@drawable/profile_pic5"
+
+                android:onClick="onChoose5"/>
+
+            <ImageView
+                android:id="@+id/sixth_img"
+
+                android:layout_width="@dimen/medium_profile_picture_edge_size"
+                android:layout_height="@dimen/medium_profile_picture_edge_size"
+                android:layout_below="@id/fourth_img"
+                android:layout_alignParentRight="true" android:layout_alignParentEnd="true"
+
+                android:padding="@dimen/medium_profile_picture_padding"
+
+                android:src="@drawable/profile_pic6"
+
+                android:onClick="onChoose6"/>
+
+            <ImageView
+                android:id="@+id/seventh_img"
+
+                android:layout_width="@dimen/medium_profile_picture_edge_size"
+                android:layout_height="@dimen/medium_profile_picture_edge_size"
+                android:layout_below="@id/fifth_img"
+                android:layout_alignParentLeft="true" android:layout_alignParentStart="true"
+
+                android:padding="@dimen/medium_profile_picture_padding"
+
+                android:src="@drawable/profile_pic7"
+
+                android:onClick="onChoose7"/>
+
+            <ImageView
+                android:id="@+id/eighth_img"
+
+                android:layout_width="@dimen/medium_profile_picture_edge_size"
+                android:layout_height="@dimen/medium_profile_picture_edge_size"
+                android:layout_below="@id/sixth_img"
+                android:layout_alignParentRight="true" android:layout_alignParentEnd="true"
+
+                android:padding="@dimen/medium_profile_picture_padding"
+
+                android:src="@drawable/profile_pic8"
+
+                android:onClick="onChoose8"/>
+
+        </RelativeLayout>
+
+    </ScrollView>
 
     <CheckBox
         android:id="@+id/other_picture_checkbox"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
+
 
         android:text="@string/choose_as_other_picture"/>
 

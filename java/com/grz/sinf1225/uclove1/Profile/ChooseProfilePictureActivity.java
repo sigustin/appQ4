@@ -77,6 +77,26 @@ public class ChooseProfilePictureActivity extends AppCompatActivity
         onChoose(R.drawable.profile_pic4);
     }
 
+    public void onChoose5(View view)
+    {
+        onChoose(R.drawable.profile_pic5);
+    }
+
+    public void onChoose6(View view)
+    {
+        onChoose(R.drawable.profile_pic6);
+    }
+
+    public void onChoose7(View view)
+    {
+        onChoose(R.drawable.profile_pic7);
+    }
+
+    public void onChoose8(View view)
+    {
+        onChoose(R.drawable.profile_pic8);
+    }
+
     public void onChoose(int pictureRes)
     {
         CheckBox asProfilePicture = (CheckBox) findViewById(R.id.other_picture_checkbox);

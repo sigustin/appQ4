@@ -31,4 +31,12 @@ public class SettingsActivity extends AppCompatActivity
                 .setNegativeButton(getResources().getString(R.string.close_popup), null)
                 .show();
     }
+
+    public void deleteDatabase(View view)
+    {
+        Database.resetDatabase();
+
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
 }

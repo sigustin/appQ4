@@ -327,8 +327,7 @@ public class EditProfileActivity extends AppCompatActivity
     public boolean changeProfilePicture(View view)
     {
         Log.d("IMAGE", "Change profile picture");
-        Intent intent = new Intent(this, ChooseProfilePictureActivity.class
-        );
+        Intent intent = new Intent(this, ChooseProfilePictureActivity.class);
         intent.putExtra(User.EXTRA_PSEUDO, currentUser.getPseudo());
         startActivity(intent);
         return false;
@@ -342,12 +341,15 @@ public class EditProfileActivity extends AppCompatActivity
             Toast cantChangePassword = Toast.makeText(this, R.string.cant_edit_visibility, Toast.LENGTH_LONG);
             cantChangePassword.show();
         }
-        Intent intent = new Intent(this, EditVisibilityActivity.class);
-        /*
-        intent.putExtra(CurrentUser.EXTRA_CURRENT_USER, currentUser);
-         */
-        intent.putExtra(User.EXTRA_PSEUDO, currentUser.getPseudo());
-        startActivity(intent);
+        else
+        {
+            Intent intent = new Intent(this, EditVisibilityActivity.class);
+            /*
+            intent.putExtra(CurrentUser.EXTRA_CURRENT_USER, currentUser);
+             */
+            intent.putExtra(User.EXTRA_PSEUDO, currentUser.getPseudo());
+            startActivity(intent);
+        }
     }
 
     public void onPasswordEditTextClicked(View view)

@@ -176,5 +176,6 @@
     <string name="done">Ok</string>
     <string name="cant_edit_visibility">Vous pourrez changer les informations de visibilité une fois inscrit</string>
     <string name="date_format">JJ/MM/AAAA</string>
+    <string name="delete_local_database">Effacer la base de données locale</string>
 
 </resources>
